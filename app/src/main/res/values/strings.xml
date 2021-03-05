@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">EtuMoov</string>
+    <string name="votre_nom">Votre nom</string>
+    <string name="votre_pr_nom">Votre prénom</string>
+</resources>
