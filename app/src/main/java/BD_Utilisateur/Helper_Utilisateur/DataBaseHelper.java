@@ -107,6 +107,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE Profil");
         db.execSQL("DROP TABLE Navigation");
         db.execSQL("DROP TABLE Planning");
+        db.execSQL("DROP TABLE T_Cours");
+        db.execSQL("DROP TABLE T_Lien");
+        db.execSQL("DROP TABLE T_Rappel");
+
         onCreate(db);
     }
 
