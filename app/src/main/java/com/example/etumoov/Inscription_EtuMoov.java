@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,20 +17,17 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Register extends AppCompatActivity {
-    EditText regNom, regPrenom, regEmail, regPassword;
-    TextView regLogin;
-    Button regBtn;
-    FirebaseAuth firebaseAuth;
-    ProgressBar progressBar;
+public class Inscription_EtuMoov extends AppCompatActivity {
+    private EditText regNom, regPrenom, regEmail, regPassword;
+    private TextView regLogin;
+    private Button regBtn;
+    private FirebaseAuth firebaseAuth;
+    private String nom, prenom, email, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setTheme(R.style.Theme_SquareRoute);
         setContentView(R.layout.activity_register);
-
-        firebaseAuth = FirebaseAuth.getInstance();
 
         regNom = findViewById(R.id.reg_nom);
         regPrenom = findViewById(R.id.reg_prenom);
@@ -40,6 +36,8 @@ public class Register extends AppCompatActivity {
         regBtn = findViewById(R.id.reg_btn);
         regLogin = findViewById(R.id.reg_login_btn);
         //progressBar.setVisibility(View.GONE);
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
         regLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,64 +49,53 @@ public class Register extends AppCompatActivity {
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = regEmail.getText().toString();
-                String prenom = regPrenom.getText().toString();
-                String nom = regNom.getText().toString();
-                String password = regPassword.getText().toString();
+                email = regEmail.getText().toString();
+                prenom = String.valueOf(regPrenom.getText());
+                nom = String.valueOf(regNom.getText());
+                password = regPassword.getText().toString();
 
                 if (email.isEmpty()) {
                     regEmail.setError("Email manquant");
-                    return;
                 }
 
-                if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     regEmail.setError("Email invalide");
-                    return;
                 }
 
                 if (prenom.isEmpty()) {
                     regPrenom.setError("Prénom manquant");
-                    return;
                 }
 
                 if (nom.isEmpty()) {
                     regPrenom.setError("nom manquant");
-                    return;
                 }
 
                 if (password.isEmpty()) {
                     regPassword.setError("Mot de passe manquant");
-                    return;
                 }
 
-             //   progressBar.setVisibility(View.VISIBLE);
-                
-                firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>(){
+                firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>(){
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task ) {
-                        if(task.isSuccessful()){
-                            User user = new User(email,prenom);
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            User user = new User(nom, prenom, email, password);
 
                             FirebaseDatabase.getInstance().getReference("Utilisateur")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>(){
+                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
-                                public void onComplete(@NonNull Task<Void> task){
-                                    if(task.isSuccessful()){
-                                        //progressBar.setVisibility(View.GONE);
-                                        Toast.makeText(Register.this, "Nouvel utilisateur créé avec succès", Toast.LENGTH_SHORT).show();
-                                    }else{
-                                        //progressBar.setVisibility(View.GONE);
-                                        Toast.makeText(Register.this, "Erreur lors de l'inscription. Veuillez réessayer", Toast.LENGTH_SHORT).show();
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(Inscription_EtuMoov.this, "Nouvel utilisateur créé avec succès", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(Inscription_EtuMoov.this, "Erreur lors de l'inscription. Veuillez réessayer", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
                             startActivity(new Intent(getApplicationContext(), activity1.class));
                             finish();
-                        }
-                        else{
-                            Toast.makeText(Register.this, "Erreur lors de l'inscription. Veuillez réessayer", Toast.LENGTH_SHORT).show();
-                            progressBar.setVisibility(View.GONE);
+                        } else {
+                            Toast.makeText(Inscription_EtuMoov.this, "Erreur lors de l'inscription. Veuillez réessayer", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

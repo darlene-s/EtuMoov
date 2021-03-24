@@ -58,18 +58,18 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="72dp"
-        android:layout_marginLeft="72dp"
+        android:layout_marginStart="71dp"
+        android:layout_marginLeft="71dp"
         android:layout_marginEnd="55dp"
         android:layout_marginRight="55dp"
         android:layout_marginBottom="348dp"
+        android:autofillHints=""
         android:background="@drawable/champs_prenom"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:textColorHint="@color/black"
-        android:textColor="@color/black"
         android:hint="Prénom"
-        android:autofillHints="" />
+        android:inputType="textPersonName"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black" />
 
     <ImageView
         android:id="@+id/imageView"
