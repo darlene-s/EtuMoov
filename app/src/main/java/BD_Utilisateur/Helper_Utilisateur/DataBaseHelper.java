@@ -37,7 +37,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String strQL1 = "CREATE TABLE IF NOT EXISTS " + T_Utilisateur
+        String strSQL1 = "CREATE TABLE IF NOT EXISTS " + T_Utilisateur
                 + "("
                 + "id_user INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "nom Text,"
@@ -47,7 +47,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "UNIQUE(mail)"
                 + ")";
 
-        String strQL2 = "CREATE TABLE IF NOT EXISTS " + T_Profil
+        String strSQL2 = "CREATE TABLE IF NOT EXISTS " + T_Profil
                 + "(id_profil INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "tps_preparation INTEGER,"
                 + "tps_suppl INTEGER,"
@@ -55,7 +55,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "FOREIGN KEY(id_user) REFERENCES utilisateur(id_user) ON DELETE CASCADE"
                 + ")";
 
-        String strQL3 = "CREATE TABLE IF NOT EXISTS " + T_Navigation
+        String strSQL3 = "CREATE TABLE IF NOT EXISTS " + T_Navigation
                 + "(id_nav INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "tps_trajet INTEGER,"
                 + "domicile TEXT,"
@@ -64,7 +64,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "FOREIGN KEY(id_profil) REFERENCES profil(id_profil) ON DELETE CASCADE"
                 + ")";
 
-        String strQL4 = "CREATE TABLE IF NOT EXISTS " + T_Planning
+        String strSQL4 = "CREATE TABLE IF NOT EXISTS " + T_Planning
                 + "(id_planning INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "jour DATE,"
                 + "Horaire Date,"
@@ -92,10 +92,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "   Date String"
                 + ")";
 
-        db.execSQL(strQL1);
-        db.execSQL(strQL2);
-        db.execSQL(strQL3);
-        db.execSQL(strQL4);
+        db.execSQL(strSQL1);
+        db.execSQL(strSQL2);
+        db.execSQL(strSQL3);
+        db.execSQL(strSQL4);
         db.execSQL(strSQL5);
         db.execSQL(strSQL6);
         db.execSQL(strSQL7);
