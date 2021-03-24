@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">EtuMoov</string>
-    <string name="votre_nom">Votre nom</string>
-    <string name="votre_pr_nom">Votre prénom</string>
+    <string name="inscription">Inscription</string>
+    <string name="mot_de_passe_oubli">Mot de passe oublié ?</string>
+    <string name="se_connecter">Se connecter</string>
+    <string name="s_inscrire">S\'inscrire</string>
+    <string name="connexion">Connexion</string>
+    <string name="btn_deconnexion">Déconnexion</string>
+    <string name="soumettre">Soumettre</string>
+    <string name="textview">TextView</string>
 </resources>

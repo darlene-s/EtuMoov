@@ -1,50 +1,127 @@
 package com.example.etumoov;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputLayout;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText regNom, regPrenom, regEmail, regPassword;
-    Button regBtn, regToLoginBtn;
-
-    FirebaseDatabase rootNode;
-    DatabaseReference reference;
+    private FirebaseUser user;
+    EditText connexionEmail,connexionPassword;
+    TextView connexionInscription, connexionForgotPassword;
+    Button connexionButton;
+    FirebaseAuth firebaseAuth;
+    private DatabaseReference reference;
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        //setTheme(R.style.Theme_EtuMoov);
         setContentView(R.layout.activity_main);
 
-        regNom = findViewById(R.id.reg_nom);
-        regPrenom = findViewById(R.id.reg_prenom);
-        regEmail = findViewById(R.id.reg_email);
-        regPassword = findViewById(R.id.reg_password);
-        regBtn = findViewById(R.id.reg_btn);
-        //regToLoginBtn = findViewById(R.id.reg_login_btn);
+        //Firebase authentication
+        firebaseAuth = FirebaseAuth.getInstance();
 
-        regBtn.setOnClickListener(new View.OnClickListener() {
+        connexionEmail = findViewById(R.id.reg_email);
+        connexionPassword = findViewById(R.id.reg_password);
+        connexionButton = findViewById(R.id.reg_login_btn);
+        connexionInscription = findViewById(R.id.reg_btn);
+        //connexionForgotPassword = findViewById(R.id.forgotpassword);
+
+        connexionInscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nom = regNom.getText().toString();
-                rootNode = FirebaseDatabase.getInstance();
-                reference = rootNode.getReference("Utilisateur");
-                String prenom = regPrenom.getText().toString();
-                String email = regEmail.getText().toString();
-                String password = regPassword.getText().toString();
-                UserHelp helperClass = new UserHelp(nom, prenom, email, password);
-
-                reference.child(email).setValue(helperClass);
+                startActivity(new Intent(getApplicationContext(), Register.class));
             }
         });
+
+      /*  connexionForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ForgotPassword.class));
+            }
+        });
+*/
+
+        connexionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = connexionEmail.getText().toString();
+                String password = connexionPassword.getText().toString();
+
+                if(email.isEmpty()){
+                    connexionEmail.setError("Email manquant");
+                    return;
+                }
+
+                if(password.isEmpty()){
+                    connexionPassword.setError("Mot de passe manquant");
+                    return;
+                }
+
+                firebaseAuth.signInWithEmailAndPassword(email,password).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MainActivity.this, "Mot de passe ou email erroné veuillez réessayer" , Toast.LENGTH_SHORT).show();
+                    }
+                });
+                firebaseAuth.signInWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        user = FirebaseAuth.getInstance().getCurrentUser();
+                        reference = FirebaseDatabase.getInstance().getReference("Utilisateur");
+                        userID = user.getUid();
+
+                        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener(){
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot){
+                                User user = snapshot.getValue(User.class);
+                                if(user != null){
+                                    String prenom = user.prenom;
+                                    Toast.makeText(MainActivity.this, "Connexion réussie ! Bienvenue " + prenom + " !" , Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(getApplicationContext(), activity1.class));
+                                    finish();
+                                } else {
+                                    Toast.makeText(MainActivity.this, " Votre email ou mot de passe est invalide", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error){
+                                Toast.makeText(MainActivity.this, "Une erreur s'est produite ! Veuillez réessayer", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            startActivity(new Intent(getApplicationContext(), activity1.class));
+        }
     }
 }
