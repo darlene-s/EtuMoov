@@ -31,6 +31,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         super(context, db_name, null, db_version);
         this.mContext = context;
     }
+    /*
+    Partie de la classe qui correspond à la gestion de la base de données dans son ensemble
+     */
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -90,6 +93,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         this.getWritableDatabase().execSQL("DROP TABLE Planning");
     }
 
+    public void openDataBase(){
+        String dbpath = mContext.getDatabasePath(db_name).getPath();
+        if (myDatabase != null && myDatabase.isOpen()){
+            return;
+        }
+        myDatabase = SQLiteDatabase.openDatabase(dbpath, null, SQLiteDatabase.OPEN_READWRITE);
+    }
+
+    public void closeDataBase(){
+        if (myDatabase!=null)
+            myDatabase.close();
+    }
+
+    /*
+    Partie concernant l'insertion des données dans la base de données
+     */
     public void insertUser(Utilisateur user){
         try {
             String strSQL = "insert into " + T_Utilisateur
@@ -142,34 +161,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
          }
      }
 
-    public void openDataBase(){
-        String dbpath = mContext.getDatabasePath(db_name).getPath();
-        if (myDatabase != null && myDatabase.isOpen()){
-            return;
-        }
-        myDatabase = SQLiteDatabase.openDatabase(dbpath, null, SQLiteDatabase.OPEN_READWRITE);
-    }
-
-    public void closeDataBase(){
-        if (myDatabase!=null)
-            myDatabase.close();
-    }
-
-    public List<Utilisateur> getListUsers(){
-        Utilisateur user = null;
-        List<bdd.models.Utilisateur> userlist = new ArrayList<>();
-        String strSQL ="SELECT *FROM Utilisateur";
-        Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
-        cursor.moveToFirst();
-        while(!cursor.isAfterLast()) {
-            user = new Utilisateur(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
-            userlist.add(user);
-            cursor.moveToNext();
-        }
-        cursor.close();
-        return userlist;
-    }
-
+     /*
+     Partie concernant la récupération d'une ligne spécifique d'une table de la BD
+      */
     public Utilisateur getUtilisateur(int id) {
         try {
             String strSQL = "SELECT *FROM Utilisateur where id_user =" + id;
@@ -186,9 +180,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public Profil getProfil(Utilisateur user){
+    public Profil getProfil(int id){
         try {
-            String strSQL = "SELECT *FROM Profil WHERE id_user =" + user.getId_user();
+            String strSQL = "SELECT *FROM Profil WHERE id_profil =" + id;
             Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
             if (cursor.moveToFirst()) {
                 do {
@@ -202,9 +196,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public Navigation getNavigation(Profil profil){
+    public Navigation getNavigation(int id){
         try {
-            String strSQL = "SELECT *FROM Navigation where id_profil =" + profil.getId_profil();
+            String strSQL = "SELECT *FROM Navigation where id_nav =" + id;
             Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
             if (cursor.moveToFirst()) {
                 do {
@@ -218,9 +212,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public Planning getPlanning(Profil profil){
+    public Planning getPlanning(int id){
         try {
-            String strSQL = "SELECT *FROM Planning WHERE id_profil="+profil.getId_profil();
+            String strSQL = "SELECT *FROM Planning WHERE id_planning=" + id;
             Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
             if (cursor.moveToFirst()) {
                 do {
@@ -232,5 +226,63 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             Toast.makeText(mContext, "Erreur lors de la récupération des infos du navigation.", Toast.LENGTH_LONG);
         }
         return null;
+    }
+
+    /*
+    Récupération globale de données de l'utilisateur de l'appli
+     */
+    public List<Utilisateur> getListUsers(){
+        Utilisateur user = null;
+        List<Utilisateur> userlist = new ArrayList<>();
+        String strSQL ="SELECT *FROM Utilisateur";
+        Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()) {
+            user = new Utilisateur(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
+            userlist.add(user);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return userlist;
+    }
+
+    public List<Navigation> getListNavigationsProfil(){
+        List<Navigation>ListeNavigations = new ArrayList<>();
+        String strSQL = "SELECT *FROM NAVIGATION";
+        Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            Navigation nav = new Navigation(cursor.getInt(cursor.getColumnIndex("id_nav")), cursor.getDouble(cursor.getColumnIndex("tps_preparation")), cursor.getString(cursor.getColumnIndex("domicile")), cursor.getString(cursor.getColumnIndex("destination")), cursor.getInt(cursor.getColumnIndex("id_profil")));
+            ListeNavigations.add(nav);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return ListeNavigations;
+    }
+
+    public List<Planning> getListPlanningsProfil(){
+        List<Planning> ListePlannings = new ArrayList<>();
+        String strSQL = "SELECT *FROM PLANNING";
+        Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            Planning planning = new Planning(cursor.getInt(cursor.getColumnIndex("id_planning")), cursor.getString(cursor.getColumnIndex("jour")), cursor.getString(cursor.getColumnIndex("Horaire")), cursor.getInt(cursor.getColumnIndex("id_profil")));
+            ListePlannings.add(planning);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return ListePlannings;
+    }
+
+    /*
+    Partie concernant la suppression d'informations dans les tables de notre base de données
+     */
+    public void SuppNavigation(int id){
+        String strSQL = "DELETE FROM Navigation WHERE id_nav =" + id;
+        this.getWritableDatabase().execSQL(strSQL);
+    }
+    public void SuppPlanning(int id){
+        String strSQL = "DELETE FROM Planning WHERE id_planning =" + id;
+        this.getWritableDatabase().execSQL(strSQL);
     }
 }
