@@ -1,4 +1,4 @@
-package bdd.models;
+package BD_Utilisateur.Models_Utilisateur;
 
 public class Utilisateur {
     private int id_user;

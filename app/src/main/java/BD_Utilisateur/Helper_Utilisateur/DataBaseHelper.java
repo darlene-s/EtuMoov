@@ -1,20 +1,18 @@
-package bdd.helper;
+package BD_Utilisateur.Helper_Utilisateur;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import bdd.models.Navigation;
-import bdd.models.Planning;
-import bdd.models.Profil;
-import bdd.models.Utilisateur;
+import BD_Utilisateur.Models_Utilisateur.Navigation;
+import BD_Utilisateur.Models_Utilisateur.Planning;
+import BD_Utilisateur.Models_Utilisateur.Profil;
+import BD_Utilisateur.Models_Utilisateur.Utilisateur;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String log = "DataBaseHelper";
