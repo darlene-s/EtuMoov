@@ -4,7 +4,6 @@ public class UserHelp {
     String nom, prenom, email, password;
 
     public UserHelp(){
-
     }
     public UserHelp(String nom, String prenom, String email, String password) {
         this.nom = nom;
