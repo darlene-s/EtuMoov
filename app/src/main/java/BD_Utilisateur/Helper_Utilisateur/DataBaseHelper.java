@@ -18,7 +18,6 @@ import BD_Utilisateur.Models_Utilisateur.Utilisateur;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String log = "DataBaseHelper";
-    private static final String test = "on va voir";
     private static final String T_Utilisateur = "Utilisateur";
     private static final String T_Profil = "Profil";
     private static final String T_Navigation = "Navigation";
