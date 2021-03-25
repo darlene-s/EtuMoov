@@ -1,11 +1,25 @@
 <resources>
-    <string name="app_name">EtuMoov</string>
-    <string name="inscription">Inscription</string>
-    <string name="mot_de_passe_oubli">Mot de passe oublié ?</string>
-    <string name="se_connecter">Se connecter</string>
-    <string name="s_inscrire">S\'inscrire</string>
-    <string name="connexion">Connexion</string>
-    <string name="btn_deconnexion">Déconnexion</string>
-    <string name="soumettre">Soumettre</string>
-    <string name="textview">TextView</string>
+    
+<!-- Page d'accueil -->
+    <string name="txt_authentification">S\'authentifier</string>
+    <string name="txt_inscrire">S\'inscrire</string>
+    <string name="txt_slogan">EtuMoov, le compagnon des étudiants</string>
+
+    <!-- Page connexion -->
+    <string name="txt_connexion">Connectez-vous !</string>
+    <string name="label_email">Email</string>
+    <string name="ET_email">Insérez votre email</string>
+    <string name="label_mdp">Mot de passe</string>
+    <string name="ET_mdp">Insérez votre mot de passe</string>
+    <string name="txt_pasdecompte">"Vous n\'avez pas encore de compte, Inscrivez vous !"</string>
+    <string name="btn_connexion">Connexion</string>
+
+    <!-- Page d'inscription -->
+
+    <string name="txt_inscrivezvousmtn">Inscrivez-vous dès maintenant !</string>
+    <string name="label_nom">Nom</string>
+    <string name="ET_nom">Insérez votre nom</string>
+    <string name="label_prenom">Prénom</string>
+    <string name="ET_prenom">Insérez votre prénom</string>
+    <string name="txt_vousdejacompte">Vous avez déjà un compte ? Connectez-vous</string>
 </resources>
