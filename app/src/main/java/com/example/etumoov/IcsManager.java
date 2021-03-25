@@ -1,5 +1,7 @@
 package com.example.etumoov;
 
+import android.content.Context;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,6 +10,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 
+import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
 import biweekly.Biweekly;
 import biweekly.ICalendar;
 import biweekly.component.VEvent;
@@ -22,9 +25,11 @@ import biweekly.component.VEvent;
 public class IcsManager {
 
     private List<VEvent> allClassesFromIcs;
+    private DataBaseHelper db;
 
-    public IcsManager(String linkOfIcsFile) throws IOException {
+    public IcsManager(String linkOfIcsFile, Context context) throws IOException {
         getIcsFile(linkOfIcsFile);
+        db = new DataBaseHelper(context);
     }
 
 
@@ -113,6 +118,9 @@ public class IcsManager {
      *
      */
     private void impelmentInDataBase() {
-
+        for(int i = 0; i < allClassesFromIcs.size();i++) {
+            db.insertCours("IDK",allClassesFromIcs.get(i).getSummary().getValue(),allClassesFromIcs.get(i).getLocation().getValue(),
+                    createHeureDebut(i),createHeureFin(i),createDate(i));
+        }
     }
 }

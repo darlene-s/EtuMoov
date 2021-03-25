@@ -10,6 +10,8 @@ import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 
+import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
+
 /**
  * Classe ScannerActivity, pour le scan du QR CODE
  *
@@ -20,6 +22,7 @@ public class ScannerActivity extends AppCompatActivity {
 
     private CodeScanner codeScanner;
     private CodeScannerView scannView;
+    private DataBaseHelper db;
 
     /**
      * Fonction de création de l'activity
@@ -32,6 +35,7 @@ public class ScannerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scanner);
         scannView = findViewById(R.id.scannerView);
         codeScanner = new CodeScanner(this,scannView);
+        db = new DataBaseHelper(this);
 
         codeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
@@ -39,7 +43,7 @@ public class ScannerActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        //db.
+                        db.insertLien(result.getText());
                     }
                 });
             }
