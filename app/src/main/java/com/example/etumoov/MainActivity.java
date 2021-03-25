@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btn_inscrire = findViewById(R.id.btn_inscrire);
-        btn_connect = findViewById(R.id.btn_connect);
+        btn_connect = findViewById(R.id.btn_authentification);
 
         btn_inscrire.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -25,10 +25,10 @@ import com.google.firebase.database.ValueEventListener;
 public class Connexion_EtuMoov extends AppCompatActivity {
 
     private FirebaseUser user;
-    EditText connexionEmail,connexionPassword;
-    TextView connexionInscription, connexionForgotPassword;
-    Button connexionButton;
-    FirebaseAuth firebaseAuth;
+    private EditText connexionEmail,connexionPassword;
+    private TextView connexionInscription, connexionForgotPassword;
+    private Button connexionButton;
+    private FirebaseAuth firebaseAuth;
     private DatabaseReference reference;
     private String userID;
 
@@ -43,8 +43,8 @@ public class Connexion_EtuMoov extends AppCompatActivity {
         connexionEmail = findViewById(R.id.reg_email);
         connexionPassword = findViewById(R.id.reg_password);
         connexionButton = findViewById(R.id.reg_login_btn);
-        connexionInscription = findViewById(R.id.reg_btn);
-        //connexionForgotPassword = findViewById(R.id.forgotpassword);
+        connexionInscription = findViewById(R.id.text_inscription);
+        //connexionForgotPassword = findViewById(R.id.text_mdpOublie);
 
         connexionInscription.setOnClickListener(new View.OnClickListener() {
             @Override

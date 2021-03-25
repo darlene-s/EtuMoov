@@ -8,13 +8,39 @@
     tools:context=".MainActivity"
     android:background="@drawable/background">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="513dp"
+            android:layout_height="409dp"
+            app:srcCompat="@drawable/ic_accueilhaut"
+            tools:layout_editor_absoluteX="-52dp"
+            tools:layout_editor_absoluteY="-10dp" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/img_accueilfond1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500dp"
+        android:layout_marginEnd="212dp"
+        android:layout_marginRight="212dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_accueilbas" />
+
     <Button
         android:id="@+id/btn_authentification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="108dp"
         android:layout_marginRight="108dp"
-        android:layout_marginBottom="244dp"
+        android:layout_marginBottom="192dp"
         android:text="@string/txt_authentification"
         android:textColor="@color/white"
         android:textSize="16sp"
@@ -23,11 +49,11 @@
 
     <Button
         android:id="@+id/btn_inscrire"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="136dp"
-        android:layout_marginRight="136dp"
-        android:layout_marginBottom="168dp"
+        android:layout_width="174dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginRight="108dp"
+        android:layout_marginBottom="120dp"
         android:text="@string/txt_inscrire"
         android:textColor="@color/white"
         android:textSize="16sp"
@@ -36,14 +62,15 @@
 
     <TextView
         android:id="@+id/tv_slogan"
-        android:layout_width="306dp"
-        android:layout_height="35dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginRight="52dp"
-        android:layout_marginBottom="64dp"
+        android:layout_width="276dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginBottom="36dp"
         android:text="@string/txt_slogan"
         android:textColor="@color/white"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btn_authentification"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -56,17 +83,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_accueilplanning" />
-
-    <ImageView
-        android:id="@+id/img_fond1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="500dp"
-        android:layout_marginEnd="212dp"
-        android:layout_marginRight="212dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_accueilbas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
