@@ -1,6 +1,7 @@
 <resources>
     
 <!-- Page d'accueil -->
+    <string name="app_name">EtuMoov</string>
     <string name="txt_authentification">S\'authentifier</string>
     <string name="txt_inscrire">S\'inscrire</string>
     <string name="txt_slogan">EtuMoov, le compagnon des étudiants</string>
