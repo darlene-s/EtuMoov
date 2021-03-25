@@ -110,18 +110,38 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE T_Cours");
         db.execSQL("DROP TABLE T_Lien");
         db.execSQL("DROP TABLE T_Rappel");
-
         onCreate(db);
     }
 
     public void deleteDB() {
-        this.getWritableDatabase().execSQL("DROP TABLE Utilisateur");
-        this.getWritableDatabase().execSQL("DROP TABLE Profil");
-        this.getWritableDatabase().execSQL("DROP TABLE Navigation");
-        this.getWritableDatabase().execSQL("DROP TABLE Planning");
+        this.getWritableDatabase().execSQL("DELETE FROM Utilisateur");
+        this.getWritableDatabase().execSQL("DELETE FROM Profil");
+        this.getWritableDatabase().execSQL("DELETE FROM Navigation");
+        this.getWritableDatabase().execSQL("DELETE FROM Planning");
         this.getWritableDatabase().execSQL("DELETE FROM T_Cours");
         this.getWritableDatabase().execSQL("DELETE FROM T_Lien");
         this.getWritableDatabase().execSQL("DELETE FROM T_Rappel");
+    }
+
+    /*
+    * Partie permettant de pouvoir vider complètement la table contenant les cours
+    * lors d'une réinitialisation du lien
+     */
+    public boolean ifCoursEmpty(){
+        String strSQL = "SELECT * FROM T_Cours";
+        Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
+        cursor.moveToFirst();
+        if(cursor.getCount() == 0 || cursor == null){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public void viderCours(){
+        if(!ifCoursEmpty())
+            this.getWritableDatabase().execSQL("DELETE FROM T_Cours");
     }
 
     public void openDataBase() {
@@ -202,6 +222,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public void insertLien(String lien) {
+        this.getWritableDatabase().execSQL("DELETE FROM T_LIEN");
         String strSql = "insert into T_Lien (lien) VALUES ('" + lien + "')";
         this.getWritableDatabase().execSQL(strSql);
     }
