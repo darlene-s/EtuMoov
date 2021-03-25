@@ -2,4 +2,9 @@
     <string name="app_name">EtuMoov</string>
     <string name="votre_nom">Votre nom</string>
     <string name="votre_pr_nom">Votre prénom</string>
+    <string name="choisis_une_ligne">Choisis une ligne !</string>
+    <string name="voici_les_horaires_de_passage">Voici les horaires de passage</string>
+    <string name="choisis_une_station">Choisis une station !</string>
+    <string name="choisis_une_station">Choisis une station !</string>
+    <string name="choisis_une_ligne">Choisis une ligne !</string>
 </resources>

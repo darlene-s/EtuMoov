@@ -5,6 +5,7 @@
     <color name="midnight_blue">#231780</color>
     <color name="electric_blue">#1503A8</color>
     <color name="dark_purple">#5028B8</color>
+    <color name="dark_blue">#0F0939</color>
     <color name="light_purple">#8D6BD1</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
