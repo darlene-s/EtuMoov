@@ -30,10 +30,10 @@ public class MoovInTimeMenu extends AppCompatActivity {
         setTheme(R.style.Theme_EtuMoov);
         setContentView(R.layout.activity_moov_in_time_menu);
 
-        //metro = findViewById(R.id.btn_metro);
-        //rer = findViewById(R.id.btn_rer);
-       // bus = findViewById(R.id.btn_bus);
-       // tram = findViewById(R.id.btn_tram);
+         metro = findViewById(R.id.btn_metro);
+         rer = findViewById(R.id.btn_rer);
+         bus = findViewById(R.id.btn_bus);
+         tram = findViewById(R.id.btn_tram);
 
         metro.setOnClickListener(new View.OnClickListener() {
             /**

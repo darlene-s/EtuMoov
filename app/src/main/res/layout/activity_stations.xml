@@ -11,11 +11,11 @@
         android:id="@+id/stations"
         android:layout_width="273dp"
         android:layout_height="563dp"
-        android:layout_marginBottom="40dp"
         android:background="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@android:layout/simple_list_item_1"></ListView>
 
     <TextView
@@ -32,7 +32,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.046" />
+        app:layout_constraintVertical_bias="0.25" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

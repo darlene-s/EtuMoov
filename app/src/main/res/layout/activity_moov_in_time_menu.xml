@@ -4,16 +4,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NavigationMap.MoovInTime.MoovInTimeMenu"
-    android:background="@color/dark_blue">
+    android:background="@color/dark_blue"
+    tools:context=".NavigationMap.MoovInTime.MoovInTimeMenu">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="425dp"
-        android:layout_height="410dp"
+    <ImageButton
+        android:id="@+id/btn_tram"
+        android:layout_width="136dp"
+        android:layout_height="154dp"
+        android:layout_marginTop="599dp"
+        android:layout_marginBottom="76dp"
+        android:background="common_google_signin_btn_text_dark_disabled"
+        android:contentDescription="@string/btn_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.836"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/btn_tram" />
+
+    <ImageButton
+        android:id="@+id/btn_bus"
+        android:layout_width="134dp"
+        android:layout_height="153dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginLeft="42dp"
+        android:layout_marginTop="600dp"
+        android:layout_marginBottom="76dp"
+        android:background="@color/cardview_shadow_end_color"
+        android:contentDescription="@string/btn_bus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_tram"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/btn_bus" />
+
+    <ImageButton
+        android:id="@+id/btn_rer"
+        android:layout_width="136dp"
+        android:layout_height="153dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="42dp"
+
+        android:layout_marginLeft="42dp"
+        android:layout_marginTop="419dp"
+        android:layout_marginBottom="28dp"
+        android:background="common_google_signin_btn_text_dark_disabled"
+        android:contentDescription="@string/btn_rer"
+        app:layout_constraintBottom_toTopOf="@+id/btn_bus"
+        app:layout_constraintEnd_toStartOf="@+id/btn_metro"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/btn_rer" />
+
+    <ImageButton
+        android:id="@+id/btn_metro"
+        android:layout_width="139dp"
+        android:layout_height="154dp"
+        android:layout_marginStart="212dp"
+        android:layout_marginLeft="212dp"
+        android:layout_marginTop="417dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        android:layout_marginBottom="28dp"
+        android:background="common_google_signin_btn_text_dark_disabled"
+        android:contentDescription="@string/btn_rer"
+        app:layout_constraintBottom_toTopOf="@+id/btn_tram"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/moov_in_time" />
+        app:srcCompat="@drawable/btn_metro" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <ImageView
+            android:id="@+id/moov_in_time1"
+            android:layout_width="match_parent"
+            android:layout_height="426dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="-16dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="16dp"
+            android:textSize="2dpsp"
+            android:contentDescription="@string/todo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/moov_in_time1" />
+
+    </RelativeLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
