@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EtuMoov">
-        <activity android:name=".MainActivity">
+        <activity android:name="jeu.clicker.ClickerActivity"/>
+        <activity android:name="jeu.memory.Memory" />
+        <activity android:name="jeu.calcul.CalculActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
