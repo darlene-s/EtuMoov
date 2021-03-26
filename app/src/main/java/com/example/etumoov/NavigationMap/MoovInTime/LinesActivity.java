@@ -1,11 +1,14 @@
 package com.example.etumoov.NavigationMap.MoovInTime;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,11 +40,19 @@ public class LinesActivity extends AppCompatActivity {
         setTheme(R.style.Theme_EtuMoov);
         setContentView(R.layout.activity_lines);
 
-        //listView = (ListView) findViewById(R.id.lignes);
+        listView = (ListView) findViewById(R.id.lignes);
         Intent intent = getIntent();
         final String transport = intent.getStringExtra(MoovInTimeMenu.EXTRA_MESSAGE);
         RequestAPI(transport);
-        adapter = new ArrayAdapter<String>(LinesActivity.this,android.R.layout.simple_list_item_1,listLines);
+        adapter = new ArrayAdapter<String>(LinesActivity.this,android.R.layout.simple_list_item_1,listLines) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+               View view = super.getView(position, convertView, parent);
+                TextView txt = view.findViewById(android.R.id.text1);
+                txt.setTextColor(Color.WHITE);
+                return view;
+            }
+        };
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             /**
