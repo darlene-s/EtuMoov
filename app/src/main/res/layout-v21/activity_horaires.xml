@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_blue"
+    tools:context=".NavigationMap.MoovInTime.HorairesActivity">
+    <TextView
+        android:id="@+id/horaires"
+        android:layout_width="293dp"
+        android:layout_height="588dp"
+        android:layout_marginBottom="44dp"
+        android:background="#000000"
+        android:backgroundTint="#000000"
+        android:textColor="@color/white"
+        android:fontFamily="@font/montserrat_regular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/stations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/voici_les_horaires_de_passage"
+        android:textColor="@color/white"
+        android:textSize="21sp"
+        app:layout_constraintBottom_toTopOf="@+id/horaires"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.585" />
+</androidx.constraintlayout.widget.ConstraintLayout>
