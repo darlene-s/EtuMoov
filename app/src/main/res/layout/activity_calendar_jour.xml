@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:background="@drawable/background_color"
+    tools:context=".Classes.CalendarJour">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black_less"
+        android:paddingBottom="3dp">
+
+        <ImageButton
+            android:id="@+id/btn_retour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="230dp"
+            android:pivotX="12"
+            android:scaleX="-1"
+            android:background="@drawable/ic_baseline_arrow_right_alt_24"
+            android:gravity="left"
+            android:padding="25dp" />
+
+        <ImageButton
+            android:id="@+id/button_qr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_baseline_qr_code_scanner_24"
+            android:gravity="right"
+            android:padding="20dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:id="@+id/LeftArrow"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="40dp"
+            android:padding="20dp"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24" />
+
+        <TextView
+            android:id="@+id/textViewDate"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="08/03/2021"
+            android:textSize="25dp" />
+
+        <ImageView
+            android:id="@+id/RightArrow"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:padding="20dp"
+            android:layout_marginRight="40dp"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/cours_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"/>
+    </LinearLayout>
+</LinearLayout>
