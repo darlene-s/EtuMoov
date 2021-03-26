@@ -8,6 +8,20 @@
     tools:context="jeu.memory.Memory">
 
     <ImageView
+        android:id="@+id/ic_stars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/include"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.112"
+        app:srcCompat="@drawable/ic_stars"
+        android:contentDescription="@string/label_img"/>
+
+    <ImageView
         android:contentDescription="@string/label_img"
         android:id="@+id/ic_montagne"
         android:layout_width="wrap_content"
@@ -56,8 +70,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
