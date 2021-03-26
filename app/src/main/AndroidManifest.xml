@@ -36,17 +36,14 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name=".NavigationMap.NaviMap.NaviMap"
-            android:label="@string/title_activity_navi_map"
-            tools:ignore="MissingClass"></activity>
+        <activity android:name=".NavigationMap.MoovInTime.MoovInTimeMenu"/>
         <activity android:name=".NavigationMap.MoovInTime.StationsActivity" />
         <activity android:name=".NavigationMap.MoovInTime.LinesActivity" />
         <activity android:name=".NavigationMap.MoovInTime.HorairesActivity" />
-        <activity android:name=".NavigationMap.MoovInTime.MoovInTimeMenu">
+        <activity
+            android:name=".NavigationMap.NaviMap.NaviMap">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -9,10 +9,11 @@
 
     <ListView
         android:id="@+id/lignes"
-        android:layout_width="256dp"
-        android:layout_height="575dp"
+        android:layout_width="273dp"
+        android:layout_height="563dp"
         android:background="#FFFFFF"
         android:backgroundTint="#000000"
+        android:fontFamily="@font/montserrat_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -31,8 +32,9 @@
         android:textSize="21sp"
         app:layout_constraintBottom_toTopOf="@+id/lignes"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.682" />
+        app:layout_constraintVertical_bias="0.442" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
