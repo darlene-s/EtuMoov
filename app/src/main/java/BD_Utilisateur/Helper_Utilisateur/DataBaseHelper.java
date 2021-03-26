@@ -51,6 +51,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "(id_profil INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "tps_preparation INTEGER,"
                 + "tps_suppl INTEGER,"
+                + "score INTEGER,"
+                + "timerMemory  TEXT,"
+                + "timerCookie TEXT,"
                 + "id_user INTEGER,"
                 + "FOREIGN KEY(id_user) REFERENCES utilisateur(id_user) ON DELETE CASCADE"
                 + ")";
@@ -180,6 +183,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     + "(tps_preparation, tps_suppl, id_user) VALUES ('"
                     + profil.getTps_preparation() + "',"
                     + profil.getTps_supplementaires() + "',"
+                    + profil.getScore() + "',"
+                    + profil.getTimerMemory() + "',"
+                    + profil.getTimerCookie() + "',"
                     + profil.getId_user() + "')";
             this.getWritableDatabase().execSQL(strSQL);
         } catch (Exception e) {
@@ -257,7 +263,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
             if (cursor.moveToFirst()) {
                 do {
-                    return new Profil(cursor.getInt(cursor.getColumnIndex("id_profil")), cursor.getDouble(cursor.getColumnIndex("tps_preparation")), cursor.getDouble(cursor.getColumnIndex("tps_suppl")), cursor.getInt(cursor.getColumnIndex("id_user")));
+                    return new Profil(cursor.getInt(cursor.getColumnIndex("id_profil")), cursor.getDouble(cursor.getColumnIndex("tps_preparation")), cursor.getDouble(cursor.getColumnIndex("tps_suppl")), cursor.getInt(cursor.getColumnIndex("score")), cursor.getString(cursor.getColumnIndex("timerMemory")), cursor.getString(cursor.getColumnIndex("timerCookie")),  cursor.getInt(cursor.getColumnIndex("id_user")));
                 } while (cursor.moveToNext());
             }
             cursor.close();
@@ -394,7 +400,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         this.getWritableDatabase().execSQL(strSQL);
     }
 
-    public boolean isEmpty() {
+    public boolean isLienEmpty() {
         String strSql = "SELECT * FROM T_Lien";
         Cursor cursor = this.getReadableDatabase().rawQuery(strSql, null);
         cursor.moveToFirst();
