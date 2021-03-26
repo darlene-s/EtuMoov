@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EtuMoov">
-        <activity android:name=".Connexion_EtuMoov"></activity>
+        <activity android:name=".ForgotPassword_EtuMoov"></activity>
+        <activity android:name=".Connexion_EtuMoov" />
         <activity android:name=".Inscription_EtuMoov" />
         <activity android:name=".MainActivity">
             <intent-filter>

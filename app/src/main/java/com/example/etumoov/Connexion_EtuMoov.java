@@ -44,7 +44,7 @@ public class Connexion_EtuMoov extends AppCompatActivity {
         connexionPassword = findViewById(R.id.reg_password);
         connexionButton = findViewById(R.id.reg_login_btn);
         connexionInscription = findViewById(R.id.text_inscription);
-        //connexionForgotPassword = findViewById(R.id.text_mdpOublie);
+        connexionForgotPassword = findViewById(R.id.text_mdpOublie);
 
         connexionInscription.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +53,12 @@ public class Connexion_EtuMoov extends AppCompatActivity {
             }
         });
 
+        connexionForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ForgotPassword_EtuMoov.class));
+            }
+        });
         connexionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
