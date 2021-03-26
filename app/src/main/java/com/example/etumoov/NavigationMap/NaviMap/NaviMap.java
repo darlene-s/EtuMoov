@@ -56,11 +56,11 @@ import com.google.android.libraries.places.api.model.RectangularBounds;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 
 /**
- * @author G.Christian | S.Darlène | T.Kenny
- * Classe MapsActivityUniversity : Classe  MapsActivityUniversity , utilise l'API Google Maps
+ * @author EtuMoov Team
+ * Classe NaviMap : Classe NaviMap , utilise l'API Google Maps
  * (Location service, direction service et affichage de la carte), cette activité permet à l'utilisateur
  * d'avoir un tracé depuis sa localisation/point de départ vers son point d'arrivée. Il y a également une liste
- * d'établissements universitaires épinglée à la carte.
+ * d'établissements universitaires/bibliothèques épinglée à la carte.
  */
 
 public class NaviMap extends FragmentActivity implements OnMapReadyCallback {

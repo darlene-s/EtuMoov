@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.example.etumoov.R;
 
 /**
- * @author EtuMoov
+ * @author EtuMoov Team
  * Classe HorairesActivity : Permet à l'utilisateur d'avoir accès aux horaires d'arrivée à sa station
  * d'une ligne de transport
  */
