@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.etumoov.NavigationMap.NaviMap.NaviMap;
+import com.example.etumoov.NavigationMap.NaviMap.TravelTime;
 import com.example.etumoov.R;
 /**
  * @author EtuMoov Team
@@ -18,7 +19,7 @@ import com.example.etumoov.R;
 public class MoovInTimeMenu extends AppCompatActivity {
 
     ImageButton metro, rer, bus, tram;
-    Button map;
+    Button map,distance;
     public static final String EXTRA_MESSAGE = "transport";
     /**
      * Fonction onCreate() de base qui représente une étape du cycle de vie de l'activité
@@ -37,6 +38,7 @@ public class MoovInTimeMenu extends AppCompatActivity {
          rer = findViewById(R.id.btn_rer);
          bus = findViewById(R.id.btn_bus);
          tram = findViewById(R.id.btn_tram);
+         distance = findViewById(R.id.btn_distance);
 
         metro.setOnClickListener(new View.OnClickListener() {
             /**
@@ -57,11 +59,24 @@ public class MoovInTimeMenu extends AppCompatActivity {
              * Fonction onClick() prenant en paramètre une vue (drawable associé au bouton métro)
              * et qui permet de lancer l'activité LinesActivity affichant les lignes de métro
              *
-             * @param v : vue représentant le bouton metros lorsqu'il est cliqué
+             * @param v : vue représentant le bouton map lorsqu'il est cliqué
              */
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),NaviMap.class);
+                startActivity(intent);
+            }
+        });
+        distance.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Fonction onClick() prenant en paramètre une vue (drawable associé au bouton métro)
+             * et qui permet de lancer l'activité LinesActivity affichant les lignes de métro
+             *
+             * @param v : vue représentant le bouton map lorsqu'il est cliqué
+             */
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TravelTime.class);
                 startActivity(intent);
             }
         });

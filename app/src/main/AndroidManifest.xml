@@ -4,8 +4,7 @@
     package="com.example.etumoov"
     tools:ignore="ExtraText">
 
-    <uses-sdk tools:overrideLibrary="com.budiyev.android.codescanner"/>
-
+    <uses-sdk tools:overrideLibrary="com.budiyev.android.codescanner" />
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -15,7 +14,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,7 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EtuMoov">
-
+        <activity android:name=".NavigationMap.NaviMap.TravelTime"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -39,7 +37,7 @@
         <activity
             android:name=".NavigationMap.NaviMap.NaviMap"
             android:label="@string/title_activity_navi_map"
-            tools:ignore="MissingClass"></activity>
+            tools:ignore="MissingClass" />
         <activity android:name=".NavigationMap.MoovInTime.StationsActivity" />
         <activity android:name=".NavigationMap.MoovInTime.LinesActivity" />
         <activity android:name=".NavigationMap.MoovInTime.HorairesActivity" />
