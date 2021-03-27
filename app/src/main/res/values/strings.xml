@@ -24,4 +24,10 @@
     <string name="label_prenom">Prénom</string>
     <string name="ET_prenom">Insérez votre prénom</string>
     <string name="txt_vousdejacompte">Vous avez déjà un compte ? Connectez-vous</string>
+    
+    <!-- Mot de passe oublié -->
+    
+    <string name="ET_rentremdp">Rentrez votre adresse email</string>
+    <string name="btn_reinitialiser">Réinitialiser votre mot de passe</string>
+
 </resources>
