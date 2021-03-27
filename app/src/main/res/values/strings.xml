@@ -17,7 +17,6 @@
     <string name="txt_mdpoublie">Mot de passe oublié ? Cliquez ici </string>
 
     <!-- Page d'inscription -->
-
     <string name="txt_inscrivezvousmtn">Inscrivez-vous dès maintenant !</string>
     <string name="label_nom">Nom</string>
     <string name="ET_nom">Insérez votre nom</string>
@@ -26,7 +25,6 @@
     <string name="txt_vousdejacompte">Vous avez déjà un compte ? Connectez-vous</string>
     
     <!-- Mot de passe oublié -->
-    
     <string name="ET_rentremdp">Rentrez votre adresse email</string>
     <string name="btn_reinitialiser">Réinitialiser votre mot de passe</string>
 
