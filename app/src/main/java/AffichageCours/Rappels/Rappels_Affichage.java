@@ -10,23 +10,21 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.example.appmobilev2.Classes.CalendarJour;
-import com.example.appmobilev2.DataBase.DataBaseManager;
-import com.example.appmobilev2.R;
+import com.example.etumoov.R;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+
+import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
 
 public class Rappels_Affichage extends AppCompatActivity {
     private List<Rappel> ListeRappels;
-    private DataBaseManager db;
+    private DataBaseHelper db;
     private ImageView btn_add;
     private TableLayout tableLayout;
 
@@ -48,8 +46,16 @@ public class Rappels_Affichage extends AppCompatActivity {
                 finish();
             }
         });
-        db = new DataBaseManager(this);
+        db = new DataBaseHelper(this);
         ListeRappels = db.getRappels();
+        Collections.sort(ListeRappels, new Comparator<Rappel>() {
+            @Override
+            public int compare(Rappel o1, Rappel o2) {
+                return o1.getDate().compareTo(o2.getDate());
+
+            }
+        });
+
         for (int i = 0; i < ListeRappels.size(); ++i) {
                 // Paramètres de design des lignes du layout
                 TableRow row = new TableRow(this);

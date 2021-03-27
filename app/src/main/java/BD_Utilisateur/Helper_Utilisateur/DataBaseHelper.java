@@ -9,8 +9,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import AffichageCours.Rappels.Rappel;
 import BD_Utilisateur.Models_Cours.Cours;
-import BD_Utilisateur.Models_Cours.Rappel;
 import BD_Utilisateur.Models_Utilisateur.Navigation;
 import BD_Utilisateur.Models_Utilisateur.Planning;
 import BD_Utilisateur.Models_Utilisateur.Profil;
