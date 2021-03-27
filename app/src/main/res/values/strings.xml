@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">EtuMoov</string>
     <string name="votre_nom">Votre nom</string>
     <string name="votre_prenom">Votre prénom</string>
 
 
     <!-- ************** Jeux  ************** -->
-
-    <string name="label_img">Image</string>
     <string name="label_calcul">Calcul</string>
     <string name="label_timer">Timer :</string>
     <string name="label_questions">Questions :</string>
@@ -19,5 +16,41 @@
     <string name="label_MoovinTime">Moovintime</string>
     <string name="label_edt">EDT</string>
     <string name="label_reveil">Réveil</string>
+
+
+    <!-- Page d'accueil -->
+    <string name="app_name">EtuMoov</string>
+    <string name="txt_authentification">S\'authentifier</string>
+    <string name="txt_inscrire">S\'inscrire</string>
+    <string name="txt_slogan">EtuMoov, le compagnon des étudiants</string>
+
+    <!-- Page connexion -->
+    <string name="txt_connexion">Connectez-vous !</string>
+    <string name="label_email">Email</string>
+    <string name="ET_email">Insérez votre email</string>
+    <string name="label_mdp">Mot de passe</string>
+    <string name="ET_mdp">Insérez votre mot de passe</string>
+    <string name="txt_pasdecompte">Vous n\'avez pas encore de compte, Inscrivez vous !</string>
+    <string name="btn_connexion">Connexion</string>
+    <string name="txt_saisirEmail">Veuillez saisir votre mot de passe :)</string>
+    <string name="txt_mdpoublie">Mot de passe oublié ? Cliquez ici </string>
+
+    <!-- Page d'inscription -->
+    <string name="txt_inscrivezvousmtn">Inscrivez-vous dès maintenant !</string>
+    <string name="label_nom">Nom</string>
+    <string name="ET_nom">Insérez votre nom</string>
+    <string name="label_prenom">Prénom</string>
+    <string name="ET_prenom">Insérez votre prénom</string>
+    <string name="txt_vousdejacompte">Vous avez déjà un compte ? Connectez-vous</string>
+
+    <!-- Mot de passe oublié -->
+    <string name="ET_rentremdp">Rentrez votre adresse email</string>
+    <string name="btn_reinitialiser">Réinitialiser votre mot de passe</string>
+
+    <!-- Bouton -->
+    <string name="btn_valider">Valider</string>
+
+
+    <string name="label_img">Image</string>
 
 </resources>

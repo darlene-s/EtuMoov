@@ -1,4 +1,4 @@
-package com.example.etumoov;
+package com.example.etumoov.Connect;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.etumoov.R;
+import com.example.etumoov.User;
+import com.example.etumoov.activity1;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;

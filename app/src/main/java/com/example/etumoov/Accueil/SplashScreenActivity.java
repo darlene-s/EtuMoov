@@ -1,4 +1,4 @@
-package com.example.etumoov;
+package com.example.etumoov.Accueil;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,9 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+
+import com.example.etumoov.MainActivity;
+import com.example.etumoov.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
     //Animation étudiants
@@ -32,7 +35,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void run() {
                 //démarrage d'une page
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AuthentificationMain.class);
                 startActivity(intent);
                 finish();
             }
