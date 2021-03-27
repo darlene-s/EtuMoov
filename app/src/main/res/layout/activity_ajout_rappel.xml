@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Rappels.AjoutRappel"
+    tools:context="AffichageCours.Rappels.AjoutRappel"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:background="@drawable/background_color">
+    android:background="@drawable/background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,12 +19,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ajouter un rappel"
-            android:fontFamily="@font/stabilo"
             android:textColor="@color/white"
             android:textSize="60sp"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="100dp"
             />
+
         <EditText
             android:id="@+id/reg_title"
             android:layout_width="wrap_content"
@@ -33,7 +33,6 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:paddingLeft="10dp"
-            android:background="@drawable/champs"
             android:ems="10"
             android:inputType="text"
             android:textColorHint="@color/black"
@@ -49,7 +48,6 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:paddingLeft="10dp"
-            android:background="@drawable/champs"
             android:ems="10"
             android:inputType="textLongMessage"
             android:textColorHint="@color/black"
@@ -65,7 +63,6 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:paddingLeft="10dp"
-            android:background="@drawable/champs"
             android:ems="10"
             android:inputType="text"
             android:textColorHint="@color/black"
@@ -80,7 +77,6 @@
         android:layout_marginTop="40dp">
     <Button
         android:id="@+id/btn_ajout"
-        android:background="@drawable/background_btn"
         android:layout_width="260dp"
         android:layout_height="75dp"
         android:layout_marginLeft="50dp"
