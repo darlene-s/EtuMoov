@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.etumoov.Accueil.AuthentificationMain;
 import com.example.etumoov.MainActivity;
 import com.example.etumoov.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -59,8 +60,9 @@ public class ForgotPassword_EtuMoov extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Toast.makeText(ForgotPassword_EtuMoov.this,"Un email de récupération vous a été envoyé",Toast.LENGTH_LONG).show();
                     //progressBar.setVisibility(View.GONE);
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                }else {
+                    startActivity(new Intent(getApplicationContext(), AuthentificationMain.class));
+                }
+                else {
                     Toast.makeText(ForgotPassword_EtuMoov.this, "Veuillez réessayer à nouveau, votre mail est probablement invalide", Toast.LENGTH_LONG).show();
 
                 }

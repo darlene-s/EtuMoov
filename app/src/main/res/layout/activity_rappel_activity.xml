@@ -6,7 +6,7 @@
     android:layout_height="fill_parent"
     android:id="@+id/Affichage_Rappel"
     android:background="@drawable/background_color"
-    tools:context=".Rappels.Rappels_Affichage">
+    tools:context="AffichageCours.Rappels.Rappels_Affichage">
 
     <TableRow
         android:layout_height="wrap_content"
@@ -18,7 +18,6 @@
             android:layout_width="wrap_content"
             android:text="Ajouter un nouveau rappel"
             android:textSize="20dp"
-            android:fontFamily="@font/stabilo"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="50dp"
             android:textColor="@color/white"/>

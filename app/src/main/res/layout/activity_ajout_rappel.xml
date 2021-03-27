@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Rappels.AjoutRappel"
+    tools:context="AffichageCours.Rappels.AjoutRappel"
     android:orientation="vertical"
     android:layout_gravity="center"
     android:background="@drawable/background_color">
@@ -19,7 +19,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ajouter un rappel"
-            android:fontFamily="@font/stabilo"
             android:textColor="@color/white"
             android:textSize="60sp"
             android:layout_marginLeft="50dp"
