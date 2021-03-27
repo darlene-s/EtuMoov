@@ -17,7 +17,7 @@
         android:layout_marginTop="300dp"
         android:text="@string/txt_connexion"
         android:textColor="@color/black"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.474"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,16 +27,29 @@
 
     <Button
         android:id="@+id/reg_login_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="168dp"
         android:text="@string/btn_connexion"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:contentDescription="@string/label_img"
+        app:layout_constraintBottom_toTopOf="@+id/tv_connexemail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.532"
+        app:srcCompat="@drawable/img_fondconnex" />
 
     <TextView
         android:id="@+id/tv_connexemail"
@@ -49,20 +62,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.105"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textStyle="bold"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
         android:id="@+id/reg_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="220dp"
+        android:layout_height="45dp"
         android:layout_marginTop="436dp"
-        android:background="@color/black"
+        android:autofillHints=""
         android:hint="@string/ET_email"
+        android:inputType="textEmailAddress"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.191"
+        app:layout_constraintHorizontal_bias="0.213"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -72,76 +85,79 @@
         android:id="@+id/tv_connexmdpd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="484dp"
+        android:layout_marginTop="496dp"
         android:text="@string/label_mdp"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintHorizontal_bias="0.111"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/reg_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="512dp"
-        android:background="@color/black"
+        android:layout_width="220dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="524dp"
+        android:autofillHints=""
         android:hint="@string/ET_mdp"
+        android:inputType="textPassword"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.242"
+        app:layout_constraintHorizontal_bias="0.19"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
     </EditText>
-
-    <TextView
-        android:id="@+id/text_inscription"
-        android:layout_width="263dp"
-        android:layout_height="33dp"
-        android:layout_marginBottom="60dp"
-        android:text="@string/txt_pasdecompte"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.56"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="181dp"
         android:layout_height="181dp"
         android:layout_marginStart="284dp"
-        android:layout_marginLeft="284dp"
         android:layout_marginTop="524dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_fondconnexion2" />
+        app:srcCompat="@drawable/ic_fondconnexion2"
+        android:contentDescription="@string/label_img" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="112dp"
         android:layout_height="111dp"
         android:layout_marginEnd="192dp"
-        android:layout_marginRight="192dp"
         android:layout_marginBottom="60dp"
         android:rotation="100"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageView2"
-        app:srcCompat="@drawable/ic_fondconnexion2" />
+        app:srcCompat="@drawable/ic_fondconnexion2"
+        android:contentDescription="@string/label_img"/>
 
     <TextView
         android:id="@+id/text_mdpOublie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="132dp"
         android:text="@string/txt_mdpoublie"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/text_inscription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="96dp"
+        android:text="@string/txt_pasdecompte"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

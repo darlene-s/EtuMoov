@@ -14,6 +14,7 @@
     <string name="ET_mdp">Insérez votre mot de passe</string>
     <string name="txt_pasdecompte">Vous n\'avez pas encore de compte, Inscrivez vous !</string>
     <string name="btn_connexion">Connexion</string>
+    <string name="txt_saisirEmail">Veuillez saisir votre mot de passe :)</string>
     <string name="txt_mdpoublie">Mot de passe oublié ? Cliquez ici </string>
 
     <!-- Page d'inscription -->
@@ -27,5 +28,11 @@
     <!-- Mot de passe oublié -->
     <string name="ET_rentremdp">Rentrez votre adresse email</string>
     <string name="btn_reinitialiser">Réinitialiser votre mot de passe</string>
+
+    <!-- Bouton -->
+    <string name="btn_valider">Valider</string>
+
+
+    <string name="label_img">Image</string>
 
 </resources>
