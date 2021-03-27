@@ -20,8 +20,7 @@ import okhttp3.Response;
  * Classe APIServices qui utilise la lib OkHttp3 pour faire des requêtes
  * à l'API du réseau RATP permettant d'avoir des informations en temps réel sur le réseau
  *
- */
-public class APIRatp {
+ */public class APIRatp {
     /**
      * Fonction getLinesFromTransport()
      * Permet de récupérer les lignes en fonction du mode de transport

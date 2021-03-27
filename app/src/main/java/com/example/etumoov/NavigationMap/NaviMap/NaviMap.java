@@ -82,6 +82,7 @@ import java.util.List;
 
 public class NaviMap extends FragmentActivity implements OnMapReadyCallback {
     private DatabaseReference reference;
+    private DatabaseReference referenceBis;
     private GoogleMap mMap;
     private static String TAG = "Info";
 
@@ -243,8 +244,8 @@ public class NaviMap extends FragmentActivity implements OnMapReadyCallback {
                 Toast.makeText(NaviMap.this, "Une erreur s'est produite ! Veuillez réessayer", Toast.LENGTH_SHORT).show();
             }
         });
-        reference = FirebaseDatabase.getInstance().getReference("Bibliotheque");
-        reference.addListenerForSingleValueEvent(new ValueEventListener(){
+        referenceBis = FirebaseDatabase.getInstance().getReference("Bibliotheque");
+        referenceBis.addListenerForSingleValueEvent(new ValueEventListener(){
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot){
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
