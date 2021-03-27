@@ -25,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import BD_Utilisateur.Models_Utilisateur.Utilisateur;
+
 public class Connexion_EtuMoov extends AppCompatActivity {
 
     private FirebaseUser user;
@@ -94,9 +96,9 @@ public class Connexion_EtuMoov extends AppCompatActivity {
                         reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener(){
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot){
-                                User user = snapshot.getValue(User.class);
+                                Utilisateur user = snapshot.getValue(Utilisateur.class);
                                 if(user != null){
-                                    String prenom = user.prenom;
+                                    String prenom = user.getPrenom();
                                     Toast.makeText(Connexion_EtuMoov.this, "Connexion réussie ! Bienvenue " + prenom + " !" , Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(getApplicationContext(), activity1.class));
                                     finish();
