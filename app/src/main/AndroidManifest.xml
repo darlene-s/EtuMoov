@@ -2,22 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.etumoov">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_logoetumoov"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_logoetumoov"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EtuMoov">
-        <activity android:name=".Accueil.AuthentificationMain"></activity>
-        <activity android:name="jeu.clicker.ClickerActivity" />
-        <activity android:name="jeu.memory.Memory" />
-        <activity android:name="jeu.calcul.CalculActivity" />
-        <activity android:name=".Connect.ForgotPassword_EtuMoov" />
-        <activity android:name=".Connect.Inscription_EtuMoov" />
-        <activity android:name=".Connect.Connexion_EtuMoov" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Accueil.SplashScreenActivity">
+        <activity android:name=".ScannerActivity"></activity>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

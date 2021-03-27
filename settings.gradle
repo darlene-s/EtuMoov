@@ -1,2 +1,4 @@
+include ':vinnie'
+include ':biweek'
 include ':app'
 rootProject.name = "EtuMoov"
