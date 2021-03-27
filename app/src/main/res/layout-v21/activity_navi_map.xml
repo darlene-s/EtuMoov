@@ -7,8 +7,7 @@
     android:foregroundTint="#FFFFFF"
     android:clickable="true"
     tools:context=".NavigationMap.NaviMap.NaviMap"
-    android:focusable="true"
-    tools:targetApi="lollipop">
+    android:focusable="true">
 
     <fragment
         android:id="@+id/map"
@@ -45,11 +44,11 @@
         android:layout_marginRight="60dp"
         android:layout_marginBottom="56dp"
         android:backgroundTint="@color/dark_purple"
-        android:text="@string/afficher_l_itinéraire"
-        android:textColor="@color/white"
         android:fontFamily="@font/montserrat_semibold"
-        android:textSize="13sp"
+        android:text="Afficher l'itinéraire"
         android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@+id/map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.93"

@@ -11,4 +11,7 @@
     <string name="btn_description">btn description</string>
     <string name="btn_bus">btn bus</string>
     <string name="btn_rer">btn rer</string>
+    <string name="afficher_l_itin_raire">Afficher l\'itinéraire</string>
+    <string name="indiquer_ma_position">Indiquer ma position</string>
+    <string name="afficher_l_itinéraire">Afficher l\'itinéraire</string>
 </resources>

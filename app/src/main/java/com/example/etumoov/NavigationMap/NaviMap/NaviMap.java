@@ -1,33 +1,48 @@
 package com.example.etumoov.NavigationMap.NaviMap;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
+import androidx.appcompat.app.AlertDialog;
+
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
 
 import com.example.etumoov.NavigationMap.NaviBD.Bibliotheque;
 import com.example.etumoov.NavigationMap.NaviBD.Universite;
 import com.example.etumoov.R;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.PlaceLikelihood;
+import com.google.android.libraries.places.api.model.RectangularBounds;
+import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
@@ -38,23 +53,25 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import com.google.maps.DirectionsApi;
+import com.google.maps.DirectionsApiRequest;
+import com.google.maps.GeoApiContext;
+import com.google.maps.model.DirectionsLeg;
+import com.google.maps.model.DirectionsResult;
+import com.google.maps.model.DirectionsRoute;
+import com.google.maps.model.DirectionsStep;
+import com.google.maps.model.EncodedPolyline;
+import android.location.Location;
+
+import android.view.View;
+
+
+import com.google.android.gms.location.LocationCallback;
+
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.model.PlaceLikelihood;
-import com.google.android.libraries.places.api.model.RectangularBounds;
-import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
-
 /**
  * @author EtuMoov Team
  * Classe NaviMap : Classe NaviMap , utilise l'API Google Maps
@@ -72,19 +89,41 @@ public class NaviMap extends FragmentActivity implements OnMapReadyCallback {
     private LocationCallback locationCallback;
 
     private View mapView;
-    private Button btnLocalisation, btnItineraire;
+    private Button btnLocalisation, btnLocalisation2;
 
     private Marker markerSearch;
+
+    private Marker markerLocalisation;
+
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+    // Used for selecting the current place.
     private static final int M_MAX_ENTRIES = 5;
-    private String[] likelyPlaceNames, likelyPlaceAddresses;
+    private String[] likelyPlaceNames;
+    private String[] likelyPlaceAddresses;
     private List[] likelyPlaceAttributions;
     private LatLng[] likelyPlaceLatLngs;
+
+
+    private String apiKey = "AIzaSyAzsTP2GsxOFNjy-PUN0De5qWjn-0-Wvn4";
+
+    // The entry point to the Places API.
     private PlacesClient placesClient;
+
     private boolean locationPermissionGranted;
 
+    // The geographical location where the device is currently located. That is, the last-known
+    // location retrieved by the Fused Location Provider.
     private Location lastKnownLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
+    LatLng latLngLocalisation;
+
+
+
+    private List<Polyline> polylines=null;
+    private LatLng start;
+    private LatLng destination;
+
+    private Polyline currentPolyline;
 
     /**
      * Fonction onCreate() de base qui représente une étape du cycle de vie de l'activité
@@ -95,21 +134,17 @@ public class NaviMap extends FragmentActivity implements OnMapReadyCallback {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setTheme(R.style.Theme_EtuMoov);
-        // Retourne le SupportMapFragment et notifie l'android system quand la map est prête à être utilisée
+       setContentView(R.layout.activity_navi_map);
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        btnLocalisation = findViewById(R.id.btnLocalisation);
-        btnItineraire = findViewById(R.id.btnItineraire);
-        //Clé de l'API Google Maps
-        String apiKey = "@string/google_maps_key";
-
 
         if (!Places.isInitialized()) {
-            Places.initialize(getApplicationContext(), "@string/google_maps_key");
+            Places.initialize(getApplicationContext(), "AIzaSyAzsTP2GsxOFNjy-PUN0De5qWjn-0-Wvn4");
             placesClient = Places.createClient(this);
         }
 
@@ -139,10 +174,16 @@ public class NaviMap extends FragmentActivity implements OnMapReadyCallback {
                     markerSearch = null;
                 }
                 Log.i(TAG, "Place" + place.getName() + ", " + place.getId());
-                LatLng destinationLatLng = place.getLatLng();
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(destinationLatLng, 16));
-                markerSearch = mMap.addMarker(new MarkerOptions().position(destinationLatLng).title(place.getName()));
+                destination = place.getLatLng();
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(destination, 16));
+                markerSearch = mMap.addMarker(new MarkerOptions().position(destination).title(place.getName()));
 
+                if(lastKnownLocation!=null){
+
+                    start = (new LatLng(lastKnownLocation.getLatitude()
+                            ,lastKnownLocation.getLongitude()));
+                    traceRoute();
+                }
             }
 
             /**
@@ -159,20 +200,137 @@ public class NaviMap extends FragmentActivity implements OnMapReadyCallback {
 
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+    }
 
-        btnLocalisation.setOnClickListener(new View.OnClickListener() {
+
+
+    /**
+     * Fonction onMapReady()
+     *
+     * Manipule la carte une fois disponible, ce callback est déclenché lorsque la carte est prête à être utilisée.
+     * La carte est initialisée avec les permissions de localisation, la géolocalisation de l'utilisateur, une vue centrée sur Paris
+     * et son agglomération et des markers associés aux universités parisiennes répertoriées au sein de la realtime database
+     *
+     * @param googleMap : Fragment associé à la carte Google Map Universités
+     */
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        getLocationPermission();
+        updateLocationUI();
+        mMap = googleMap;
+
+
+        reference = FirebaseDatabase.getInstance().getReference("Universite");
+        reference.addListenerForSingleValueEvent(new ValueEventListener(){
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot){
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Universite universite = dataSnapshot.getValue(Universite.class);
+                    LatLng coordonnees1 = new LatLng(universite.lat, universite.lng);
+                    BitmapDescriptor icon1 = BitmapDescriptorFactory.fromResource(R.drawable.logo_univ);
+                    mMap.addMarker(new MarkerOptions().position(coordonnees1).title(universite.nom_univ).snippet(universite.adresse_univ).icon(icon1));
+                }
+            }
             /**
-             * Fonction onClick() prenant en paramètre une vue (bouton de localisation)
-             * et qui permet à l'utilisateur d'apercevoir sa position en temps réel sur la carte et
-             * de recentrer la vue de la map sur la position de l'utilisateur
+             * Fonction onCancelled(), prend en paramètre une erreur si un problème de récupération des universités repertoriées
+             * intervient
              *
-             * @param v :  vue représentant le bouton de localisation lorsqu'il est cliqué
+             * @param error : Erreur liée à la récupération des données de l'entité Université au niveau de la BD
              */
             @Override
+            public void onCancelled(@NonNull DatabaseError error){
+                Toast.makeText(NaviMap.this, "Une erreur s'est produite ! Veuillez réessayer", Toast.LENGTH_SHORT).show();
+            }
+        });
+        reference = FirebaseDatabase.getInstance().getReference("Bibliotheque");
+        reference.addListenerForSingleValueEvent(new ValueEventListener(){
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot){
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Bibliotheque bibliotheque = dataSnapshot.getValue(Bibliotheque.class);
+                    LatLng coordonnees2 = new LatLng(bibliotheque.lat,bibliotheque.lng);
+                    BitmapDescriptor icon2 = BitmapDescriptorFactory.fromResource(R.drawable.logo_bibli);
+                    mMap.addMarker(new MarkerOptions().position(coordonnees2).title(bibliotheque.nom_bibli).snippet(bibliotheque.adresse_bibli).icon(icon2));
+                }
+            }
+            /**
+             * Fonction onCancelled(), prend en paramètre une erreur si un problème de récupération des universités repertoriées
+             * intervient
+             *
+             * @param error : Erreur liée à la récupération des données de l'entité Université au niveau de la BD
+             */
+            @Override
+            public void onCancelled(@NonNull DatabaseError error){
+                Toast.makeText(NaviMap.this, "Une erreur s'est produite ! Veuillez réessayer", Toast.LENGTH_SHORT).show();
+            }
+        });
+        LatLngBounds parisBounds = new LatLngBounds(
+                new LatLng(48.646582, 1.868754),
+                new LatLng(49.124015, 2.881794)
+        );
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(parisBounds.getCenter(), 10));
+
+        this.mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            /**
+             * Fonction getInfoWindow()
+             * Doit retourner "null" , pour que getInfoContents() soit appelé ensuite.
+             *
+             * @param arg0 : Booléen 0 si les fonctions précédentes sont correctement appelées, 1 si il y a une erreur
+             * @return
+             */
+            @Override
+            public View getInfoWindow(Marker arg0) {
+                return null;
+            }
+
+            /**
+             * Fonction getInfoContents()
+             * Permet de gonfler les mises en page de la fenêtre d'information, du titre et de l'extrait.
+             *
+             * @param marker Marker contenant des informations sur les universités
+             * @return
+             */
+            @Override
+            public View getInfoContents(Marker marker) {
+                @SuppressLint("WrongViewCast") View infoWindow = getLayoutInflater().inflate(R.layout.custom_info_contents,
+                        (FrameLayout) findViewById(R.id.map), false);
+
+                TextView title = infoWindow.findViewById(R.id.title);
+                title.setText(marker.getTitle());
+
+                TextView snippet = infoWindow.findViewById(R.id.snippet);
+                snippet.setText(marker.getSnippet());
+
+                return infoWindow;
+            }
+        });
+
+        btnLocalisation = findViewById(R.id.btnLocalisation);
+        btnLocalisation2 = findViewById(R.id.btnItineraire);
+
+        btnLocalisation.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
+                getDeviceLocation();
                 showCurrentPlace();
             }
         });
+
+        btnLocalisation2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(lastKnownLocation!=null && destination !=null){
+                    destination = (new LatLng(lastKnownLocation.getLatitude()
+                            ,lastKnownLocation.getLongitude()));
+                    traceRoute();
+                }
+                else{
+                    Toast.makeText(NaviMap.this,"Veuillez choisir une destination/indiquer votre position",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
     }
 
     /**
@@ -239,7 +397,7 @@ public class NaviMap extends FragmentActivity implements OnMapReadyCallback {
                 lastKnownLocation = null;
                 getLocationPermission();
             }
-        } catch (SecurityException e) {
+        } catch (SecurityException e)  {
             Log.e("Exception: %s", e.getMessage());
         }
     }
@@ -252,7 +410,6 @@ public class NaviMap extends FragmentActivity implements OnMapReadyCallback {
      */
     private void getDeviceLocation() {
         try {
-            System.out.println("TEST");
             if (locationPermissionGranted) {
 
                 Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
@@ -262,110 +419,27 @@ public class NaviMap extends FragmentActivity implements OnMapReadyCallback {
                         if (task.isSuccessful()) {
                             // Set the map's camera position to the current location of the device.
                             lastKnownLocation = task.getResult();
+                            start = (new LatLng(lastKnownLocation.getLatitude()
+                                    ,lastKnownLocation.getLongitude()));
                             if (lastKnownLocation != null) {
                                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                         new LatLng(lastKnownLocation.getLatitude(),
-                                                lastKnownLocation.getLongitude()), 10));
+                                                lastKnownLocation.getLongitude()), 16));
+                                mMap.setMyLocationEnabled(true);
                             }
                         } else {
                             Log.d(TAG, "Current location is null. Using defaults.");
                             Log.e(TAG, "Exception: %s", task.getException());
                             mMap.moveCamera(CameraUpdateFactory
-                                    .newLatLngZoom(new LatLng(48.646582, 1.868754), 10));
+                                    .newLatLngZoom(new LatLng(48.646582, 1.868754),10));
                             mMap.getUiSettings().setMyLocationButtonEnabled(false);
                         }
                     }
                 });
             }
-        } catch (SecurityException e) {
+        } catch (SecurityException e)  {
             Log.e("Exception: %s", e.getMessage(), e);
         }
-    }
-
-
-    /**
-     * Fonction onMapReady()
-     *
-     * Manipule la carte une fois disponible, ce callback est déclenché lorsque la carte est prête à être utilisée.
-     * La carte est initialisée avec les permissions de localisation, la géolocalisation de l'utilisateur, une vue centrée sur Paris
-     * et son agglomération et des markers associés aux universités parisiennes répertoriées au sein de la realtime database
-     *
-     * @param googleMap : Fragment associé à la carte Google Map Universités
-     */
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-        getLocationPermission();
-        updateLocationUI();
-        mMap = googleMap;
-        reference = FirebaseDatabase.getInstance().getReference("Universite");
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Universite universite = dataSnapshot.getValue(Universite.class);
-                    LatLng coordonnees1 = new LatLng(universite.lat, universite.lng);
-                    BitmapDescriptor icon1 = BitmapDescriptorFactory.fromResource(R.drawable.logo_univ);
-                    mMap.addMarker(new MarkerOptions().position(coordonnees1).title(universite.nom_univ).snippet(universite.adresse_univ).icon(icon1));
-
-                    Bibliotheque bibliotheque = dataSnapshot.getValue(Bibliotheque.class);
-                    LatLng coordonnees2 = new LatLng(bibliotheque.lat,bibliotheque.lng);
-                    BitmapDescriptor icon2 = BitmapDescriptorFactory.fromResource(R.drawable.logo_bibli);
-                    mMap.addMarker(new MarkerOptions().position(coordonnees2).title(bibliotheque.nom_bibli).snippet(bibliotheque.adresse_bibli).icon(icon2));
-                }
-            }
-
-            /**
-             * Fonction onCancelled(), prend en paramètre une erreur si un problème de récupération des universités repertoriées
-             * intervient
-             *
-             * @param error : Erreur liée à la récupération des données de l'entité Université au niveau de la BD
-             */
-            @Override
-            public void onCancelled(@NonNull DatabaseError error){
-                Toast.makeText(NaviMap.this, "Une erreur s'est produite ! Veuillez réessayer", Toast.LENGTH_SHORT).show();
-            }
-        });
-        LatLngBounds parisBounds = new LatLngBounds(
-                new LatLng(48.646582, 1.868754),
-                new LatLng(49.124015, 2.881794)
-        );
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(parisBounds.getCenter(), 10));
-
-        this.mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
-            /**
-             * Fonction getInfoWindow()
-             * Doit retourner "null" , pour que getInfoContents() soit appelé ensuite.
-             *
-             * @param arg0 : Booléen 0 si les fonctions précédentes sont correctement appelées, 1 si il y a une erreur
-             * @return
-             */
-            @Override
-            public View getInfoWindow(Marker arg0) {
-                return null;
-            }
-
-            /**
-             * Fonction getInfoContents()
-             * Permet de gonfler les mises en page de la fenêtre d'information, du titre et de l'extrait.
-             *
-             * @param marker Marker contenant des informations sur les universités
-             * @return
-             */
-            @Override
-            public View getInfoContents(Marker marker) {
-                View infoWindow = getLayoutInflater().inflate(R.layout.custom_info_contents,
-                        (FrameLayout) findViewById(R.id.map), false);
-
-                TextView title = infoWindow.findViewById(R.id.title);
-                title.setText(marker.getTitle());
-
-                TextView snippet = infoWindow.findViewById(R.id.snippet);
-                snippet.setText(marker.getSnippet());
-
-                return infoWindow;
-            }
-        });
     }
 
     /**
@@ -394,23 +468,26 @@ public class NaviMap extends FragmentActivity implements OnMapReadyCallback {
         }
 
         if (locationPermissionGranted) {
+            // Use fields to define the data types to return.
             List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME, Place.Field.ADDRESS,
                     Place.Field.LAT_LNG);
+
+            // Use the builder to create a FindCurrentPlaceRequest.
             FindCurrentPlaceRequest request =
                     FindCurrentPlaceRequest.newInstance(placeFields);
-            @SuppressWarnings("MissingPermission") final Task<FindCurrentPlaceResponse> placeResult =
+
+            // Get the likely places - that is, the businesses and other points of interest that
+            // are the best match for the device's current location.
+            @SuppressWarnings("MissingPermission") final
+            Task<FindCurrentPlaceResponse> placeResult =
                     placesClient.findCurrentPlace(request);
-            placeResult.addOnCompleteListener(new OnCompleteListener<FindCurrentPlaceResponse>() {
-                /**
-                 * Fonction onComplete(), qui prend en paramètre une tâche qui est la la recherche
-                 * du lieu actuel et des lieux a proximité
-                 *
-                 * @param task : Tâche associée à la recherche du lieu actuel et des lieux a proximité
-                 */
+            placeResult.addOnCompleteListener (new OnCompleteListener<FindCurrentPlaceResponse>() {
                 @Override
                 public void onComplete(@NonNull Task<FindCurrentPlaceResponse> task) {
                     if (task.isSuccessful() && task.getResult() != null) {
                         FindCurrentPlaceResponse likelyPlaces = task.getResult();
+
+                        // Set the count, handling cases where less than 5 entries are returned.
                         int count;
                         if (likelyPlaces.getPlaceLikelihoods().size() < M_MAX_ENTRIES) {
                             count = likelyPlaces.getPlaceLikelihoods().size();
@@ -425,7 +502,7 @@ public class NaviMap extends FragmentActivity implements OnMapReadyCallback {
                         likelyPlaceLatLngs = new LatLng[count];
 
                         for (PlaceLikelihood placeLikelihood : likelyPlaces.getPlaceLikelihoods()) {
-                            // Construit une liste de lieux favoris à montrer à l'utilisateur.
+                            // Build a list of likely places to show the user.
                             likelyPlaceNames[i] = placeLikelihood.getPlace().getName();
                             likelyPlaceAddresses[i] = placeLikelihood.getPlace().getAddress();
                             likelyPlaceAttributions[i] = placeLikelihood.getPlace()
@@ -437,14 +514,19 @@ public class NaviMap extends FragmentActivity implements OnMapReadyCallback {
                                 break;
                             }
                         }
-                       NaviMap.this.openPlacesDialog();
-                    } else {
+
+                        // Show a dialog offering the user the list of likely places, and add a
+                        // marker at the selected place.
+                        NaviMap.this.openPlacesDialog();
+                    }
+                    else {
                         Log.e(TAG, "Exception: %s", task.getException());
                     }
                 }
             });
         } else {
-            Log.i(TAG, "L'utilisateur n'a pas activé là géolocalisation");
+            // The user has not granted permission.
+            Log.i(TAG, "The user did not grant location permission.");
 
 
             getLocationPermission();
@@ -456,14 +538,8 @@ public class NaviMap extends FragmentActivity implements OnMapReadyCallback {
      * Ouvre une fenêtre de dialogue avec les lieux à proximité de la localisation actuelle de l'utilisateur
      */
     private void openPlacesDialog() {
-        // Ask the user to choose the place where they are now.
+        Toast.makeText(NaviMap.this,"Choissisez l'endroit où vous vous situez s'il est présent dans la liste",Toast.LENGTH_LONG).show();
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-            /**
-             * Fonction onClick
-             * Récupère le lieu sélectionné par l'utilisateur parmi la liste de lieux à proximité affichée
-             * @param dialog : Interface de dialogue
-             * @param which : Argument contenant la position du lieu choisi parmi la liste de lieux dans l'interface de dialogue
-             */
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 LatLng markerLatLng = likelyPlaceLatLngs[which];
@@ -472,13 +548,24 @@ public class NaviMap extends FragmentActivity implements OnMapReadyCallback {
                     markerSnippet = markerSnippet + "\n" + likelyPlaceAttributions[which];
                 }
 
-                mMap.addMarker(new MarkerOptions()
+                if (!(markerLocalisation == null)) {
+                    markerLocalisation.remove();
+                    markerLocalisation = null;
+                }
+
+                markerLocalisation = mMap.addMarker(new MarkerOptions()
                         .title(likelyPlaceNames[which])
                         .position(markerLatLng)
                         .snippet(markerSnippet));
 
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markerLatLng,
                         16));
+                Location temp = new Location(LocationManager.GPS_PROVIDER);
+                temp.setLatitude(markerLatLng.latitude);
+                temp.setLongitude(markerLatLng.longitude);
+                lastKnownLocation = new Location(temp);
+                start = (new LatLng(lastKnownLocation.getLatitude()
+                        ,lastKnownLocation.getLongitude()));
             }
         };
 
@@ -486,6 +573,114 @@ public class NaviMap extends FragmentActivity implements OnMapReadyCallback {
                 .setTitle("Localisation")
                 .setItems(likelyPlaceNames, listener)
                 .show();
+    }
+
+    /**
+     * Fonction getUrl
+     * Récupère l'url nécessaire pour l'api Google Maps Directions
+     */
+    private String getUrl(LatLng origin, LatLng dest, String directionMode) {
+        // Origin of route
+        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
+        // Destination of route
+        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
+        // Mode
+        String mode = "mode=" + directionMode;
+        // Building the parameters to the web service
+        String parameters = str_origin + "&" + str_dest + "&" + mode;
+        // Output format
+        String output = "json";
+        // Building the url to the web service
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + getString(R.string.google_maps_key);
+        return url;
+    }
+
+    /**
+     * Fonction traceRoute
+     * Trace la route entre un endroit de départ et un endroit d'arrivée sur la map
+     */
+    public void traceRoute() {
+        //Execute Directions API request
+        if (start != null && destination != null) {
+
+            if (!(markerLocalisation == null)) {
+                markerLocalisation.remove();
+                markerLocalisation = null;
+            }
+            if (!(markerSearch == null)) {
+                markerSearch.remove();
+                markerSearch = null;
+            }
+            markerLocalisation = mMap.addMarker(new MarkerOptions().position(start).title("Position actuelle"));
+            markerSearch = mMap.addMarker(new MarkerOptions().position(destination).title("Destination"));
+
+
+            List<LatLng> path = new ArrayList();
+            GeoApiContext context = new GeoApiContext.Builder()
+                    .apiKey(apiKey)
+                    .build();
+            String startString = start.latitude + "," + start.longitude;
+            String destinationString = destination.latitude + "," + destination.longitude;
+            DirectionsApiRequest req = DirectionsApi.getDirections(context, startString, destinationString);
+            try {
+                DirectionsResult res = req.await();
+
+                //Loop through legs and steps to get encoded polylines of each step
+                if (res.routes != null && res.routes.length > 0) {
+                    DirectionsRoute route = res.routes[0];
+
+                    if (route.legs != null) {
+                        for (int i = 0; i < route.legs.length; i++) {
+                            DirectionsLeg leg = route.legs[i];
+                            if (leg.steps != null) {
+                                for (int j = 0; j < leg.steps.length; j++) {
+                                    DirectionsStep step = leg.steps[j];
+                                    if (step.steps != null && step.steps.length > 0) {
+                                        for (int k = 0; k < step.steps.length; k++) {
+                                            DirectionsStep step1 = step.steps[k];
+                                            EncodedPolyline points1 = step1.polyline;
+                                            if (points1 != null) {
+                                                //Decode polyline and add points to list of route coordinates
+                                                List<com.google.maps.model.LatLng> coords1 = points1.decodePath();
+                                                for (com.google.maps.model.LatLng coord1 : coords1) {
+                                                    path.add(new LatLng(coord1.lat, coord1.lng));
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        EncodedPolyline points = step.polyline;
+                                        if (points != null) {
+                                            //Decode polyline and add points to list of route coordinates
+                                            List<com.google.maps.model.LatLng> coords = points.decodePath();
+                                            for (com.google.maps.model.LatLng coord : coords) {
+                                                path.add(new LatLng(coord.lat, coord.lng));
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch (Exception ex) {
+                Log.e(TAG, ex.getLocalizedMessage());
+            }
+
+            //Draw the polyline
+            if (path.size() > 0) {
+                if(currentPolyline != null){
+                    currentPolyline.remove();
+                }
+                PolylineOptions opts = new PolylineOptions().addAll(path).color(R.color.light_purple).width(5);
+                currentPolyline = mMap.addPolyline(opts);
+            }
+
+            mMap.getUiSettings().setZoomControlsEnabled(true);
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(start, 11));
+        }
+        else{
+            Toast.makeText(NaviMap.this,"Erreur lors du tracage de l'itinéraire",Toast.LENGTH_LONG).show();
+        }
     }
 
 
