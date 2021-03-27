@@ -1,55 +1,53 @@
 package com.example.etumoov.NavigationMap.NaviMap;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.etumoov.NavigationMap.NaviBD.Universite;
 import com.example.etumoov.R;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class TravelTime extends AppCompatActivity implements APIDistanceMatrix.Geo {
-    EditText edttxt_from,edttxt_to;
-    Button btn_get;
-    String str_from,str_to;
-    TextView tv_result1,tv_result2;
+import java.util.ArrayList;
+
+public class TravelTime extends AppCompatActivity {
+    private DatabaseReference reference;
+    private ListView UniversiteList;
+    private ArrayList<String> UnivArray = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(
-                R.layout.activity_travel_time);
-        initialize();
-        btn_get.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_travel_time);
+        UniversiteList = (ListView)findViewById(R.id.etablissements);
+        ArrayAdapter<String> UnivArrayAdapter = new ArrayAdapter<String>(TravelTime.this, android.R.layout.simple_list_item_1,
+                UnivArray);
+        reference = FirebaseDatabase.getInstance().getReference("Universite");
+        reference.addListenerForSingleValueEvent(new ValueEventListener(){
             @Override
-            public void onClick(View v) {
-                str_from=edttxt_from.getText().toString();
-                str_to=edttxt_to.getText().toString();
-                String url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + str_from + "&destinations=" + str_to + "&mode=rail&language=fr-FR&key=@string/google_maps_key";
-                new APIDistanceMatrix(TravelTime.this).execute(url);
+            public void onDataChange(@NonNull DataSnapshot snapshot){
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Universite universite = dataSnapshot.getValue(Universite.class);
 
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error){
+                Toast.makeText(TravelTime.this, "Une erreur s'est produite ! Veuillez réessayer", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    @Override
-    public void setDouble(String result) {
-        String res[]=result.split(",");
-        Double min=Double.parseDouble(res[0])/60;
-        int dist=Integer.parseInt(res[1])/1000;
-        tv_result1.setText("Durée= " + (int) (min / 60) + " h " + (int) (min % 60) + " min");
-        tv_result2.setText("Distance= " + dist + " kilomètres");
-
-    }
-    public void initialize()
-    {
-        edttxt_from= (EditText) findViewById(R.id.editText_from);
-        edttxt_to= (EditText) findViewById(R.id.editText_to);
-        btn_get= (Button) findViewById(R.id.button_get);
-        tv_result1= (TextView) findViewById(R.id.textView_result1);
-        tv_result2=(TextView) findViewById(R.id.textView_result2);
-
     }
 
 }
