@@ -8,20 +8,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.example.appmobilev2.DataBase.DataBaseManager;
-import com.example.appmobilev2.R;
+import com.example.etumoov.R;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
 
 public class AjoutRappel extends AppCompatActivity {
 
     private EditText titre, description, date;
     private Button button;
-    private DataBaseManager db;
+    private DataBaseHelper db;
     private String vTitre, vDescription, vDate;
 
     @Override
@@ -33,7 +35,7 @@ public class AjoutRappel extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        db = new DataBaseManager(this);
+        db = new DataBaseHelper(this);
         titre = findViewById(R.id.reg_title);
         description = findViewById(R.id.reg_descrip);
         date = findViewById(R.id.reg_date);
@@ -45,28 +47,51 @@ public class AjoutRappel extends AppCompatActivity {
                 vTitre = titre.getText().toString();
                 vDescription = description.getText().toString();
                 vDate = date.getText().toString();
-                if(chechValid(vDate)) {
+                if(vTitre.isEmpty())
+                    titre.setError("Champ vide");
+                else if(vDescription.isEmpty())
+                    description.setError("Champ vide");
+                else if (vDate.isEmpty())
+                    date.setError("Champ vide");
+                else if (!checkValid(vDate))
+                    date.setError("Mauvais format");
+                else if (checkRightDate(vDate))
+                    date.setError("La date est inférieure à la date du jour");
+                else {
                     db.insertRappel(vTitre, vDescription, vDate);
                     db.close();
-                    Intent RappelsActivity= new Intent(getApplicationContext(), Rappels_Affichage.class);
+                    Intent RappelsActivity = new Intent(getApplicationContext(), Rappels_Affichage.class);
                     startActivity(RappelsActivity);
                     finish();
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "La date rentrée n'est pas au bon format", Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
-    public boolean chechValid(String date){
+    private boolean checkValid(String dateD){
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        format.isLenient();
         try {
-            format.parse(date);
+            format.parse(dateD);
         } catch (ParseException e){
             return false;
         }
         return true;
+    }
+    private boolean checkRightDate(String dateD){
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar calendar = Calendar.getInstance();
+        Date today = calendar.getTime();
+        String todayDate = format.format(today);
+        try {
+            Date dateSelec  = format.parse(dateD);
+            Date dateToday = format.parse(todayDate);
+            int i = dateSelec.compareTo(dateToday);
+            if (i < 0){
+                return true;
+            }
+        } catch (ParseException e){
+            return false;
+        }
+        return false;
     }
 }

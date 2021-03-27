@@ -16,8 +16,12 @@ import android.widget.TextView;
 
 import com.example.etumoov.R;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
@@ -48,11 +52,20 @@ public class Rappels_Affichage extends AppCompatActivity {
         });
         db = new DataBaseHelper(this);
         ListeRappels = db.getRappels();
+
         Collections.sort(ListeRappels, new Comparator<Rappel>() {
             @Override
             public int compare(Rappel o1, Rappel o2) {
-                return o1.getDate().compareTo(o2.getDate());
-
+                int i = 0;
+                DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    Date datePremier  = format.parse(o1.getDate());
+                    Date dateDeuxieme = format.parse(o2.getDate());
+                    i = datePremier.compareTo(dateDeuxieme);
+                } catch(ParseException e){
+                    e.printStackTrace();
+                }
+                return i;
             }
         });
 
