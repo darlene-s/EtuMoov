@@ -2,4 +2,8 @@
     <string name="app_name">EtuMoov</string>
     <string name="votre_nom">Votre nom</string>
     <string name="votre_pr_nom">Votre prénom</string>
+
+    <string name = "label_prenom">Prénom</string>
+    <string name = "label_img">Image</string>
+    <string name = "label_date">Date du jour</string>
 </resources>

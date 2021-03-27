@@ -1,47 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:background="@drawable/background_color"
-    tools:context=".Classes.CalendarJour">
+    android:background="@drawable/ic_background"
+    tools:context="AffichageCours.Classes.CalendarJour">
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/black_less"
+        android:layout_gravity="center"
         android:paddingBottom="3dp">
-
-        <ImageButton
-            android:id="@+id/btn_retour"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="230dp"
-            android:pivotX="12"
-            android:scaleX="-1"
-            android:background="@drawable/ic_baseline_arrow_right_alt_24"
-            android:gravity="left"
-            android:padding="25dp" />
 
         <ImageButton
             android:id="@+id/button_qr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/ic_baseline_qr_code_scanner_24"
-            android:gravity="right"
-            android:padding="20dp" />
+            android:layout_marginEnd="230dp"
+            android:background="@drawable/ic_qr"
+            android:backgroundTint="@color/white"
+            android:contentDescription="@string/label_img"
+            android:gravity="start"
+            android:padding="25dp" />
+
+        <ImageButton
+            android:id="@+id/btn_retour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/ic_refresh"
+            android:contentDescription="@string/label_img"
+            android:gravity="end"
+            android:padding="25dp" />
     </LinearLayout>
 
-
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
@@ -51,26 +53,31 @@
             android:id="@+id/LeftArrow"
             android:layout_width="70dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="40dp"
+            android:layout_marginStart="40dp"
             android:padding="20dp"
-            android:src="@drawable/ic_baseline_arrow_back_ios_24" />
+            android:rotation="-180"
+            android:src="@drawable/ic_arrow"
+            android:contentDescription="@string/label_img"/>
 
         <TextView
             android:id="@+id/textViewDate"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="08/03/2021"
-            android:textSize="25dp" />
+            android:text="@string/label_date"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
 
         <ImageView
             android:id="@+id/RightArrow"
             android:layout_width="70dp"
             android:layout_height="match_parent"
+            android:layout_marginEnd="40dp"
+            android:contentDescription="@string/label_img"
             android:padding="20dp"
-            android:layout_marginRight="40dp"
-            android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+            android:src="@drawable/ic_arrow" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -82,5 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="visible"/>
+
+
     </LinearLayout>
 </LinearLayout>
