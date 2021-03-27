@@ -4,22 +4,22 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_logoetumoov"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_logoetumoov"
         android:supportsRtl="true"
         android:theme="@style/Theme.EtuMoov">
-        <activity android:name=".ForgotPassword_EtuMoov"></activity>
-        <activity android:name=".Connexion_EtuMoov" />
-        <activity android:name=".Inscription_EtuMoov" />
-        <activity android:name=".MainActivity">
+        <activity android:name="jeu.clicker.ClickerActivity"/>
+        <activity android:name="jeu.memory.Memory" />
+        <activity android:name="jeu.calcul.CalculActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity1" />
     </application>
 
 </manifest>

@@ -4,84 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    tools:context=".MainActivity" >
+
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="salut"
+        android:text="MEmory"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.892" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="pouet"
+        android:text="Calcul"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="Panda"
+        android:text="Clicker"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.681" />
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints">
-
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="515dp"
-            android:layout_height="410dp"
-            android:contentDescription="@string/label_img"
-            app:srcCompat="@drawable/ic_accueilhaut"
-            tools:layout_editor_absoluteX="-52dp"
-            tools:layout_editor_absoluteY="-10dp" />
-
-        <ImageView
-            android:id="@+id/img_planning"
-            android:layout_width="383dp"
-            android:layout_height="276dp"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/label_img"
-            app:srcCompat="@drawable/ic_accueilplanning" />
-
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottom_nav"
+            app:itemBackground="@color/dark_blue"
+            app:itemTextColor="@drawable/selector"
+            app:itemIconTint="@drawable/selector"
+            app:menu="@menu/menu_nav"
+            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/img_accueilfond1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="500dp"
-        android:layout_marginEnd="212dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_accueilbas"
-        android:contentDescription="@string/label_img"/>
-
-    <Button
-        android:id="@+id/btn_authentification"
-        android:layout_width="180dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="108dp"
-        android:layout_marginBottom="192dp"
-        android:text="@string/txt_authentification"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/btn_inscrire"
-        android:layout_width="180dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="108dp"
-        android:layout_marginBottom="132dp"
-        android:text="@string/txt_inscrire"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_slogan"
-        android:layout_width="276dp"
-        android:layout_height="43dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginBottom="36dp"
-        android:text="@string/txt_slogan"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btn_authentification"
-        app:layout_constraintEnd_toEndOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
