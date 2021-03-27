@@ -15,4 +15,9 @@
     <string name="indiquer_ma_position">Indiquer ma position</string>
     <string name="afficher_l_itinéraire">Afficher l\'itinéraire</string>
     <string name="afficher_temps">Afficher temps</string>
+    <string name="btn_carte">Carte</string>
+    <string name="btn_distance">Distance</string>
+    <string name="label_img">Image</string>
+
+
 </resources>
