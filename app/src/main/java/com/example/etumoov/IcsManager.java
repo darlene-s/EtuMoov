@@ -30,6 +30,8 @@ public class IcsManager {
     public IcsManager(String linkOfIcsFile, Context context) throws IOException {
         getIcsFile(linkOfIcsFile);
         db = new DataBaseHelper(context);
+        impelmentInDataBase();
+        db.close();
     }
 
 
