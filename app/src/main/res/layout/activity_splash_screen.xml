@@ -38,14 +38,14 @@
         android:id="@+id/ic_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/label_img"
         app:layout_constraintBottom_toBottomOf="@+id/ic_sphere_rouge"
         app:layout_constraintEnd_toEndOf="@+id/ic_sphere_rouge"
-        app:layout_constraintHorizontal_bias="0.510"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="@+id/ic_sphere_rouge"
         app:layout_constraintTop_toTopOf="@+id/ic_sphere_rouge"
-        app:layout_constraintVertical_bias="0.710"
-        app:srcCompat="@drawable/ic_logoetumoov"
-        android:contentDescription="@string/label_img"/>
+        app:layout_constraintVertical_bias="0.745"
+        app:srcCompat="@drawable/ic_logoetumoov" />
 
     <ImageView
         android:id="@+id/ic_EtuMoov"
