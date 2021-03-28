@@ -50,4 +50,13 @@
 
     <!-- Bouton -->
     <string name="btn_valider">Valider</string>
+    
+    <!-- Ajout Rappel -->
+    
+    <string name="ET_daterappel">Date du rappel (xx/xx/xxxx)</string>
+    <string name="ET_descrrappel">Description du rappel</string>
+    <string name="ET_titrerappel">Titre de votre rappel</string>
+    <string name="btn_ajoutrappel">Ajouter</string>
+    <string name="txt_titreaddrappel">Ajouter un rappel !</string>
+    
 </resources>
