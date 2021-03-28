@@ -83,7 +83,7 @@ public class Rappels_Affichage extends AppCompatActivity {
                 textTitre.setText(ListeRappels.get(i).getTitre());
                 textTitre.setTextColor(Color.parseColor("#FF000000"));
                 TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
-                params.setMargins(50, 0, 0 , 0);
+                params.setMargins(10, 0, 170, 0);
                 textTitre.setLayoutParams(params);
                 textTitre.setTextSize(15);
 

@@ -15,10 +15,9 @@
 
 
         <!-- NavBar -->
-        <activity android:name=".MainActivity"/>
+        <!-- <activity android:name=".MainActivity"/> -->
         <!-- Activité EDT -->
         <activity android:name=".ScannerActivity"/>
-
         <activity android:name=".Accueil.SplashScreenActivity"/>
         <activity android:name="AffichageCours.Rappels.AjoutRappel"/>
         <activity android:name="AffichageCours.Classes.CalendarJour"/>
