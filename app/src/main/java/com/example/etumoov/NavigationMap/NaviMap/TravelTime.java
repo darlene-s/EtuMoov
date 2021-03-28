@@ -26,7 +26,7 @@ public class TravelTime extends AppCompatActivity {
     private DatabaseReference reference;
     private ListView UniversiteList;
     private ArrayList<String> UnivArray = new ArrayList<>();
-    private EditText numero, rue, codePostal;
+    private EditText numero, rue, codePostal, numero2, rue2, codePostal2;
     private Button btn_valide;
     private APIGoogleDistance api;
     private TextView duree;
@@ -38,8 +38,11 @@ public class TravelTime extends AppCompatActivity {
         numero = findViewById(R.id.txt_edit_numero);
         rue = findViewById(R.id.txt_edit_rue);
         codePostal = findViewById(R.id.txt_edit_codePostal);
+        numero2 = findViewById(R.id.txt_edit_numero2);
+        rue2 = findViewById(R.id.txt_edit_rue2);
+        codePostal2 = findViewById(R.id.txt_edit_codePostal2);
         btn_valide = findViewById(R.id.button_valider);
-        duree = findViewById(R.id.textView);
+        duree = findViewById(R.id.txt_view_trajet_tps);
         api = new APIGoogleDistance();
 
         ArrayAdapter<String> UnivArrayAdapter = new ArrayAdapter<String>(TravelTime.this, android.R.layout.simple_list_item_1,
@@ -63,7 +66,7 @@ public class TravelTime extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String res;
-                res = api.getTravelTime(numero.getText() + " " + rue.getText() + "," + codePostal.getText(), "143 Avenue de versailles, 75016");
+                res = api.getTravelTime(numero.getText() + " " + rue.getText() + "," + codePostal.getText(), numero2.getText() + " " + rue2.getText() + "," + codePostal2.getText());
                 duree.setText(res);
             }
         });

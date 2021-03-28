@@ -189,13 +189,13 @@
         android:id="@+id/txt_edit_numero"
         android:layout_width="73dp"
         android:layout_height="20dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:fontFamily="@font/montserrat_medium"
         android:inputType="textPostalAddress"
-        android:textColor="@color/white"
+         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.01"
+        app:layout_constraintHorizontal_bias="0.063"
         app:layout_constraintStart_toEndOf="@+id/txt_view_domicile2"
         app:layout_constraintTop_toBottomOf="@+id/txt_view_domicile" />
 
