@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -91,6 +92,7 @@ public class CalendarJour extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 createListView();
+                Toast.makeText(getApplicationContext(), "Mise à jour réussie", Toast.LENGTH_SHORT).show();
             }
         });
     }
