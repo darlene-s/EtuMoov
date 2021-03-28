@@ -20,7 +20,7 @@
         <activity android:name=".ScannerActivity"/>
 
         <activity android:name=".Accueil.SplashScreenActivity"/>
-        <activity android:name="AffichageCours.Rappels.Rappels_Affichage"/>
+        <activity android:name="AffichageCours.Rappels.AjoutRappel"/>
         <activity android:name="AffichageCours.Classes.CalendarJour"/>
 
         <!-- Activité Connexion -->
@@ -36,7 +36,7 @@
         <activity android:name="jeu.memory.Memory"/>
 
         <!-- Activité principale :) -->
-        <activity android:name="AffichageCours.Rappels.AjoutRappel">
+        <activity android:name="AffichageCours.Rappels.Rappels_Affichage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
