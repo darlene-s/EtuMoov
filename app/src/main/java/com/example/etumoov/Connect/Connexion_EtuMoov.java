@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,73 +59,55 @@ public class Connexion_EtuMoov extends AppCompatActivity {
         connexionForgotPassword = findViewById(R.id.text_mdpOublie);
         db = new DataBaseHelper(this);
 
-        connexionInscription.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Inscription_EtuMoov.class));
+        connexionInscription.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), Inscription_EtuMoov.class)));
+
+        connexionForgotPassword.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), ForgotPassword_EtuMoov.class)));
+        connexionButton.setOnClickListener(v -> {
+            String email = connexionEmail.getText().toString();
+            String password = connexionPassword.getText().toString();
+
+            if(email.isEmpty()){
+                connexionEmail.setError("Email manquant");
+                return;
             }
-        });
 
-        connexionForgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ForgotPassword_EtuMoov.class));
+            if(password.isEmpty()){
+                connexionPassword.setError("Mot de passe manquant");
+                return;
             }
-        });
-        connexionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = connexionEmail.getText().toString();
-                String password = connexionPassword.getText().toString();
 
-                if(email.isEmpty()){
-                    connexionEmail.setError("Email manquant");
-                    return;
-                }
+            firebaseAuth.signInWithEmailAndPassword(email, password).addOnFailureListener(e -> Toast.makeText(Connexion_EtuMoov.this, "Mot de passe ou email erroné veuillez réessayer" , Toast.LENGTH_SHORT).show());
+            firebaseAuth.signInWithEmailAndPassword(email,password).addOnSuccessListener(authResult -> {
+                user = FirebaseAuth.getInstance().getCurrentUser();
+                reference = FirebaseDatabase.getInstance().getReference("Utilisateur");
+                userID = user.getUid();
 
-                if(password.isEmpty()){
-                    connexionPassword.setError("Mot de passe manquant");
-                    return;
-                }
-
-                firebaseAuth.signInWithEmailAndPassword(email, password).addOnFailureListener(new OnFailureListener() {
+                reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener(){
                     @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Connexion_EtuMoov.this, "Mot de passe ou email erroné veuillez réessayer" , Toast.LENGTH_SHORT).show();
+                    public void onDataChange(@NonNull DataSnapshot snapshot){
+                        Utilisateur user = snapshot.getValue(Utilisateur.class);
+                        if(user != null){
+                            String prenom = user.getPrenom();
+                            if(!db.UserExist(user.getEmail()))
+                                db.insertUser(user);
+                            Utilisateur utilisateur = db.getUtilisateur(user.getEmail());
+                            Toast.makeText(Connexion_EtuMoov.this, "Connexion réussie ! Bienvenue " + prenom + " !" , Toast.LENGTH_LONG).show();
+                            db.close();
+                            Intent intent = new Intent(getApplicationContext(), CalendarJour.class);
+                            intent.putExtra("ID_Utilisateur", utilisateur.getId_user());
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(Connexion_EtuMoov.this, " Votre email ou mot de passe est invalide", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error){
+                        Toast.makeText(Connexion_EtuMoov.this, "Une erreur s'est produite ! Veuillez réessayer", Toast.LENGTH_SHORT).show();
                     }
                 });
-                firebaseAuth.signInWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        user = FirebaseAuth.getInstance().getCurrentUser();
-                        reference = FirebaseDatabase.getInstance().getReference("Utilisateur");
-                        userID = user.getUid();
-
-                        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener(){
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot){
-                                Utilisateur user = snapshot.getValue(Utilisateur.class);
-                                if(user != null){
-                                    String prenom = user.getPrenom();
-                                    Utilisateur utilisateur = db.getUtilisateur(user.getEmail());
-                                    Toast.makeText(Connexion_EtuMoov.this, "Connexion réussie ! Bienvenue " + prenom + " !" , Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(), Rappels_Affichage.class);
-                                    intent.putExtra("ID_Utilisateur", utilisateur.getId_user());
-                                    startActivity(intent);
-                                    finish();
-                                } else {
-                                    Toast.makeText(Connexion_EtuMoov.this, " Votre email ou mot de passe est invalide", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error){
-                                Toast.makeText(Connexion_EtuMoov.this, "Une erreur s'est produite ! Veuillez réessayer", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                });
-            }
+            });
         });
     }
 

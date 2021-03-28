@@ -428,4 +428,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         } else return false;
 
     }
+
+    public boolean UserExist(String email){
+        try {
+            String strSQL = "SELECT *FROM Utilisateur where mail  = '" + email +"'";
+            Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    if (cursor.getString(cursor.getColumnIndex("mail")).contentEquals(email))
+                        return true;
+                    else
+                        return false;
+                } while(cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (Exception e) {}
+        return false;
+    }
 }

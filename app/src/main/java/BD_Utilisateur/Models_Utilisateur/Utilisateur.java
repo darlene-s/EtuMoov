@@ -2,25 +2,25 @@ package BD_Utilisateur.Models_Utilisateur;
 
 public class Utilisateur {
     private int id_user;
-    private String nom;
-    private String prenom;
     private String email;
-    private String mdp;
+    private String prenom;
+    private String nom;
+    private String password;
 
+    public Utilisateur(){}
     public Utilisateur(String nom, String prenom, String email, String mdp){
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-        this.mdp = mdp;
+        this.password = mdp;
     }
     public Utilisateur(int id, String nom, String prenom, String email, String mdp){
         this.id_user = id;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-        this.mdp = mdp;
+        this.password = mdp;
     }
-
 
     public int getId_user() {
         return id_user;
@@ -55,10 +55,10 @@ public class Utilisateur {
     }
 
     public String getMdp() {
-        return mdp;
+        return password;
     }
 
     public void setMdp(String mdp) {
-        this.mdp = mdp;
+        this.password = mdp;
     }
 }

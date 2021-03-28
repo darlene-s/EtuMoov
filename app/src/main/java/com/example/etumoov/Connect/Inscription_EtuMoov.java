@@ -47,71 +47,59 @@ public class Inscription_EtuMoov extends AppCompatActivity {
         db = new DataBaseHelper(this);
         firebaseAuth = FirebaseAuth.getInstance();
 
-        regLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        regLogin.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MainActivity.class)));
+
+        regBtn.setOnClickListener(v -> {
+            email = String.valueOf(regEmail.getText());
+            prenom = String.valueOf(regPrenom.getText());
+            nom = String.valueOf(regNom.getText());
+            password = String.valueOf(regPassword.getText());
+
+            if (prenom.isEmpty()) {
+                regPrenom.setError("Prénom manquant");
             }
-        });
 
-        regBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                email = regEmail.getText().toString();
-                prenom = String.valueOf(regPrenom.getText());
-                nom = String.valueOf(regNom.getText());
-                password = regPassword.getText().toString();
+            if (nom.isEmpty()) {
+                regPrenom.setError("nom manquant");
+            }
 
-                if (prenom.isEmpty()) {
-                    regPrenom.setError("Prénom manquant");
-                }
+            if (email.isEmpty()) {
+                regEmail.setError("Email manquant");
+            }
 
-                if (nom.isEmpty()) {
-                    regPrenom.setError("nom manquant");
-                }
+            if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                regEmail.setError("Email invalide");
+            }
 
-                if (email.isEmpty()) {
-                    regEmail.setError("Email manquant");
-                }
+            if (password.isEmpty()) {
+                regPassword.setError("Mot de passe manquant");
+            }
 
-                if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    regEmail.setError("Email invalide");
-                }
-
-                if (password.isEmpty()) {
-                    regPassword.setError("Mot de passe manquant");
-                }
-
-                firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>(){
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Utilisateur utilisateur = new Utilisateur(nom, prenom, email, password);
-                            FirebaseDatabase.getInstance().getReference("Utilisateur")
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue(utilisateur).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
+            firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Utilisateur utilisateur = new Utilisateur(nom, prenom, email, password);
+                    FirebaseDatabase.getInstance().getReference("Utilisateur")
+                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .setValue(utilisateur).addOnCompleteListener(task1 -> {
+                                if (task1.isSuccessful()) {
+                                    if(!db.UserExist(email))
                                         db.insertUser(utilisateur);
-                                        user = db.getUtilisateur(utilisateur.getEmail());
-                                        db.insertProfil(new Profil(0, 0, 0, "", "", user.getId_user()));
-                                        Toast.makeText(Inscription_EtuMoov.this, "Nouvel utilisateur créé avec succès", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(Inscription_EtuMoov.this, "Erreur lors de l'inscription. Veuillez réessayer", Toast.LENGTH_SHORT).show();
-                                    }
+                                    user = db.getUtilisateur(utilisateur.getEmail());
+                                    db.insertProfil(new Profil(0, 0, 0, "", "", user.getId_user()));
+                                    Toast.makeText(Inscription_EtuMoov.this, "Nouvel utilisateur créé avec succès", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(Inscription_EtuMoov.this, "Erreur lors de l'inscription. Veuillez réessayer", Toast.LENGTH_SHORT).show();
                                 }
                             });
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            intent.putExtra("ID_Utilisateur", user.getId_user());
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            Toast.makeText(Inscription_EtuMoov.this, "Erreur lors de l'inscription. Veuillez réessayer", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
+                    db.close();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.putExtra("ID_Utilisateur", user.getId_user());
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(Inscription_EtuMoov.this, "Erreur lors de l'inscription. Veuillez réessayer", Toast.LENGTH_SHORT).show();
+                }
+            });
         });
     }
 }
