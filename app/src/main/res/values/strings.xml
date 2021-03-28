@@ -65,7 +65,7 @@
 
     <!-- ============== Liste des rappels ============== -->
 
-    <string name="txt_listerappel">Liste des choses à faire</string>
+    <string name="txt_listerappel">Liste des choses à faire : </string>
 
 
     <!-- ============== Navigation ============== -->
