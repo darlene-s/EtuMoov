@@ -15,6 +15,8 @@ import com.example.etumoov.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import BD_Utilisateur.Models_Cours.Cours;
+
 public class CoursAdapter extends ArrayAdapter<Cours> {
     private Context mContext;
     private List<Cours> moviesList = new ArrayList<>();

@@ -116,7 +116,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void deleteDB() {
+    public void deleteBD() {
         this.getWritableDatabase().execSQL("DELETE FROM Utilisateur");
         this.getWritableDatabase().execSQL("DELETE FROM Profil");
         this.getWritableDatabase().execSQL("DELETE FROM Navigation");
@@ -124,6 +124,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         this.getWritableDatabase().execSQL("DELETE FROM T_Cours");
         this.getWritableDatabase().execSQL("DELETE FROM T_Lien");
         this.getWritableDatabase().execSQL("DELETE FROM T_Rappel");
+    }
+
+    public void deleteCours() {
+        this.getWritableDatabase().execSQL("DELETE FROM T_Cours");
     }
 
     /*

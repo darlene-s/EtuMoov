@@ -28,6 +28,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import BD_Utilisateur.Models_Cours.Cours;
 import biweekly.Biweekly;
 import biweekly.ICalendar;
 import biweekly.component.VEvent;
@@ -63,7 +64,7 @@ public class CalendarJour extends AppCompatActivity implements View.OnClickListe
         RightArrow.setOnClickListener(this::onClick);
         Intent intent = getIntent();
         if(intent != null && intent.hasExtra("LienEDT")) {
-            db.deleteDB();
+            db.deleteCours();
             lienIntent = intent.getStringExtra("LienEDT");
             db.insertLien(lienIntent);
             lireLien();
