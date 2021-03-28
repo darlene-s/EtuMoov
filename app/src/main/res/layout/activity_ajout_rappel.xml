@@ -9,27 +9,28 @@
     android:layout_gravity="center"
     android:background="@drawable/ajouter_rappel">
 
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
 
-    <ImageView
-        android:id="@+id/img_profilnuage"
-        android:layout_width="381dp"
-        android:layout_height="249dp"
-        android:layout_marginBottom="8dp"
-        android:contentDescription="@string/label_img"
-        app:layout_constraintBottom_toTopOf="@+id/btn_ajout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.004"
-        app:srcCompat="@drawable/img_rappelnuage"
-        tools:ignore="MissingConstraints" />
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="414dp"
+            android:layout_height="336dp"
+            app:srcCompat="@drawable/img_rappelnuage"
+            tools:ignore="ContentDescription"
+            tools:layout_editor_absoluteX="-3dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+    </RelativeLayout>
 
     <EditText
         android:id="@+id/reg_title"
         android:layout_width="236dp"
         android:layout_height="38dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="28dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/ET_titrerappel"
@@ -39,14 +40,44 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/reg_descrip"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_ajout"
+        android:layout_width="198dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="72dp"
+        android:text="@string/btn_ajoutrappel"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/reg_descrip"
-        android:layout_width="230dp"
-        android:layout_height="114dp"
+        android:id="@+id/reg_date"
+        android:layout_width="233dp"
+        android:layout_height="39dp"
         android:layout_marginBottom="20dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/ET_daterappel"
+        android:textColor="@color/black"
+        android:textColorHint="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_ajout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TextFields" />
+
+    <EditText
+        android:id="@+id/reg_descrip"
+        android:layout_width="238dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="28dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/ET_descrrappel"
@@ -56,23 +87,8 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/reg_date"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/reg_date"
-        android:layout_width="233dp"
-        android:layout_height="39dp"
-        android:layout_marginBottom="28dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/ET_daterappel"
-        android:textColor="@color/black"
-        android:textColorHint="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_ajout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="TextFields" />
 
     <ImageView
         android:id="@+id/img_profilnote"
@@ -84,20 +100,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/img_addrappel"
-        android:contentDescription="@string/label_img" />
-
-    <Button
-        android:id="@+id/btn_ajout"
-        android:layout_width="198dp"
-        android:layout_height="49dp"
-        android:layout_marginBottom="88dp"
-        android:text="@string/btn_ajoutrappel"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/tv_ajouterrappel"

@@ -63,6 +63,10 @@
     <string name="txt_titreaddrappel">Ajouter un rappel !</string>
     <string name="txt_ajt_rappel">Ajouter un nouveau rappel</string>
 
+    <!-- ============== Liste des rappels ============== -->
+
+    <string name="txt_listerappel">Liste des choses à faire</string>
+
 
     <!-- ============== Navigation ============== -->
     <!-- ============== Réveil ============== -->

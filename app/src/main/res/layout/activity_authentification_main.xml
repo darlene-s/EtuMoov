@@ -60,8 +60,10 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.888"
         tools:ignore="RtlCompat" />
 
     <Button
@@ -74,29 +76,22 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_authentification"
-        app:layout_constraintVertical_bias="0.169"
+        app:layout_constraintVertical_bias="0.357"
         tools:ignore="RtlCompat" />
 
     <TextView
         android:id="@+id/tv_slogan"
         android:layout_width="276dp"
         android:layout_height="43dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="138dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginBottom="36dp"
         android:text="@string/txt_slogan"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btn_authentification"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/img_accueilfond1"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-        app:layout_constraintVertical_bias="1.0"
-        tools:ignore="RtlCompat" />
+        tools:ignore="RtlCompat"
+        tools:layout_editor_absoluteX="75dp"
+        tools:layout_editor_absoluteY="435dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
