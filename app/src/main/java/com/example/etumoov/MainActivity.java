@@ -29,11 +29,11 @@ public class MainActivity extends AppCompatActivity {
     PendingIntent pendingIntent;
     Intent alarmReceiverIntent;
     AlarmManager alarmManager;
-    TimePicker timepicker;
     Button btn_alarm_auto;
-    Button btn_alarm_manuelle;
     Button btn_snooze;
     Button btn_play;
+    Calendar calendar;
+    Context context;
 
     //binder
     AlarmService mService;
@@ -43,15 +43,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.context = this;
 
         btn_alarm_auto = findViewById(R.id.btn_ajout_alarme_auto);
-        btn_alarm_manuelle = findViewById(R.id.btn_ajout_alarme_manuel);
 
-        timepicker = (TimePicker) findViewById(R.id.timepicker);
-        timepicker.setIs24HourView(true);
+        alarmReceiverIntent = new Intent(this.context, AlarmBroadcastReceiver.class);
+
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-        //new thread to show buttons
+        calendar = calendar.getInstance();
+
+        //thread pour changer la visibilité des boutons
         Thread thread = new Thread(){
             @Override
             public void run(){
@@ -62,11 +64,8 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 if(mService.showButtons()){
-                                    Log.e("thread 2","alarm works");
                                     try {
                                         btn_alarm_auto.setVisibility(View.INVISIBLE);
-                                        btn_alarm_manuelle.setVisibility(View.INVISIBLE);
-                                        timepicker.setVisibility(View.INVISIBLE);
 
                                         btn_snooze = findViewById(R.id.btn_snooze);
                                         btn_play = findViewById(R.id.btn_play);
@@ -85,40 +84,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setAutoAlarm(View view) {
-        Calendar calendar = Calendar.getInstance();
-
         //mettre le reveil en prenant en compte les données de l'utilisateur : heure du 1er cours, temps d'itineraire etc
-        calendar.set(Calendar.HOUR_OF_DAY, 1);
-        calendar.set(Calendar.MINUTE, 18);
+        calendar.set(Calendar.HOUR_OF_DAY, 19);
+        calendar.set(Calendar.MINUTE, 40);
         calendar.set(Calendar.SECOND, 0);
 
-        alarmReceiverIntent = new Intent(this, AlarmBroadcastReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmReceiverIntent, 0);
+        alarmReceiverIntent.putExtra("extra","alarm on");
+        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmReceiverIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
         Toast.makeText(this, "ALARME LANCÉE AUTOMATIQUEMENT", Toast.LENGTH_SHORT).show();
     }
 
-    public void setBasicAlarm(View view) {
-        Calendar calendar = Calendar.getInstance();
-
-        //ce sont ici les valeurs du timepicker
-        calendar.set(Calendar.HOUR_OF_DAY, timepicker.getCurrentHour());
-        calendar.set(Calendar.MINUTE, timepicker.getCurrentMinute());
-        calendar.set(Calendar.SECOND, 0);
-
-        alarmReceiverIntent = new Intent(this, AlarmBroadcastReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmReceiverIntent, 0);
-
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-        Toast.makeText(this, "ALARME LANCÉE MANUELLEMENT", Toast.LENGTH_SHORT).show();
-    }
-
     public void alarmSnooze(View view) {
-        alarmReceiverIntent = new Intent(this, AlarmBroadcastReceiver.class);
+        alarmReceiverIntent.putExtra("extra","alarm off");
+
+        //cancel the alarm
+        alarmManager.cancel(pendingIntent);
+
+        //stop the ringtone
+        //sends a message to stop directly to the ringtonePlayingService
+        sendBroadcast(alarmReceiverIntent);
+
+        btn_snooze.setVisibility(View.INVISIBLE);
+        btn_play.setVisibility(View.INVISIBLE);
+        btn_alarm_auto.setVisibility(View.VISIBLE);
+
+        alarmReceiverIntent.putExtra("extra","alarm on");
         pendingIntent = PendingIntent.getBroadcast(this, 0, alarmReceiverIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        alarmManager.set(AlarmManager.RTC_WAKEUP, 300000, pendingIntent);
+        calendar = Calendar.getInstance();
+        alarmManager.set(AlarmManager.RTC_WAKEUP, (calendar.getTimeInMillis()+300000), pendingIntent);
         Toast.makeText(this, "ALARME DANS 5 MIN", Toast.LENGTH_SHORT).show();
     }
 
