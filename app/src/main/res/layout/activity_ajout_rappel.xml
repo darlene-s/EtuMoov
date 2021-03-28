@@ -12,11 +12,17 @@
 
     <ImageView
         android:id="@+id/img_profilnuage"
-        android:layout_width="502dp"
-        android:layout_height="768dp"
+        android:layout_width="381dp"
+        android:layout_height="249dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/label_img"
+        app:layout_constraintBottom_toTopOf="@+id/btn_ajout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.004"
         app:srcCompat="@drawable/img_rappelnuage"
-        tools:layout_editor_absoluteX="-28dp"
-        tools:layout_editor_absoluteY="-241dp"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -38,8 +44,8 @@
 
     <EditText
         android:id="@+id/reg_descrip"
-        android:layout_width="238dp"
-        android:layout_height="40dp"
+        android:layout_width="230dp"
+        android:layout_height="114dp"
         android:layout_marginBottom="20dp"
         android:autofillHints=""
         android:ems="10"
@@ -77,7 +83,8 @@
         app:layout_constraintHorizontal_bias="0.341"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/img_addrappel" />
+        app:srcCompat="@drawable/img_addrappel"
+        android:contentDescription="@string/label_img" />
 
     <Button
         android:id="@+id/btn_ajout"

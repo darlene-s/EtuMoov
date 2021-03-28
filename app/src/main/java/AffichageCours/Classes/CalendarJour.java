@@ -11,9 +11,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.appmobilev2.DataBase.DataBaseManager;
-import com.example.appmobilev2.QRCode.QrCodeActivity;
-import com.example.appmobilev2.R;
+
+import com.example.etumoov.MainActivity;
+import com.example.etumoov.R;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -31,6 +31,7 @@ import java.util.List;
 import biweekly.Biweekly;
 import biweekly.ICalendar;
 import biweekly.component.VEvent;
+import BD_Utilisateur.Helper_Utilisateur.*;
 
 public class CalendarJour extends AppCompatActivity implements View.OnClickListener {
 
@@ -44,7 +45,7 @@ public class CalendarJour extends AppCompatActivity implements View.OnClickListe
     private String lienIntent;
     private String result = "";
     private BufferedReader reader;
-    private DataBaseManager db;
+    private DataBaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +57,13 @@ public class CalendarJour extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_calendar_jour);
 
         this.findViewByID();
-        db = new DataBaseManager(this);
+        db = new DataBaseHelper(this);
 
         LeftArrow.setOnClickListener(this::onClick);
         RightArrow.setOnClickListener(this::onClick);
         Intent intent = getIntent();
         if(intent != null && intent.hasExtra("LienEDT")) {
-            db.delete();
+            db.deleteDB();
             lienIntent = intent.getStringExtra("LienEDT");
             db.insertLien(lienIntent);
             lireLien();
@@ -76,7 +77,7 @@ public class CalendarJour extends AppCompatActivity implements View.OnClickListe
 
         // JEU DE DONNEES POUR TEST LE BON FONCTIONNEMENT DE L'AFFICHAGE DES COURS
         coursList = new ArrayList<>();
-        if(!db.isEmpty())
+        if(!db.isLienEmpty())
             createList();
         mAdapter = new CoursAdapter(this, getCoursDate(coursList, getSelectedDate(datecount)));
         listView.setAdapter(mAdapter);
@@ -85,7 +86,7 @@ public class CalendarJour extends AppCompatActivity implements View.OnClickListe
         btn_qr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent edtActivity = new Intent(getApplicationContext(), QrCodeActivity.class);
+                Intent edtActivity = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(edtActivity);
                 finish();
             }
@@ -93,7 +94,7 @@ public class CalendarJour extends AppCompatActivity implements View.OnClickListe
         btn_retour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mainActivity = new Intent(getApplicationContext(), com.example.appmobilev2.MainActivity.class);
+                Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(mainActivity);
                 finish();
             }
@@ -195,7 +196,7 @@ public class CalendarJour extends AppCompatActivity implements View.OnClickListe
 
     public void createList() {
             //coursList.add(new com.example.appmobilev2.Classes.Cours("IDK",event.get(i).getSummary().getValue(),event.get(i).getLocation().getValue(),createHeureDebut(i),createHeureFin(i),createDate(i)));
-            coursList = db.getCours();
+            //coursList = db.getCours();
     }
 
     public void createBD() {

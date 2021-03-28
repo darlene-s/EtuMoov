@@ -11,9 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.etumoov.MainActivity;
 import com.example.etumoov.R;
-import com.example.etumoov.User;
-import com.example.etumoov.activity1;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -100,7 +99,7 @@ public class Connexion_EtuMoov extends AppCompatActivity {
                                 if(user != null){
                                     String prenom = user.getPrenom();
                                     Toast.makeText(Connexion_EtuMoov.this, "Connexion réussie ! Bienvenue " + prenom + " !" , Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(getApplicationContext(), activity1.class));
+                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                     finish();
                                 } else {
                                     Toast.makeText(Connexion_EtuMoov.this, " Votre email ou mot de passe est invalide", Toast.LENGTH_SHORT).show();
@@ -122,7 +121,7 @@ public class Connexion_EtuMoov extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(), activity1.class));
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
     }
 }

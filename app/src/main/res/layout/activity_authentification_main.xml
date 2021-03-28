@@ -4,19 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context=".Accueil.AuthentificationMain"
-    android:background="@drawable/background">
+    tools:context=".Accueil.AuthentificationMain">
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints">
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/img_fond"
             android:layout_width="match_parent"
-            android:layout_height="370dp"
+            android:layout_height="453dp"
             android:contentDescription="@string/label_img"
             app:srcCompat="@drawable/ic_accueilhaut"
             tools:layout_editor_absoluteX="-52dp"
@@ -24,8 +25,8 @@
 
         <ImageView
             android:id="@+id/img_planning"
-            android:layout_width="383dp"
-            android:layout_height="276dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:contentDescription="@string/label_img"
             app:srcCompat="@drawable/ic_accueilplanning"
@@ -42,9 +43,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="540dp"
         android:layout_marginEnd="172dp"
-        android:layout_marginRight="172dp"
         android:contentDescription="@string/label_img"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_accueilbas" />
 
@@ -52,32 +54,38 @@
         android:id="@+id/btn_authentification"
         android:layout_width="180dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="108dp"
         android:layout_marginBottom="192dp"
         android:text="@string/txt_authentification"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
         tools:ignore="RtlCompat" />
 
     <Button
         android:id="@+id/btn_inscrire"
         android:layout_width="180dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="108dp"
         android:layout_marginBottom="132dp"
         android:text="@string/txt_inscrire"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="RtlCompat"/>
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_authentification"
+        app:layout_constraintVertical_bias="0.169"
+        tools:ignore="RtlCompat" />
 
     <TextView
         android:id="@+id/tv_slogan"
         android:layout_width="276dp"
         android:layout_height="43dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="138dp"
         android:layout_marginEnd="56dp"
         android:layout_marginBottom="36dp"
         android:text="@string/txt_slogan"
@@ -86,5 +94,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btn_authentification"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="RtlCompat"/>
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/img_accueilfond1"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="RtlCompat" />
 </androidx.constraintlayout.widget.ConstraintLayout>

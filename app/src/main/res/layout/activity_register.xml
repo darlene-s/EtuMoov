@@ -169,16 +169,15 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/img_fondinscription"
+        android:layout_width="447dp"
+        android:layout_height="344dp"
+        android:contentDescription="@string/label_img"
         app:layout_constraintBottom_toBottomOf="@+id/reg_login_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_inscriptionfond"
-        android:contentDescription="@string/label_img"/>
+        app:srcCompat="@drawable/ic_inscriptionfond" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

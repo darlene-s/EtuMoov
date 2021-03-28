@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.etumoov.MainActivity;
 import com.example.etumoov.R;
-import com.example.etumoov.activity1;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -97,7 +96,7 @@ public class Inscription_EtuMoov extends AppCompatActivity {
                                     }
                                 }
                             });
-                            startActivity(new Intent(getApplicationContext(), activity1.class));
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             finish();
                         } else {
                             Toast.makeText(Inscription_EtuMoov.this, "Erreur lors de l'inscription. Veuillez réessayer", Toast.LENGTH_SHORT).show();
