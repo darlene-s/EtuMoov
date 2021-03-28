@@ -107,4 +107,14 @@
         app:layout_constraintTop_toBottomOf="@+id/img_profilnote"
         app:layout_constraintVertical_bias="0.0" />
 
+    <ImageView
+        android:id="@+id/imageView18"
+        android:layout_width="215dp"
+        android:layout_height="190dp"
+        android:rotation="50"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_ajout"
+        app:srcCompat="@drawable/ic_form3"
+        tools:ignore="ContentDescription" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
