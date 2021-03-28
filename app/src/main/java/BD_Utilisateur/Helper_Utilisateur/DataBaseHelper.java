@@ -245,7 +245,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     /*
     Partie concernant la récupération d'une ligne spécifique d'une table de la BD
      */
-    public Utilisateur getUtilisateur(String email) {
+    public Utilisateur getUtilisateurbyId(int id) {
+        try {
+            String strSQL = "SELECT *FROM Utilisateur where id_user =" +id;
+            Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    return new Utilisateur(cursor.getInt(cursor.getColumnIndex("id_user")), cursor.getString(cursor.getColumnIndex("nom")), cursor.getString(cursor.getColumnIndex("prenom")), cursor.getString(cursor.getColumnIndex("mail")), cursor.getString(cursor.getColumnIndex("mdp")));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (Exception e) {
+            Toast.makeText(mContext, "Erreur dans la récupération des infos de l'utilisateur", Toast.LENGTH_LONG);
+        }
+        return null;
+    }
+    public Utilisateur getUtilisateurbyEmail(String email) {
         try {
             String strSQL = "SELECT *FROM Utilisateur where mail  = '" + email +"'";
             Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);

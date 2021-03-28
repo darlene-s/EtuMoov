@@ -90,7 +90,7 @@ public class Connexion_EtuMoov extends AppCompatActivity {
                             String prenom = user.getPrenom();
                             if(!db.UserExist(user.getEmail()))
                                 db.insertUser(user);
-                            Utilisateur utilisateur = db.getUtilisateur(user.getEmail());
+                            Utilisateur utilisateur = db.getUtilisateurbyEmail(user.getEmail());
                             Toast.makeText(Connexion_EtuMoov.this, "Connexion réussie ! Bienvenue " + prenom + " !" , Toast.LENGTH_LONG).show();
                             db.close();
                             Intent intent = new Intent(getApplicationContext(), CalendarJour.class);

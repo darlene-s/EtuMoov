@@ -84,8 +84,8 @@ public class Inscription_EtuMoov extends AppCompatActivity {
                                 if (task1.isSuccessful()) {
                                     if(!db.UserExist(email))
                                         db.insertUser(utilisateur);
-                                    user = db.getUtilisateur(utilisateur.getEmail());
-                                    db.insertProfil(new Profil(0, 0, 0, "", "", user.getId_user()));
+                                    user = db.getUtilisateurbyEmail(utilisateur.getEmail());
+                                    //db.insertProfil(new Profil(0, 0, 0, "", "", user.getId_user()));
                                     Toast.makeText(Inscription_EtuMoov.this, "Nouvel utilisateur créé avec succès", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(Inscription_EtuMoov.this, "Erreur lors de l'inscription. Veuillez réessayer", Toast.LENGTH_SHORT).show();

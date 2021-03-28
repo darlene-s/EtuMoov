@@ -49,13 +49,13 @@
 
     <string name="ET_rentremdp">Rentrez votre adresse email</string>
     <string name="btn_reinitialiser">Réinitialiser votre mot de passe</string>
-    <string name = "label_date">Date du jour</string>
+    <string name="label_date">Date du jour</string>
 
     <!-- ============== Bouton ============== -->
     <string name="btn_valider">Valider</string>
     <string name="btn_ajoutrappel">Ajouter</string>
 
-    
+
     <!-- ============== Ajout Rappel ============== -->
     <string name="ET_daterappel">Date du rappel (xx/xx/xxxx)</string>
     <string name="ET_descrrappel">Description du rappel</string>
@@ -72,5 +72,5 @@
     <!-- ============== Réveil ============== -->
     <!-- ============== Générale ============== -->
 
-    
+
 </resources>

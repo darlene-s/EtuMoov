@@ -13,33 +13,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EtuMoov"
         android:usesCleartextTraffic="true">
-
-
+        <activity android:name=".ProfilRegisterActivity"></activity>
         <!-- NavBar -->
         <!-- <activity android:name=".MainActivity"/> -->
         <!-- Activité EDT -->
-        <activity android:name="AffichageCours.Scanner.ScannerActivity"/>
-        <activity android:name=".MainActivity"/>
-        <activity android:name="AffichageCours.Rappels.Rappels_Affichage"/>
-        <activity android:name="AffichageCours.Rappels.AjoutRappel"/>
-        <activity android:name="AffichageCours.Classes.CalendarJour"/>
-
-        <!-- Activité Connexion -->
-        <activity android:name=".Connect.Connexion_EtuMoov"/>
-        <activity android:name=".Connect.ForgotPassword_EtuMoov"/>
-        <activity android:name=".Accueil.AuthentificationMain"/>
-        <activity android:name=".Connect.Inscription_EtuMoov"/>
-
-
-        <!-- Activité jeux -->
-        <activity android:name="jeu.clicker.ClickerActivity"/>
-        <activity android:name="jeu.calcul.CalculActivity"/>
-        <activity android:name="jeu.memory.Memory"/>
-
-        <!-- Activité principale :) -->
+        <activity android:name="AffichageCours.Scanner.ScannerActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name="AffichageCours.Rappels.Rappels_Affichage" />
+        <activity android:name="AffichageCours.Rappels.AjoutRappel" />
+        <activity android:name="AffichageCours.Classes.CalendarJour" /> <!-- Activité Connexion -->
+        <activity android:name=".Connect.Connexion_EtuMoov" />
+        <activity android:name=".Connect.ForgotPassword_EtuMoov" />
+        <activity android:name=".Accueil.AuthentificationMain" />
+        <activity android:name=".Connect.Inscription_EtuMoov" /> <!-- Activité jeux -->
+        <activity android:name="jeu.clicker.ClickerActivity" />
+        <activity android:name="jeu.calcul.CalculActivity" />
+        <activity android:name="jeu.memory.Memory" /> <!-- Activité principale :) -->
         <activity android:name=".Accueil.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
