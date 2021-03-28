@@ -30,18 +30,21 @@ public class APIGoogleDistance {
                     String myResponse = response.body().string();
                     try {
                         JSONObject object = new JSONObject(myResponse);
-                        JSONObject result = object.getJSONObject("result");
-                        JSONArray array = result.getJSONArray("schedules");
-                        for(int i=0;i<array.length();i++){
-                            schedule[0] += array.getJSONObject(i).getString("duration");
+                        JSONArray result = object.getJSONArray("rows");
+                        for(int i=0;i<result.length();i++) {
+                            JSONObject res = result.getJSONObject(i);
+                            JSONArray array = res.getJSONArray("elements");
+                            for (int j = 0; j < array.length(); j++) {
+                                JSONObject jsonobject2 = array.getJSONObject(j);
+                                JSONObject jsonobject3 = jsonobject2.getJSONObject("duration");
+                                schedule[0] += jsonobject3.getString("text");
+                            }
                         }
                         countDownLatch.countDown();
                     } catch (JSONException e) {
                         countDownLatch.countDown();
                         e.printStackTrace();
                     }
-
-
                 }
                 else{
                     countDownLatch.countDown();
@@ -50,7 +53,7 @@ public class APIGoogleDistance {
             }
         };
 
-        String url ="https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins="+ depart +"&destinations="+ arrivee+"&key=AIzaSyAwCUwkCcE-9QysXg4Tq1lIi0IP-3sq8nU";
+        String url ="https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins="+ depart +"&destinations="+ arrivee+"&mode=transit&transit_mode=rail&key=AIzaSyAwCUwkCcE-9QysXg4Tq1lIi0IP-3sq8nU";
         Request request = new Request.Builder().url(url).build();
         countDownLatch.countDown();
         okHttpClient.newCall(request).enqueue(callback);

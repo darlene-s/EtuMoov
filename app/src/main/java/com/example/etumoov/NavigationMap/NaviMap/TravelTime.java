@@ -3,6 +3,8 @@ package com.example.etumoov.NavigationMap.NaviMap;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -21,35 +23,57 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TravelTime extends AppCompatActivity {
     private DatabaseReference reference;
     private ListView UniversiteList;
     private ArrayList<String> UnivArray = new ArrayList<>();
+    private EditText numero, rue, codePostal;
+    private Button btn_valide;
+    private APIGoogleDistance api;
+    private TextView duree;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_travel_time);
-        UniversiteList = (ListView)findViewById(R.id.etablissements);
+        UniversiteList = (ListView) findViewById(R.id.etablissements);
+        numero = findViewById(R.id.txt_edit_numero);
+        rue = findViewById(R.id.txt_edit_rue);
+        codePostal = findViewById(R.id.txt_edit_codePostale);
+        btn_valide = findViewById(R.id.button_valider);
+        duree = findViewById(R.id.textView);
+        api = new APIGoogleDistance();
+
         ArrayAdapter<String> UnivArrayAdapter = new ArrayAdapter<String>(TravelTime.this, android.R.layout.simple_list_item_1,
                 UnivArray);
         reference = FirebaseDatabase.getInstance().getReference("Universite");
-        reference.addListenerForSingleValueEvent(new ValueEventListener(){
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot){
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Universite universite = dataSnapshot.getValue(Universite.class);
-
                 }
             }
+
             @Override
-            public void onCancelled(@NonNull DatabaseError error){
+            public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(TravelTime.this, "Une erreur s'est produite ! Veuillez réessayer", Toast.LENGTH_SHORT).show();
             }
         });
-    }
 
+        btn_valide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String res;
+                res = api.getTravelTime(numero.getText() + " " + rue.getText() + "," + codePostal.getText(), "143 Avenue de versailles, 75016");
+                duree.setText(res);
+            }
+        });
+    }
 }
 
 
