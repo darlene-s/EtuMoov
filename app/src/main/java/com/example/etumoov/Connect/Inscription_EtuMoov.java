@@ -62,20 +62,20 @@ public class Inscription_EtuMoov extends AppCompatActivity {
                 nom = String.valueOf(regNom.getText());
                 password = regPassword.getText().toString();
 
-                if (email.isEmpty()) {
-                    regEmail.setError("Email manquant");
-                }
-
-                if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    regEmail.setError("Email invalide");
-                }
-
                 if (prenom.isEmpty()) {
                     regPrenom.setError("Prénom manquant");
                 }
 
                 if (nom.isEmpty()) {
                     regPrenom.setError("nom manquant");
+                }
+
+                if (email.isEmpty()) {
+                    regEmail.setError("Email manquant");
+                }
+
+                if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    regEmail.setError("Email invalide");
                 }
 
                 if (password.isEmpty()) {

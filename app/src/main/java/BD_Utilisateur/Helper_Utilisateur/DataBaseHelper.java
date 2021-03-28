@@ -247,7 +247,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
      */
     public Utilisateur getUtilisateur(String email) {
         try {
-            String strSQL = "SELECT *FROM Utilisateur where email  =" + email;
+            String strSQL = "SELECT *FROM Utilisateur where mail  = '" + email +"'";
             Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
             if (cursor.moveToFirst()) {
                 do {
