@@ -46,8 +46,10 @@
         android:contentDescription="@string/label_img"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.461"
         app:srcCompat="@drawable/ic_accueilbas" />
 
     <Button
@@ -86,12 +88,14 @@
         android:id="@+id/tv_slogan"
         android:layout_width="276dp"
         android:layout_height="43dp"
+        android:layout_marginBottom="76dp"
         android:text="@string/txt_slogan"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        tools:ignore="RtlCompat"
-        tools:layout_editor_absoluteX="75dp"
-        tools:layout_editor_absoluteY="435dp" />
+        app:layout_constraintBottom_toTopOf="@+id/btn_authentification"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="RtlCompat" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

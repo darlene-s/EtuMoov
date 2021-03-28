@@ -24,6 +24,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
+
+import AffichageCours.Classes.CalendarJour;
+import AffichageCours.Rappels.Rappels_Affichage;
 import BD_Utilisateur.Models_Utilisateur.Utilisateur;
 
 public class Connexion_EtuMoov extends AppCompatActivity {
@@ -99,7 +103,7 @@ public class Connexion_EtuMoov extends AppCompatActivity {
                                 if(user != null){
                                     String prenom = user.getPrenom();
                                     Toast.makeText(Connexion_EtuMoov.this, "Connexion réussie ! Bienvenue " + prenom + " !" , Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                    startActivity(new Intent(getApplicationContext(), Rappels_Affichage.class));
                                     finish();
                                 } else {
                                     Toast.makeText(Connexion_EtuMoov.this, " Votre email ou mot de passe est invalide", Toast.LENGTH_SHORT).show();
@@ -121,7 +125,7 @@ public class Connexion_EtuMoov extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), CalendarJour.class));
         }
     }
 }
