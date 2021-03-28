@@ -11,7 +11,8 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_logoetumoov"
         android:supportsRtl="true"
-        android:theme="@style/Theme.EtuMoov">
+        android:theme="@style/Theme.EtuMoov"
+        android:usesCleartextTraffic="true">
 
 
         <!-- NavBar -->
