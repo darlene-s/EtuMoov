@@ -72,19 +72,10 @@ public class CalendarJour extends AppCompatActivity implements View.OnClickListe
         db = new DataBaseHelper(this);
         coursList = new ArrayList<>();
 
+        createListView();
+
         LeftArrow.setOnClickListener(this::onClick);
         RightArrow.setOnClickListener(this::onClick);
-        if(!db.isLienEmpty()) {
-            try {
-                db.deleteCours();
-                ics = new IcsManager(db.getLien(), this.getApplicationContext());
-                createList();
-                mAdapter = new CoursAdapter(this, getCoursDate(coursList, getSelectedDate(datecount)));
-                listView.setAdapter(mAdapter);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
 
         db.close();
 
@@ -99,9 +90,23 @@ public class CalendarJour extends AppCompatActivity implements View.OnClickListe
         btn_refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                createListView();
             }
         });
+    }
+
+    public void createListView() {
+        if(!db.isLienEmpty()) {
+            try {
+                db.deleteCours();
+                ics = new IcsManager(db.getLien(), this.getApplicationContext());
+                createList();
+                mAdapter = new CoursAdapter(this, getCoursDate(coursList, getSelectedDate(datecount)));
+                listView.setAdapter(mAdapter);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void findViewByID() {
