@@ -3,13 +3,16 @@ package com.example.etumoov;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 
+import AffichageCours.Classes.CalendarJour;
 import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
 
 /**
@@ -44,11 +47,15 @@ public class ScannerActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         db.insertLien(result.getText());
+                        Intent intent = new Intent(getApplicationContext(),CalendarJour.class);
+                        startActivity(intent);
                     }
                 });
             }
         });
     }
+
+
 
     @Override
     protected void onResume() {

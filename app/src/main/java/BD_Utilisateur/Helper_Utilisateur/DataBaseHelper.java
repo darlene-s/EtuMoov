@@ -9,7 +9,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import AffichageCours.Rappels.Rappel;
 import BD_Utilisateur.Models_Cours.Cours;
 import BD_Utilisateur.Models_Utilisateur.Navigation;
 import BD_Utilisateur.Models_Utilisateur.Planning;
@@ -367,19 +366,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return cours;
     }
 
-    public ArrayList<Rappel> getRappels() {
-        ArrayList<Rappel> rappels = new ArrayList<>();
-        String strSql = "SELECT * FROM T_Rappel";
+    public String getLien() {
+        String result = null;
+
+        String strSql = "SELECT * FROM T_Lien";
         Cursor cursor = this.getReadableDatabase().rawQuery(strSql, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            Rappel rappel = new Rappel(cursor.getString(1), cursor.getString(2), cursor.getString(3));
-            rappels.add(rappel);
+            result = cursor.getString(1);
             cursor.moveToNext();
         }
         cursor.close();
 
-        return rappels;
+        return result;
     }
 
     /*
@@ -398,6 +397,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void SuppRappel(String titre) {
         String strSQL = "DELETE FROM T_Rappel WHERE Titre ='" + titre + "'";
         this.getWritableDatabase().execSQL(strSQL);
+    }
+
+    public void deleteCours() {
+        this.getWritableDatabase().execSQL("DELETE FROM T_Cours");
     }
 
     public boolean isLienEmpty() {

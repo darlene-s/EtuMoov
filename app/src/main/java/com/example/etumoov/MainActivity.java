@@ -2,6 +2,7 @@ package com.example.etumoov;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import AffichageCours.Classes.CalendarJour;
 import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
 import BD_Utilisateur.Models_Utilisateur.Utilisateur;
 
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         regPassword = findViewById(R.id.reg_password);
         text = findViewById(R.id.textView);
         regBtn = findViewById(R.id.reg_btn);
-        //regToLoginBtn = findViewById(R.id.reg_login_btn);
+        regToLoginBtn = findViewById(R.id.reg_login_btn);
         //text.setText(db.getUtilisateur(1).getPrenom());
 
         regBtn.setOnClickListener(new View.OnClickListener() {
@@ -48,5 +50,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         db.close();
+        regToLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CalendarJour.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
