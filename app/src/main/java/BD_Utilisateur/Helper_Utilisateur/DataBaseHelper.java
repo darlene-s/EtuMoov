@@ -371,6 +371,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return cours;
     }
 
+    public String getLien() {
+        String result = null;
+
+        String strSql = "SELECT * FROM T_Lien";
+        Cursor cursor = this.getReadableDatabase().rawQuery(strSql, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            result = cursor.getString(1);
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return result;
+    }
+
     public ArrayList<Rappel> getRappels() {
         ArrayList<Rappel> rappels = new ArrayList<>();
         String strSql = "SELECT * FROM T_Rappel";
