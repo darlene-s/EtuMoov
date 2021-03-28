@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import AffichageCours.Classes.CalendarJour;
+import AffichageCours.Rappels.Rappels_Affichage;
 import jeu.calcul.CalculActivity;
 import jeu.clicker.ClickerActivity;
 import jeu.memory.Memory;
@@ -17,20 +19,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void salut(View view){
-        startActivity(new Intent(getApplicationContext(), Memory.class));
-        finish();
-    }
-    public void pouet(View view){
-        startActivity(new Intent(getApplicationContext(), CalculActivity.class));
+    public void onClick1(View view){
+        startActivity(new Intent(getApplicationContext(), CalendarJour.class));
         finish();
     }
 
-    public void Panda(View view){
-        startActivity(new Intent(getApplicationContext(), ClickerActivity.class));
+    public void onClick2(View view){
+        startActivity(new Intent(getApplicationContext(), Rappels_Affichage.class));
         finish();
     }
-
 
 
 }

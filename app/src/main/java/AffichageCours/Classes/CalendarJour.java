@@ -45,10 +45,6 @@ public class CalendarJour extends AppCompatActivity implements View.OnClickListe
     private ListView listView;
     private CoursAdapter mAdapter;
     private ArrayList<Cours> coursList;
-    private List<VEvent> event;
-    private String lienIntent;
-    private String result = "";
-    private BufferedReader reader;
     private DataBaseHelper db;
     private IcsManager ics;
 
