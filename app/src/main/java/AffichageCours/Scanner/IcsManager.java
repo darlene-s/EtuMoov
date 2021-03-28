@@ -1,4 +1,4 @@
-package com.example.etumoov;
+package AffichageCours.Scanner;
 
 import android.content.Context;
 

@@ -28,6 +28,8 @@ import java.util.Calendar;
 
 import AffichageCours.Classes.CalendarJour;
 import AffichageCours.Rappels.Rappels_Affichage;
+import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
+import BD_Utilisateur.Models_Utilisateur.Profil;
 import BD_Utilisateur.Models_Utilisateur.Utilisateur;
 
 public class Connexion_EtuMoov extends AppCompatActivity {
@@ -38,6 +40,7 @@ public class Connexion_EtuMoov extends AppCompatActivity {
     private Button connexionButton;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference reference;
+    private DataBaseHelper db;
     private String userID;
 
     @Override
@@ -53,6 +56,7 @@ public class Connexion_EtuMoov extends AppCompatActivity {
         connexionButton = findViewById(R.id.reg_login_btn);
         connexionInscription = findViewById(R.id.text_inscription);
         connexionForgotPassword = findViewById(R.id.text_mdpOublie);
+        db = new DataBaseHelper(this);
 
         connexionInscription.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,8 +106,11 @@ public class Connexion_EtuMoov extends AppCompatActivity {
                                 Utilisateur user = snapshot.getValue(Utilisateur.class);
                                 if(user != null){
                                     String prenom = user.getPrenom();
+                                    Utilisateur utilisateur = db.getUtilisateur(user.getEmail());
                                     Toast.makeText(Connexion_EtuMoov.this, "Connexion réussie ! Bienvenue " + prenom + " !" , Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(getApplicationContext(), Rappels_Affichage.class));
+                                    Intent intent = new Intent(getApplicationContext(), Rappels_Affichage.class);
+                                    intent.putExtra("ID_Utilisateur", utilisateur.getId_user());
+                                    startActivity(intent);
                                     finish();
                                 } else {
                                     Toast.makeText(Connexion_EtuMoov.this, " Votre email ou mot de passe est invalide", Toast.LENGTH_SHORT).show();

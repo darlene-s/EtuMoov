@@ -245,9 +245,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     /*
     Partie concernant la récupération d'une ligne spécifique d'une table de la BD
      */
-    public Utilisateur getUtilisateur(int id) {
+    public Utilisateur getUtilisateur(String email) {
         try {
-            String strSQL = "SELECT *FROM Utilisateur where id_user =" + id;
+            String strSQL = "SELECT *FROM Utilisateur where email  =" + email;
             Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
             if (cursor.moveToFirst()) {
                 do {
@@ -263,7 +263,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public Profil getProfil(int id) {
         try {
-            String strSQL = "SELECT *FROM Profil WHERE id_profil =" + id;
+            String strSQL = "SELECT *FROM Profil WHERE id_user =" + id;
             Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
             if (cursor.moveToFirst()) {
                 do {

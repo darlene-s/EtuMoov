@@ -1,4 +1,4 @@
-package com.example.etumoov;
+package AffichageCours.Scanner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,7 @@ import android.view.View;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
+import com.example.etumoov.R;
 import com.google.zxing.Result;
 
 import AffichageCours.Classes.CalendarJour;

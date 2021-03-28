@@ -18,7 +18,7 @@
         <!-- NavBar -->
         <!-- <activity android:name=".MainActivity"/> -->
         <!-- Activité EDT -->
-        <activity android:name=".ScannerActivity"/>
+        <activity android:name="AffichageCours.Scanner.ScannerActivity"/>
         <activity android:name=".MainActivity"/>
         <activity android:name="AffichageCours.Rappels.Rappels_Affichage"/>
         <activity android:name="AffichageCours.Rappels.AjoutRappel"/>

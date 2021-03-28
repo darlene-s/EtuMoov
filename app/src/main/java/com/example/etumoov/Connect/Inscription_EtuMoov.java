@@ -19,12 +19,16 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
+import BD_Utilisateur.Models_Utilisateur.Profil;
 import BD_Utilisateur.Models_Utilisateur.Utilisateur;
 
 public class Inscription_EtuMoov extends AppCompatActivity {
     private EditText regNom, regPrenom, regEmail, regPassword;
     private TextView regLogin;
     private Button regBtn;
+    private Utilisateur user;
+    private DataBaseHelper db;
     private FirebaseAuth firebaseAuth;
     private String nom, prenom, email, password;
 
@@ -40,7 +44,7 @@ public class Inscription_EtuMoov extends AppCompatActivity {
         regBtn = findViewById(R.id.reg_btn);
         regLogin = findViewById(R.id.reg_login_btn);
         //progressBar.setVisibility(View.GONE);
-
+        db = new DataBaseHelper(this);
         firebaseAuth = FirebaseAuth.getInstance();
 
         regLogin.setOnClickListener(new View.OnClickListener() {
@@ -82,21 +86,25 @@ public class Inscription_EtuMoov extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Utilisateur user = new Utilisateur(nom, prenom, email, password);
-
+                            Utilisateur utilisateur = new Utilisateur(nom, prenom, email, password);
                             FirebaseDatabase.getInstance().getReference("Utilisateur")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    .setValue(utilisateur).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
+                                        db.insertUser(utilisateur);
+                                        user = db.getUtilisateur(utilisateur.getEmail());
+                                        db.insertProfil(new Profil(0, 0, 0, "", "", user.getId_user()));
                                         Toast.makeText(Inscription_EtuMoov.this, "Nouvel utilisateur créé avec succès", Toast.LENGTH_SHORT).show();
                                     } else {
                                         Toast.makeText(Inscription_EtuMoov.this, "Erreur lors de l'inscription. Veuillez réessayer", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent.putExtra("ID_Utilisateur", user.getId_user());
+                            startActivity(intent);
                             finish();
                         } else {
                             Toast.makeText(Inscription_EtuMoov.this, "Erreur lors de l'inscription. Veuillez réessayer", Toast.LENGTH_SHORT).show();
