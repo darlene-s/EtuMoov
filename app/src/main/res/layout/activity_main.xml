@@ -65,8 +65,11 @@
         android:id="@+id/imageView2"
         android:layout_width="346dp"
         android:layout_height="460dp"
-        app:srcCompat="@drawable/ic_accueilbas"
-        tools:layout_editor_absoluteX="215dp"
-        tools:layout_editor_absoluteY="478dp" />
+        android:layout_marginStart="200dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="480dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_accueilbas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
