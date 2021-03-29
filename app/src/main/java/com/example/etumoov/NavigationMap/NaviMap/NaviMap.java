@@ -580,13 +580,13 @@ public class NaviMap extends FragmentActivity implements OnMapReadyCallback {
      * Fonction getUrl
      * Récupère l'url nécessaire pour l'api Google Maps Directions
      */
-    private String getUrl(LatLng origin, LatLng dest, String directionMode) {
+    private String getUrl(LatLng origin, LatLng dest) {
         // Origin of route
         String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
         // Destination of route
         String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
         // Mode
-        String mode = "mode=" + directionMode;
+        String mode = "transit_mode=" + "rail";
         // Building the parameters to the web service
         String parameters = str_origin + "&" + str_dest + "&" + mode;
         // Output format
