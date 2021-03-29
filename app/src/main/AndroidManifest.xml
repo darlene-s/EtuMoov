@@ -15,8 +15,8 @@
         android:roundIcon="@drawable/ic_logoetumoov"
         android:supportsRtl="true"
         android:theme="@style/Theme.EtuMoov">
-        <activity android:name="Meteo.cityFinder"></activity>
-        <activity android:name="Meteo.MeteoActivity" /> <!-- NavBar -->
+        <activity android:name="Meteo.MeteoActivity"></activity>
+        <activity android:name="AffichageCours.Rappels.Rappels_Affichage" /> <!-- NavBar -->
         <!-- <activity android:name=".MainActivity"/> -->
         <!-- Activité EDT -->
         <activity android:name=".ScannerActivity" />
@@ -30,7 +30,7 @@
         <activity android:name="jeu.clicker.ClickerActivity" />
         <activity android:name="jeu.calcul.CalculActivity" />
         <activity android:name="jeu.memory.Memory" /> <!-- Activité principale :) -->
-        <activity android:name="AffichageCours.Rappels.Rappels_Affichage">
+        <activity android:name="Meteo.cityFinder">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

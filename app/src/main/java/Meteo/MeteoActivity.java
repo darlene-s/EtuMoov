@@ -87,6 +87,7 @@ public class MeteoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MeteoActivity.this, cityFinder.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

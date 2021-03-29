@@ -19,7 +19,7 @@ public class cityFinder extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city_finder);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final EditText editText=findViewById(R.id.searchCity);
 
@@ -28,7 +28,7 @@ public class cityFinder extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 String newCity = editText.getText().toString();
                 Intent intent = new Intent(cityFinder.this,MeteoActivity.class);
-                intent.putExtra("City",newCity);
+                intent.putExtra("City", newCity);
                 startActivity(intent);
                 return false;
             }
