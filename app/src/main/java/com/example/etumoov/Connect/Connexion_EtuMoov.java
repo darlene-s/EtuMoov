@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.etumoov.MainActivity;
+import com.example.etumoov.ProfilActivity;
 import com.example.etumoov.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -93,7 +94,7 @@ public class Connexion_EtuMoov extends AppCompatActivity {
                             Utilisateur utilisateur = db.getUtilisateurbyEmail(user.getEmail());
                             Toast.makeText(Connexion_EtuMoov.this, "Connexion réussie ! Bienvenue " + prenom + " !" , Toast.LENGTH_LONG).show();
                             db.close();
-                            Intent intent = new Intent(getApplicationContext(), CalendarJour.class);
+                            Intent intent = new Intent(getApplicationContext(), ProfilActivity.class);
                             intent.putExtra("ID_Utilisateur", utilisateur.getId_user());
                             startActivity(intent);
                             finish();
@@ -115,7 +116,7 @@ public class Connexion_EtuMoov extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(), CalendarJour.class));
+            startActivity(new Intent(getApplicationContext(), Profil.class));
         }
     }
 }

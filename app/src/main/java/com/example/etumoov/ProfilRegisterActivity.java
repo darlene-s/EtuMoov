@@ -35,7 +35,9 @@ public class ProfilRegisterActivity extends AppCompatActivity {
                 tps_prepa.setError("Le champ est vide");
             Utilisateur user = db.getUtilisateurbyId(id);
             db.insertProfil(new Profil(Double.parseDouble(vTps_P), Double.parseDouble(vTps_S), 0, "", "", user.getId_user()));
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            Intent nextIntent = new Intent(getApplicationContext(), ProfilActivity.class);
+            nextIntent.putExtra("ID_Utilisateur", user.getId_user());
+            startActivity(nextIntent);
             finish();
         });
     }
