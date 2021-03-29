@@ -70,10 +70,13 @@ public class Inscription_EtuMoov extends AppCompatActivity {
             else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 regEmail.setError("Email invalide");
             }
-
             else if (password.isEmpty()) {
                 regPassword.setError("Mot de passe manquant");
             }
+            else if(password.matches("[0-9]+"))
+                regPassword.setError("Votre mot de passe ne peut pas contenir que des chiffres");
+            else if(password.matches("[a-zA-Z]+"))
+                regPassword.setError("Votre mot de passe ne peut pas contenir que des lettres");
             else {
                 firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
