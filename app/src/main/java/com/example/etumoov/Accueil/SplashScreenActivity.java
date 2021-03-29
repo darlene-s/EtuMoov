@@ -56,7 +56,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("Settings", AuthentificationMain.MODE_PRIVATE);
         String language = prefs.getString("My_Lang", "");
         setLocale(language);
-        Toast.makeText(SplashScreenActivity.this, language, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(SplashScreenActivity.this, language, Toast.LENGTH_SHORT).show();
     }
 
     private void setLangue(String value){

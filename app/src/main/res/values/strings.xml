@@ -66,6 +66,7 @@
     <!-- ============== Liste des rappels ============== -->
 
     <string name="txt_listerappel">Liste des choses à faire : </string>
+    <string name="langue_app">Français</string>
 
     <!--  ============== Météo ============== -->
 
