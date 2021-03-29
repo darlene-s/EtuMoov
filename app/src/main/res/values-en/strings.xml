@@ -73,6 +73,11 @@
     <string name="nouv_ville">Trouver une nouvelle ville !</string>
     <string name="entr_ville">Entrez le nom de la ville</string>
 
+    <string name="txt_tps_preparation">Votre temps de préparation : </string>
+    <string name="txt_tps_supplementaire">Votre temps supplémentaire :</string>
+    <string name="txt_score_jeu">Votre meilleur score sur les jeux : </string>
+    <string name="btn_deco">Déconnexion</string>
+
     <!-- ============== Navigation ============== -->
     <!-- ============== Réveil ============== -->
     <!-- ============== Générale ============== -->
