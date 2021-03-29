@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_profil"/>
     <item
         android:id="@+id/reveil"
-        android:title="@string/label_edt"
+        android:title="@string/label_reveil"
         android:icon="@drawable/ic_reveil"/>
     <item
         android:id="@+id/meteo"
@@ -16,6 +16,10 @@
         android:id="@+id/navigation"
         android:title="@string/label_MoovinTime"
         android:icon="@drawable/ic_navigation"/>
+    <item
+        android:id="@+id/emploiDuTps"
+        android:title="@string/label_edt"
+        android:icon="@drawable/ic_edt"/>
 
 
 </menu>

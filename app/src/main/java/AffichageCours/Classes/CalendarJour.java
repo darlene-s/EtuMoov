@@ -3,6 +3,7 @@ package AffichageCours.Classes;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -11,10 +12,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import AffichageCours.Scanner.IcsManager;
+
+import com.example.etumoov.Profil.ProfilActivity;
 import com.example.etumoov.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import AffichageCours.Scanner.ScannerActivity;
 
 import java.io.IOException;
@@ -28,6 +34,8 @@ import java.util.Date;
 
 import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
 import BD_Utilisateur.Models_Cours.Cours;
+import BD_Utilisateur.Models_Utilisateur.Profil;
+import Meteo.MeteoActivity;
 
 public class CalendarJour extends AppCompatActivity implements View.OnClickListener {
 
@@ -81,6 +89,35 @@ public class CalendarJour extends AppCompatActivity implements View.OnClickListe
             public void onClick(View v) {
                 createListView();
                 Toast.makeText(getApplicationContext(), "Mise à jour réussie", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setSelectedItemId(R.id.meteo);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.reveil:
+                        startActivity(new Intent(getApplicationContext(),  ProfilActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.profil:
+                        startActivity(new Intent(getApplicationContext(), ProfilActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.emploiDuTps:
+                        return true;
+                    case R.id.navigation:
+                        startActivity(new Intent(getApplicationContext(), CalendarJour.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.meteo:
+                        startActivity(new Intent(getApplicationContext(), MeteoActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                }
+                return false;
             }
         });
     }

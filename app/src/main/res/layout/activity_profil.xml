@@ -12,7 +12,7 @@
         android:layout_height="39dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="132dp"
-        android:text="Votre temps de préparation :"
+        android:text="@string/txt_tps_preparation"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,7 +23,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="272dp"
         android:layout_marginTop="132dp"
-        android:text="TextView"
+        android:text="@string/label_img"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,7 +33,7 @@
         android:layout_height="37dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="320dp"
-        android:text="Votre temps de préparation supplémentaire"
+        android:text="@string/txt_tps_supplémentaire"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +44,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="272dp"
         android:layout_marginTop="320dp"
-        android:text="TextView"
+        android:text="@string/label_img"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -54,7 +54,7 @@
         android:layout_height="29dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="472dp"
-        android:text="Votre meilleur score aux jeux"
+        android:text="@string/txt_score_jeu"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -65,7 +65,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="272dp"
         android:layout_marginTop="472dp"
-        android:text="TextView"
+        android:text="@string/label_img"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -74,11 +74,26 @@
         android:id="@+id/btn_deconnexion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:text="Déconnexion"
+        android:text="@string/btn_deco"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.683" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottom_nav"
+            app:itemBackground="@color/dark_blue"
+            app:itemTextColor="@drawable/selector"
+            app:itemIconTint="@drawable/selector"
+            app:menu="@menu/menu_nav"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
