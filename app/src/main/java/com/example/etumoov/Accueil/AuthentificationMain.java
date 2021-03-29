@@ -2,8 +2,11 @@ package com.example.etumoov.Accueil;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +22,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Locale;
+
 import BD_Utilisateur.Models_Utilisateur.Profil;
+import Paramètres.SettingsActivity;
 
 public class AuthentificationMain extends AppCompatActivity {
 
@@ -52,7 +58,6 @@ public class AuthentificationMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentification_main);
-
         btn_inscrire = findViewById(R.id.btn_inscrire);
         btn_connect = findViewById(R.id.btn_authentification);
 
@@ -72,4 +77,5 @@ public class AuthentificationMain extends AppCompatActivity {
             }
         });
     }
+    
 }
