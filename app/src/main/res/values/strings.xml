@@ -16,7 +16,7 @@
     <string name="afficher_l_itinéraire">Afficher l\'itinéraire</string>
     <string name="afficher_temps">Afficher temps</string>
     <string name="btn_carte">Carte</string>
-    <string name="btn_distance">Distance</string>
+    <string name="btn_distance">Calcul du temps de trajet</string>
     <string name="label_img">Image</string>
     <string name="mon_tablissement">Mon établissement :</string>
     <string name="obtenez_votre_temps_de_trajet">Obtenez votre temps de trajet !</string>

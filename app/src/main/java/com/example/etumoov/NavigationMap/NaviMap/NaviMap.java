@@ -126,6 +126,8 @@ public class NaviMap extends FragmentActivity implements OnMapReadyCallback {
 
     private Polyline currentPolyline;
 
+    private APIGoogleDistance api;
+
     /**
      * Fonction onCreate() de base qui représente une étape du cycle de vie de l'activité
      * Initialisation de l'activité MapsActivityUniversity
@@ -143,6 +145,7 @@ public class NaviMap extends FragmentActivity implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        api = new APIGoogleDistance();
 
         if (!Places.isInitialized()) {
             Places.initialize(getApplicationContext(), "AIzaSyAzsTP2GsxOFNjy-PUN0De5qWjn-0-Wvn4");

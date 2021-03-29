@@ -11,15 +11,14 @@
         android:id="@+id/btn_tram"
         android:layout_width="136dp"
         android:layout_height="154dp"
-        android:layout_marginTop="599dp"
         android:layout_marginBottom="76dp"
-        android:background="@color/material_on_surface_stroke"
         android:contentDescription="@string/btn_description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.836"
+        app:layout_constraintHorizontal_bias="0.847"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/moov_in_time1"
+        app:layout_constraintVertical_bias="0.833"
         app:srcCompat="@drawable/btn_tram" />
 
     <ImageButton
@@ -28,14 +27,14 @@
         android:layout_height="153dp"
         android:layout_marginStart="42dp"
         android:layout_marginLeft="42dp"
-        android:layout_marginTop="600dp"
         android:layout_marginBottom="76dp"
-        android:background="@color/material_on_surface_stroke"
         android:contentDescription="@string/btn_bus"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_tram"
+        app:layout_constraintHorizontal_bias="0.277"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/moov_in_time1"
+        app:layout_constraintVertical_bias="0.829"
         app:srcCompat="@drawable/btn_bus" />
 
     <Button
@@ -50,8 +49,10 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.706"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_tram" />
+        app:layout_constraintTop_toTopOf="@+id/moov_in_time1"
+        app:layout_constraintVertical_bias="0.156" />
 
     <ImageButton
         android:id="@+id/btn_rer"
@@ -60,14 +61,14 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="42dp"
         android:layout_marginLeft="42dp"
-        android:layout_marginTop="419dp"
         android:layout_marginBottom="28dp"
-        android:background="@color/material_on_surface_stroke"
         android:contentDescription="@string/btn_rer"
         app:layout_constraintBottom_toTopOf="@+id/btn_bus"
         app:layout_constraintEnd_toStartOf="@+id/btn_metro"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/moov_in_time1"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/btn_rer" />
 
     <Button
@@ -82,8 +83,10 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.402"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_bus" />
+        app:layout_constraintTop_toTopOf="@+id/moov_in_time1"
+        app:layout_constraintVertical_bias="0.156" />
 
     <ImageButton
         android:id="@+id/btn_metro"
@@ -91,48 +94,39 @@
         android:layout_height="154dp"
         android:layout_marginStart="212dp"
         android:layout_marginLeft="212dp"
-        android:layout_marginTop="417dp"
         android:layout_marginEnd="42dp"
         android:layout_marginRight="42dp"
         android:layout_marginBottom="28dp"
-        android:background="@color/material_on_surface_stroke"
         android:contentDescription="@string/btn_rer"
         app:layout_constraintBottom_toTopOf="@+id/btn_tram"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/btn_metro" />
 
-    <RelativeLayout
-        android:id="@+id/map"
+    <ImageView
+        android:id="@+id/moov_in_time1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="16dp">
-
-        <ImageView
-            android:id="@+id/moov_in_time1"
-            android:layout_width="match_parent"
-            android:layout_height="426dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="-16dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginBottom="16dp"
-            android:contentDescription="@string/label_img"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/moov_in_time1" />
-
-    </RelativeLayout>
-
+        android:layout_height="261dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="-3dp"
+        android:layout_marginLeft="-3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginRight="3dp"
+        android:contentDescription="@string/label_img"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/moov_in_time1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
