@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Accueil.SplashScreenActivity"
+    android:background="@color/dark_blue">
+
+    <ImageView
+        android:id="@+id/ic_sphere_rouge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.385"
+        app:srcCompat="@drawable/ic_boulette"
+        android:contentDescription="@string/label_img"/>
+
+    <ImageView
+        android:id="@+id/ic_etudiants"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:contentDescription="@string/label_img"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ic_sphere_rouge"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_diplome" />
+
+    <ImageView
+        android:id="@+id/ic_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/label_img"
+        app:layout_constraintBottom_toBottomOf="@+id/ic_sphere_rouge"
+        app:layout_constraintEnd_toEndOf="@+id/ic_sphere_rouge"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="@+id/ic_sphere_rouge"
+        app:layout_constraintTop_toTopOf="@+id/ic_sphere_rouge"
+        app:layout_constraintVertical_bias="0.745"
+        app:srcCompat="@drawable/ic_logoetumoov" />
+
+    <ImageView
+        android:id="@+id/ic_EtuMoov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/ic_etudiants"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ic_sphere_rouge"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/txt_etumoov"
+        android:contentDescription="@string/label_img"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/ic_etudiants"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ic_EtuMoov" />
+</androidx.constraintlayout.widget.ConstraintLayout>

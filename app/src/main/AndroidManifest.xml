@@ -2,14 +2,40 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.etumoov">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_logoetumoov"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_logoetumoov"
         android:supportsRtl="true"
-        android:theme="@style/Theme.EtuMoov">
-        <activity android:name=".MainActivity">
+        android:theme="@style/Theme.EtuMoov"
+        android:usesCleartextTraffic="true">
+        <activity android:name="Meteo.cityFinder"/>
+        <activity android:name="Meteo.MeteoActivity" />
+        <activity android:name=".Profil.ProfilActivity" />
+        <activity android:name=".Profil.ProfilRegisterActivity" /> <!-- NavBar -->
+        <!-- <activity android:name=".MainActivity"/> -->
+        <!-- Activité EDT -->
+        <activity android:name="AffichageCours.Scanner.ScannerActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name="AffichageCours.Rappels.Rappels_Affichage" />
+        <activity android:name="AffichageCours.Rappels.AjoutRappel" />
+        <activity android:name="AffichageCours.Classes.CalendarJour" /> <!-- Activité Connexion -->
+        <activity android:name=".Connect.Connexion_EtuMoov" />
+        <activity android:name=".Connect.ForgotPassword_EtuMoov" />
+        <activity android:name="Paramètres.SettingsActivity" />
+        <activity android:name=".Connect.Inscription_EtuMoov" /> <!-- Activité jeux -->
+        <activity android:name="jeu.clicker.ClickerActivity" />
+        <activity android:name="jeu.calcul.CalculActivity" />
+        <activity android:name=".Accueil.AuthentificationMain"/>
+        <activity android:name="jeu.memory.Memory" />
+        <!-- Activité principale :) -->
+        <activity android:name=".Accueil.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,50 +1,43 @@
 package com.example.etumoov;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 
-import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
+import AffichageCours.Classes.CalendarJour;
+import AffichageCours.Rappels.Rappels_Affichage;
+import Paramètres.SettingsActivity;
+import jeu.calcul.CalculActivity;
+import jeu.clicker.ClickerActivity;
+import jeu.memory.Memory;
+/* main temporaire */
 public class MainActivity extends AppCompatActivity {
-
-    EditText regNom, regPrenom, regEmail, regPassword;
-    Button regBtn, regToLoginBtn;
-
-    FirebaseDatabase rootNode;
-    DatabaseReference reference;
-
+    private TextView txt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
 
-        regNom = findViewById(R.id.reg_nom);
-        regPrenom = findViewById(R.id.reg_prenom);
-        regEmail = findViewById(R.id.reg_email);
-        regPassword = findViewById(R.id.reg_password);
-        regBtn = findViewById(R.id.reg_btn);
-        //regToLoginBtn = findViewById(R.id.reg_login_btn);
+    public void onClick1(View view){
+        startActivity(new Intent(getApplicationContext(), CalendarJour.class));
+        finish();
+    }
 
-        regBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String nom = regNom.getText().toString();
-                rootNode = FirebaseDatabase.getInstance();
-                reference = rootNode.getReference("Utilisateur");
-                String prenom = regPrenom.getText().toString();
-                String email = regEmail.getText().toString();
-                String password = regPassword.getText().toString();
-                UserHelp helperClass = new UserHelp(nom, prenom, email, password);
+    public void onClick2(View view){
+        startActivity(new Intent(getApplicationContext(), Rappels_Affichage.class));
+        finish();
+    }
 
-                reference.child(email).setValue(helperClass);
-            }
-        });
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+        startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
     }
 }
