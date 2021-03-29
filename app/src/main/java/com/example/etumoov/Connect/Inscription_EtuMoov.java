@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.etumoov.MainActivity;
+import com.example.etumoov.ProfilActivity;
 import com.example.etumoov.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -92,7 +93,7 @@ public class Inscription_EtuMoov extends AppCompatActivity {
                             }
                         });
                         db.close();
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), ProfilActivity.class);
                         intent.putExtra("ID_Utilisateur", user.getId_user());
                         startActivity(intent);
                         finish();
