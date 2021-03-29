@@ -24,7 +24,8 @@ public class ProfilActivity extends AppCompatActivity {
         db = new DataBaseHelper(this);
 
         Intent intent = getIntent();
-        int id = intent.getIntExtra("Id_Utilisateur", 0);
+        String str = intent.getStringExtra("ID_Utilisateur");
+        int id = Integer.parseInt(str);
         Profil profil = db.getProfil(id);
 
         textTps_p.setText(String.valueOf(profil.getTps_preparation()));

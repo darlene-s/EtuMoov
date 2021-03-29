@@ -30,6 +30,7 @@ public class Inscription_EtuMoov extends AppCompatActivity {
     private EditText regNom, regPrenom, regEmail, regPassword;
     private TextView regLogin;
     private Button regBtn;
+    private Utilisateur user;
     private DataBaseHelper db;
     private FirebaseAuth firebaseAuth;
     private String nom, prenom, email, password;
@@ -91,12 +92,11 @@ public class Inscription_EtuMoov extends AppCompatActivity {
                                         if(!db.UserExist(email))
                                             db.insertUser(utilisateur);
                                         Toast.makeText(Inscription_EtuMoov.this, "Nouvel utilisateur créé avec succès", Toast.LENGTH_SHORT).show();
-                                         Utilisateur user = db.getUtilisateurbyEmail(utilisateur.getEmail());
-                                        //db.insertProfil(new Profil(0, 0, 0, "", "", user.getId_user()));
-                                        db.close();
+                                        user = db.getUtilisateurbyEmail(utilisateur.getEmail());
                                         Intent intent = new Intent(getApplicationContext(), ProfilRegisterActivity.class);
-                                        intent.putExtra("ID_Utilisateur", user.getId_user());
+                                        intent.putExtra("ID_Utilisateur", String.valueOf(user.getId_user()));
                                         startActivity(intent);
+                                        db.close();
                                         finish();
                                     } else {
                                         Toast.makeText(Inscription_EtuMoov.this, "Erreur lors de l'inscription. Veuillez réessayer", Toast.LENGTH_SHORT).show();
