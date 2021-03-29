@@ -54,6 +54,10 @@ dependencies {
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'uk.co.chrisjenx:calligraphy:2.3.0'
 
+    //Meteo
+    implementation 'com.loopj.android:android-async-http:1.4.11'
+
+
 }
 
 apply plugin: 'com.google.gms.google-services'

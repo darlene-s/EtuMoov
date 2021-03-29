@@ -67,6 +67,13 @@
 
     <string name="txt_listerappel">Liste des choses à faire : </string>
 
+    <!--  ============== Météo ============== -->
+
+    <string name="degre">Veuillez Patienter</string>
+    <string name="nouv_ville">Trouver une nouvelle ville !</string>
+    <string name="entr_ville">Entrez le nom de la ville</string>
+
+
 
     <!-- ============== Navigation ============== -->
     <!-- ============== Réveil ============== -->
