@@ -30,6 +30,7 @@ public class TravelTime extends AppCompatActivity {
     private Button btn_valide;
     private APIGoogleDistance api;
     private TextView duree;
+    private long sec, minutes, hours, days;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +68,16 @@ public class TravelTime extends AppCompatActivity {
             public void onClick(View v) {
                 String res;
                 res = api.getTravelTime(numero.getText() + " " + rue.getText() + "," + codePostal.getText(), numero2.getText() + " " + rue2.getText() + "," + codePostal2.getText());
-                duree.setText(res);
+                calculateTime(Long.parseLong(res));
+                duree.setText(hours + " heures " + minutes + " minutes");
             }
         });
+    }
+
+    public void calculateTime(long seconds) {
+        sec = seconds % 60;
+        minutes = seconds % 3600 / 60;
+        hours = seconds % 86400 / 3600;
     }
 }
 

@@ -37,7 +37,7 @@ public class APIGoogleDistance {
                             for (int j = 0; j < array.length(); j++) {
                                 JSONObject jsonobject2 = array.getJSONObject(j);
                                 JSONObject jsonobject3 = jsonobject2.getJSONObject("duration");
-                                schedule[0] += jsonobject3.getString("text");
+                                schedule[0] += jsonobject3.getString("value");
                             }
                         }
                         countDownLatch.countDown();
