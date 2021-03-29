@@ -2,6 +2,7 @@ package com.example.etumoov.Connect;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -68,7 +69,7 @@ public class Inscription_EtuMoov extends AppCompatActivity {
                 regEmail.setError("Email manquant");
             }
 
-            else if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 regEmail.setError("Email invalide");
             }
 
