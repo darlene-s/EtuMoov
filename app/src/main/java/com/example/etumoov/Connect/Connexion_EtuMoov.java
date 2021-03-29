@@ -93,10 +93,11 @@ public class Connexion_EtuMoov extends AppCompatActivity {
                                 db.insertUser(user);
                             Utilisateur utilisateur = db.getUtilisateurbyEmail(user.getEmail());
                             Toast.makeText(Connexion_EtuMoov.this, "Connexion réussie ! Bienvenue " + prenom + " !" , Toast.LENGTH_LONG).show();
-                            db.close();
                             Intent intent = new Intent(getApplicationContext(), ProfilActivity.class);
-                            //intent.putExtra("ID_Utilisateur", utilisateur.getId_user());
+                            intent.putExtra("ID_Utilisateur", String.valueOf(utilisateur.getId_user()));
+                            intent.putExtra("clé", FirebaseAuth.getInstance().getCurrentUser().getUid());
                             startActivity(intent);
+                            db.close();
                             finish();
                         } else {
                             Toast.makeText(Connexion_EtuMoov.this, " Votre email ou mot de passe est invalide", Toast.LENGTH_SHORT).show();
@@ -110,13 +111,5 @@ public class Connexion_EtuMoov extends AppCompatActivity {
                 });
             });
         });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(), Profil.class));
-        }
     }
 }

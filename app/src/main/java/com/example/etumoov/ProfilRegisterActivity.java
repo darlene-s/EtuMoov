@@ -37,6 +37,7 @@ public class ProfilRegisterActivity extends AppCompatActivity {
         db = new DataBaseHelper(this);
         Intent intent = getIntent();
         String str = intent.getStringExtra("ID_Utilisateur");
+        String cle = intent.getStringExtra("clé");
         int id = Integer.parseInt(str);
         btn_creation.setOnClickListener(v -> {
             String vTps_P = tps_prepa.getText().toString();
@@ -45,11 +46,11 @@ public class ProfilRegisterActivity extends AppCompatActivity {
                 tps_prepa.setError("Le champ est vide");
             else {
                 Utilisateur user = db.getUtilisateurbyId(id);
-                Profil profil = new Profil(Double.parseDouble(vTps_P), Double.parseDouble(vTps_S), 0, "", "", user.getId_user());
+                Profil profil = new Profil(Integer.parseInt(vTps_P), Integer.parseInt(vTps_S), 0, "", "", user.getId_user());
                 if (profil != null){
-                    FirebaseDatabase.getInstance().getReference("Profil").child(String.valueOf(user.getId_user())).setValue(profil);
-                    Toast.makeText(ProfilRegisterActivity.this, "Profil enregistré", Toast.LENGTH_LONG).show();
+                    FirebaseDatabase.getInstance().getReference("Profil").child(cle).setValue(profil);
                     db.insertProfil(profil);
+                    Toast.makeText(ProfilRegisterActivity.this, "Profil enregistré", Toast.LENGTH_LONG).show();
                     Intent nextIntent = new Intent(getApplicationContext(), ProfilActivity.class);
                     nextIntent.putExtra("ID_Utilisateur", String.valueOf(user.getId_user()));
                     startActivity(nextIntent);

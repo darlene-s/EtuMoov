@@ -95,6 +95,7 @@ public class Inscription_EtuMoov extends AppCompatActivity {
                                         user = db.getUtilisateurbyEmail(utilisateur.getEmail());
                                         Intent intent = new Intent(getApplicationContext(), ProfilRegisterActivity.class);
                                         intent.putExtra("ID_Utilisateur", String.valueOf(user.getId_user()));
+                                        intent.putExtra("clé", FirebaseAuth.getInstance().getCurrentUser().getUid());
                                         startActivity(intent);
                                         db.close();
                                         finish();

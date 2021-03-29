@@ -129,6 +129,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void deleteCours() {
         this.getWritableDatabase().execSQL("DELETE FROM T_Cours");
     }
+    public void deleteDataUser(){
+        this.getWritableDatabase().execSQL("DELETE FROM Utilisateur");
+        this.getWritableDatabase().execSQL("DELETE FROM Profil");
+        this.getWritableDatabase().execSQL("DELETE FROM Navigation");
+    }
 
     /*
     * Partie permettant de pouvoir vider complètement la table contenant les cours
@@ -184,13 +189,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void insertProfil(Profil profil) {
         try {
             String strSQL = "insert into " + T_Profil
-                    + "(tps_preparation, tps_suppl, id_user) VALUES ('"
-                    + profil.getTps_preparation() + "',"
-                    + profil.getTps_supplementaires() + "',"
-                    + profil.getScore() + "',"
-                    + profil.getTimerMemory() + "',"
+                    + "(tps_preparation, tps_suppl, score, timerMemory, timerCookie, id_user) VALUES ("
+                    + profil.getTps_preparation() + ","
+                    + profil.getTps_supplementaires() + ","
+                    + profil.getScore() + ",'"
+                    + profil.getTimerMemory() + "','"
                     + profil.getTimerCookie() + "',"
-                    + profil.getId_user() + "')";
+                    + profil.getId_user() + ")";
             this.getWritableDatabase().execSQL(strSQL);
         } catch (Exception e) {
             Toast.makeText(mContext, "Erreur dans l'ajout des informations pour le profil dans la base de données", Toast.LENGTH_LONG);
@@ -282,7 +287,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
             if (cursor.moveToFirst()) {
                 do {
-                    return new Profil(cursor.getInt(cursor.getColumnIndex("id_profil")), cursor.getDouble(cursor.getColumnIndex("tps_preparation")), cursor.getDouble(cursor.getColumnIndex("tps_suppl")), cursor.getInt(cursor.getColumnIndex("score")), cursor.getString(cursor.getColumnIndex("timerMemory")), cursor.getString(cursor.getColumnIndex("timerCookie")),  cursor.getInt(cursor.getColumnIndex("id_user")));
+                    return new Profil(cursor.getInt(cursor.getColumnIndex("id_profil")), cursor.getInt(cursor.getColumnIndex("tps_preparation")), cursor.getInt(cursor.getColumnIndex("tps_suppl")), cursor.getInt(cursor.getColumnIndex("score")), cursor.getString(cursor.getColumnIndex("timerMemory")), cursor.getString(cursor.getColumnIndex("timerCookie")),  cursor.getInt(cursor.getColumnIndex("id_user")));
                 } while (cursor.moveToNext());
             }
             cursor.close();
@@ -451,6 +456,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             if (cursor.moveToFirst()) {
                 do {
                     if (cursor.getString(cursor.getColumnIndex("mail")).contentEquals(email))
+                        return true;
+                    else
+                        return false;
+                } while(cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (Exception e) {}
+        return false;
+    }
+
+    public boolean ProfilExist(int id){
+        try {
+            String strSQL = "SELECT *FROM Profil where id_user =" + id;
+            Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    if (cursor.getInt(cursor.getColumnIndex("id_user")) == id)
                         return true;
                     else
                         return false;

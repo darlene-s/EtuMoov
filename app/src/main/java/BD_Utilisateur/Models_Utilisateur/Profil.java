@@ -2,11 +2,11 @@ package BD_Utilisateur.Models_Utilisateur;
 
 public class Profil {
     private int id_profil, id_user, score;
-    private double tps_preparation, tps_supplementaires;
+    private int tps_preparation, tps_supplementaires;
     private String timerMemory, timerCookie;
 
     public Profil(){}
-    public Profil(double tps_p, double tps_s, int score, String timerMemory, String timerCookie, int id_u){
+    public Profil(int tps_p, int tps_s, int score, String timerMemory, String timerCookie, int id_u){
         this.tps_preparation = tps_p;
         this.tps_supplementaires = tps_s;
         this.score = score;
@@ -14,7 +14,7 @@ public class Profil {
         this.timerCookie = timerCookie;
         this.id_user = id_u;
     }
-    public Profil(int id_p, double tps_p, double tps_s, int score, String timerMemory, String timerCookie,  int id_u){
+    public Profil(int id_p, int tps_p, int tps_s, int score, String timerMemory, String timerCookie,  int id_u){
         this.id_profil = id_p;
         this.tps_preparation = tps_p;
         this.tps_supplementaires = tps_s;
@@ -32,7 +32,7 @@ public class Profil {
         this.id_profil = id_profil;
     }
 
-    public double getTps_preparation() {
+    public int getTps_preparation() {
         return tps_preparation;
     }
 
@@ -40,7 +40,7 @@ public class Profil {
         this.tps_preparation = tps_preparation;
     }
 
-    public double getTps_supplementaires() {
+    public int getTps_supplementaires() {
         return tps_supplementaires;
     }
 
