@@ -3,7 +3,6 @@ package com.example.etumoov.Connect;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,8 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.etumoov.MainActivity;
-import com.example.etumoov.ProfilActivity;
-import com.example.etumoov.ProfilRegisterActivity;
+import com.example.etumoov.Profil.ProfilRegisterActivity;
 import com.example.etumoov.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,7 +21,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
-import BD_Utilisateur.Models_Utilisateur.Profil;
 import BD_Utilisateur.Models_Utilisateur.Utilisateur;
 
 public class Inscription_EtuMoov extends AppCompatActivity {

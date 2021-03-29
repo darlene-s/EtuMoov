@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.example.etumoov.Connect.Connexion_EtuMoov;
 import com.example.etumoov.Connect.Inscription_EtuMoov;
-import com.example.etumoov.ProfilActivity;
+import com.example.etumoov.Profil.ProfilActivity;
 import com.example.etumoov.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;

@@ -13,8 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EtuMoov"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ProfilActivity"></activity>
-        <activity android:name=".ProfilRegisterActivity" /> <!-- NavBar -->
+        <activity android:name=".Profil.ProfilActivity"></activity>
+        <activity android:name=".Profil.ProfilRegisterActivity" /> <!-- NavBar -->
         <!-- <activity android:name=".MainActivity"/> -->
         <!-- Activité EDT -->
         <activity android:name="AffichageCours.Scanner.ScannerActivity" />

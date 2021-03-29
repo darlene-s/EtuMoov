@@ -1,4 +1,4 @@
-package com.example.etumoov;
+package com.example.etumoov.Profil;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.etumoov.Accueil.AuthentificationMain;
-import com.example.etumoov.Connect.Connexion_EtuMoov;
+import com.example.etumoov.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,7 +21,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
 import BD_Utilisateur.Models_Utilisateur.Profil;
-import BD_Utilisateur.Models_Utilisateur.Utilisateur;
 
 public class ProfilActivity extends AppCompatActivity {
 
