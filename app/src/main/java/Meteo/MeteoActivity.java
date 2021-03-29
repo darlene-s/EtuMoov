@@ -18,12 +18,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.etumoov.Profil.ProfilActivity;
 import com.example.etumoov.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import org.json.JSONObject;
+
+import AffichageCours.Classes.CalendarJour;
 import cz.msebera.android.httpclient.Header;
 
 public class MeteoActivity extends AppCompatActivity {
@@ -56,7 +59,7 @@ public class MeteoActivity extends AppCompatActivity {
         mCityFinder = findViewById(R.id.cityFinder);
         NameofCity = findViewById(R.id.cityName);
 
-        /* navbar
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.meteo);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -64,11 +67,19 @@ public class MeteoActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.reveil:
-                        startActivity(new Intent(getApplicationContext(), reveil.AlarmActivity.class));
+                        startActivity(new Intent(getApplicationContext(),  MeteoActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.profil:
-                        startActivity(new Intent(getApplicationContext(), application.ProfilActivity.class));
+                        startActivity(new Intent(getApplicationContext(), ProfilActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.emploiDuTps:
+                        startActivity(new Intent(getApplicationContext(), CalendarJour.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.navigation:
+                        startActivity(new Intent(getApplicationContext(), MeteoActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.meteo:
@@ -77,7 +88,7 @@ public class MeteoActivity extends AppCompatActivity {
                 return false;
             }
         });
-*/
+
         mCityFinder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,8 +171,6 @@ public class MeteoActivity extends AppCompatActivity {
             if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(MeteoActivity.this,"Location Succesffully",Toast.LENGTH_SHORT).show();
                 getWeatherForCurrentLocation();
-            }
-            else {
             }
         }
     }
