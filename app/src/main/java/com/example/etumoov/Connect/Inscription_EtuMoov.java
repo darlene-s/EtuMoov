@@ -59,47 +59,48 @@ public class Inscription_EtuMoov extends AppCompatActivity {
                 regPrenom.setError("Prénom manquant");
             }
 
-            if (nom.isEmpty()) {
+            else if (nom.isEmpty()) {
                 regPrenom.setError("nom manquant");
             }
 
-            if (email.isEmpty()) {
+            else if (email.isEmpty()) {
                 regEmail.setError("Email manquant");
             }
 
-            if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            else if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 regEmail.setError("Email invalide");
             }
 
-            if (password.isEmpty()) {
+            else if (password.isEmpty()) {
                 regPassword.setError("Mot de passe manquant");
             }
-
-            firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    Utilisateur utilisateur = new Utilisateur(nom, prenom, email, password);
-                    FirebaseDatabase.getInstance().getReference("Utilisateur")
-                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                            .setValue(utilisateur).addOnCompleteListener(task1 -> {
-                                if (task1.isSuccessful()) {
-                                    if(!db.UserExist(email))
-                                        db.insertUser(utilisateur);
-                                    user = db.getUtilisateurbyEmail(utilisateur.getEmail());
-                                    //db.insertProfil(new Profil(0, 0, 0, "", "", user.getId_user()));
-                                    Toast.makeText(Inscription_EtuMoov.this, "Nouvel utilisateur créé avec succès", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(Inscription_EtuMoov.this, "Erreur lors de l'inscription. Veuillez réessayer", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                    db.close();
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.putExtra("ID_Utilisateur", user.getId_user());
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(Inscription_EtuMoov.this, "Erreur lors de l'inscription. Veuillez réessayer", Toast.LENGTH_SHORT).show();
-                }
-            });
+            else {
+                firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Utilisateur utilisateur = new Utilisateur(nom, prenom, email, password);
+                        FirebaseDatabase.getInstance().getReference("Utilisateur")
+                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .setValue(utilisateur).addOnCompleteListener(task1 -> {
+                            if (task1.isSuccessful()) {
+                                if(!db.UserExist(email))
+                                    db.insertUser(utilisateur);
+                                user = db.getUtilisateurbyEmail(utilisateur.getEmail());
+                                //db.insertProfil(new Profil(0, 0, 0, "", "", user.getId_user()));
+                                Toast.makeText(Inscription_EtuMoov.this, "Nouvel utilisateur créé avec succès", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(Inscription_EtuMoov.this, "Erreur lors de l'inscription. Veuillez réessayer", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        db.close();
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.putExtra("ID_Utilisateur", user.getId_user());
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(Inscription_EtuMoov.this, "Erreur lors de l'inscription. Veuillez réessayer", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         });
     }
 }

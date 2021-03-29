@@ -95,7 +95,7 @@ public class Connexion_EtuMoov extends AppCompatActivity {
                             Toast.makeText(Connexion_EtuMoov.this, "Connexion réussie ! Bienvenue " + prenom + " !" , Toast.LENGTH_LONG).show();
                             db.close();
                             Intent intent = new Intent(getApplicationContext(), ProfilActivity.class);
-                            intent.putExtra("ID_Utilisateur", utilisateur.getId_user());
+                            //intent.putExtra("ID_Utilisateur", utilisateur.getId_user());
                             startActivity(intent);
                             finish();
                         } else {
@@ -104,7 +104,7 @@ public class Connexion_EtuMoov extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error){
+                    public void onCancelled(@NonNull DatabaseError error) {
                         Toast.makeText(Connexion_EtuMoov.this, "Une erreur s'est produite ! Veuillez réessayer", Toast.LENGTH_SHORT).show();
                     }
                 });

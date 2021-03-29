@@ -7,6 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.etumoov.Connect.Inscription_EtuMoov;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
 import BD_Utilisateur.Models_Utilisateur.Profil;
@@ -17,6 +22,7 @@ public class ProfilRegisterActivity extends AppCompatActivity {
     private EditText tps_prepa, tps_supp;
     private Button btn_creation;
     private DataBaseHelper db;
+    private DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +39,23 @@ public class ProfilRegisterActivity extends AppCompatActivity {
             String vTps_S = tps_supp.getText().toString();
             if (vTps_P.isEmpty())
                 tps_prepa.setError("Le champ est vide");
-            Utilisateur user = db.getUtilisateurbyId(id);
-            db.insertProfil(new Profil(Double.parseDouble(vTps_P), Double.parseDouble(vTps_S), 0, "", "", user.getId_user()));
-            Intent nextIntent = new Intent(getApplicationContext(), ProfilActivity.class);
-            nextIntent.putExtra("ID_Utilisateur", user.getId_user());
-            startActivity(nextIntent);
-            finish();
+            else {
+                Utilisateur user = db.getUtilisateurbyId(id);
+                Profil profil = new Profil(Double.parseDouble(vTps_P), Double.parseDouble(vTps_S), 0, "", "", user.getId_user());
+                FirebaseDatabase.getInstance().getReference("Profil").child(String.valueOf(user.getId_user())).setValue(profil).addOnCompleteListener( task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(ProfilRegisterActivity.this, "Profil enregistré", Toast.LENGTH_LONG).show();
+                        db.insertProfil(profil);
+                        Intent nextIntent = new Intent(getApplicationContext(), ProfilActivity.class);
+                        nextIntent.putExtra("ID_Utilisateur", user.getId_user());
+                        db.close();
+                        startActivity(nextIntent);
+                        finish();
+                    } else {
+                        Toast.makeText(ProfilRegisterActivity.this, "Erreur lors de l'inscription. Veuillez réessayer", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
         });
     }
 }
