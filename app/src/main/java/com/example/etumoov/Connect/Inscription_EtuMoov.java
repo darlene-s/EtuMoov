@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.etumoov.MainActivity;
 import com.example.etumoov.ProfilActivity;
+import com.example.etumoov.ProfilRegisterActivity;
 import com.example.etumoov.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -86,18 +87,18 @@ public class Inscription_EtuMoov extends AppCompatActivity {
                             if (task1.isSuccessful()) {
                                 if(!db.UserExist(email))
                                     db.insertUser(utilisateur);
+                                Toast.makeText(Inscription_EtuMoov.this, "Nouvel utilisateur créé avec succès", Toast.LENGTH_SHORT).show();
                                 user = db.getUtilisateurbyEmail(utilisateur.getEmail());
                                 //db.insertProfil(new Profil(0, 0, 0, "", "", user.getId_user()));
-                                Toast.makeText(Inscription_EtuMoov.this, "Nouvel utilisateur créé avec succès", Toast.LENGTH_SHORT).show();
+                                db.close();
+                                Intent intent = new Intent(getApplicationContext(), ProfilRegisterActivity.class);
+                                intent.putExtra("ID_Utilisateur", user.getId_user());
+                                startActivity(intent);
+                                finish();
                             } else {
                                 Toast.makeText(Inscription_EtuMoov.this, "Erreur lors de l'inscription. Veuillez réessayer", Toast.LENGTH_SHORT).show();
                             }
                         });
-                        db.close();
-                        Intent intent = new Intent(getApplicationContext(), ProfilActivity.class);
-                        intent.putExtra("ID_Utilisateur", user.getId_user());
-                        startActivity(intent);
-                        finish();
                     } else {
                         Toast.makeText(Inscription_EtuMoov.this, "Erreur lors de l'inscription. Veuillez réessayer", Toast.LENGTH_SHORT).show();
                     }
