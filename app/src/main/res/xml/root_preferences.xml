@@ -36,12 +36,12 @@
             app:summary="Modifiez l'adresse de votre domicile"
             />
         <ListPreference
+            app:key="choix_theme"
             app:title="Thème"
             app:summary="Sélectionnez le thème pour l'application"
             app:defaultValue="0"
             app:entries="@array/theme"
-            app:entryValues="@array/themeValues">
-        </ListPreference>
+            app:entryValues="@array/theme_values"/>
     </PreferenceCategory>
 
     <PreferenceCategory app:title="Aide">
