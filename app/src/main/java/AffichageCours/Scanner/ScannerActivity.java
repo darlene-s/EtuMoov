@@ -38,7 +38,6 @@ public class ScannerActivity extends AppCompatActivity {
     private CodeScanner codeScanner;
     private CodeScannerView scannView;
     private DataBaseHelper db;
-    private boolean locationPermissionGranted;
 
     /**
      * Fonction de création de l'activity
@@ -52,13 +51,12 @@ public class ScannerActivity extends AppCompatActivity {
         scannView = findViewById(R.id.scannerView);
         codeScanner = new CodeScanner(this,scannView);
         db = new DataBaseHelper(this);
-        if(locationPermissionGranted) {
-            codeScanner.setDecodeCallback(new DecodeCallback() {
-                @Override
-                public void onDecoded(@NonNull Result result) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+        codeScanner.setDecodeCallback(new DecodeCallback() {
+               @Override
+               public void onDecoded(@NonNull Result result) {
+                   runOnUiThread(new Runnable() {
+                       @Override
+                       public void run() {
                             db.insertLien(result.getText());
                             Intent intent = new Intent(getApplicationContext(), CalendarJour.class);
                             startActivity(intent);
@@ -66,7 +64,7 @@ public class ScannerActivity extends AppCompatActivity {
                     });
                 }
             });
-        }
+
     }
 
 
