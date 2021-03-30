@@ -39,7 +39,7 @@
         android:id="@+id/btn_snooze"
         android:layout_width="129dp"
         android:layout_height="65dp"
-        android:layout_marginBottom="116dp"
+
         android:onClick="alarmSnooze"
         android:text="@string/btn_snooze"
         android:textColor="@color/white"
@@ -53,14 +53,15 @@
         android:id="@+id/btn_play"
         android:layout_width="129dp"
         android:layout_height="65dp"
-        android:layout_marginBottom="48dp"
         android:onClick="startActivity"
         android:text="@string/btn_jouer"
         android:textColor="@color/white"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/langue"
@@ -79,14 +80,16 @@
         app:layout_constraintStart_toEndOf="@+id/btn_ajout_alarme_auto"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout
+   <RelativeLayout
         android:id="@+id/relativeLayout3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
