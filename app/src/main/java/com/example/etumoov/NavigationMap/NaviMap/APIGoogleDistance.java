@@ -13,7 +13,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class APIGoogleDistance {
-    public String getTravelTime(String depart, String arrivee){
+    public String getTravelTime(String depart, String arrivee, double longitude, double latitude){
 
         OkHttpClient okHttpClient = new OkHttpClient();
         final String[] schedule = {""};
@@ -53,7 +53,11 @@ public class APIGoogleDistance {
             }
         };
 
-        String url ="https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins="+ depart +"&destinations="+ arrivee+"&mode=transit&transit_mode=rail&key=AIzaSyAwCUwkCcE-9QysXg4Tq1lIi0IP-3sq8nU";
+        String url = null;
+        if(longitude == 0.0 && latitude == 0.0)
+            url ="https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins="+ depart +"&destinations="+ arrivee+"&mode=transit&transit_mode=rail&key=AIzaSyAwCUwkCcE-9QysXg4Tq1lIi0IP-3sq8nU";
+        else
+            url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins="+ latitude + "," + longitude +"&destinations="+ arrivee+"&mode=transit&transit_mode=rail&key=AIzaSyAwCUwkCcE-9QysXg4Tq1lIi0IP-3sq8nU";
         Request request = new Request.Builder().url(url).build();
         countDownLatch.countDown();
         okHttpClient.newCall(request).enqueue(callback);

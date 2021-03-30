@@ -27,19 +27,17 @@
         android:layout_width="391dp"
         android:layout_height="168dp"
         android:layout_marginStart="21dp"
-        android:layout_marginLeft="21dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="21dp"
-        android:layout_marginRight="21dp"
         android:layout_marginBottom="40dp"
+        android:contentDescription="@string/label_img"
         app:layout_constraintBottom_toTopOf="@+id/txt_view_destination"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_view_domicile"
         app:layout_constraintVertical_bias="0.022"
-        app:srcCompat="@drawable/ic_rectangle"
-        android:contentDescription="@string/label_img" />
+        app:srcCompat="@drawable/ic_rectangle" />
 
     <ImageView
         android:id="@+id/img_fond2"
@@ -323,5 +321,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_view_trajet_tps" />
+
+    <Button
+        android:id="@+id/btn_localisation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Localisation"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        app:layout_constraintEnd_toEndOf="@+id/imageView5"
+        app:layout_constraintHorizontal_bias="0.956"
+        app:layout_constraintStart_toEndOf="@+id/txt_edit_numero"
+        app:layout_constraintTop_toTopOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="0.05" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
