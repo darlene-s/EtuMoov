@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
@@ -29,7 +30,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class TravelTime extends AppCompatActivity {
@@ -111,13 +114,21 @@ public class TravelTime extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Location> task) {
                 Location location = task.getResult();
-                longitude = location.getLongitude();
-                latitude = location.getLatitude();
-                Toast.makeText(TravelTime.this,"Adresse trouver !", Toast.LENGTH_SHORT).show();
-                numero.setFocusable(false);
-                rue.setFocusable(false);
-                codePostal.setFocusable(false);
-                choix = true;
+                if(location != null) {
+                    try {
+                        Geocoder geocoder = new Geocoder(TravelTime.this,Locale.getDefault());
+                        List<Address> addressList = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
+                        Toast.makeText(TravelTime.this,"Adresse trouver !", Toast.LENGTH_SHORT).show();
+                        numero.setFocusable(false);
+                        rue.setFocusable(false);
+                        codePostal.setFocusable(false);
+                        choix = true;
+                        longitude = addressList.get(0).getLongitude();
+                        latitude = addressList.get(0).getLatitude();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
     }
