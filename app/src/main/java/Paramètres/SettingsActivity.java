@@ -1,26 +1,17 @@
 package Paramètres;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
 
 import com.example.etumoov.Accueil.AuthentificationMain;
-import com.example.etumoov.MainActivity;
-import com.example.etumoov.ProfilActivity;
 import com.example.etumoov.R;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.Locale;
-
 import AffichageCours.Classes.CalendarJour;
 import AffichageCours.Scanner.ScannerActivity;
 import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;

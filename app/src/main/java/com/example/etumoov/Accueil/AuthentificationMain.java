@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.etumoov.Connect.Connexion_EtuMoov;
 import com.example.etumoov.Connect.Inscription_EtuMoov;
 import com.example.etumoov.Profil.ProfilActivity;
+import com.example.etumoov.Profil.ProfilRegisterActivity;
 import com.example.etumoov.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -24,12 +25,15 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Locale;
 
+import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
 import BD_Utilisateur.Models_Utilisateur.Profil;
+import BD_Utilisateur.Models_Utilisateur.Utilisateur;
 import Paramètres.SettingsActivity;
 
 public class AuthentificationMain extends AppCompatActivity {
 
     private Button btn_inscrire, btn_connect;
+    private DataBaseHelper db;
 
     @Override
     protected void onStart() {
@@ -44,6 +48,26 @@ public class AuthentificationMain extends AppCompatActivity {
                         intent.putExtra("ID_Utilisateur", String.valueOf(profil.getId_user()));
                         startActivity(intent);
                         finish();
+                    } else {
+                        FirebaseDatabase.getInstance().getReference("Utilisateur").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                Utilisateur utilisateur = snapshot.getValue(Utilisateur.class);
+                                if (utilisateur != null){
+                                    db = new DataBaseHelper(getApplicationContext());
+                                    Utilisateur user = db.getUtilisateurbyEmail(utilisateur.getEmail());
+                                    Intent intent = new Intent(getApplicationContext(), ProfilRegisterActivity.class);
+                                    intent.putExtra("ID_Utilisateur", String.valueOf(user.getId_user()));
+                                    intent.putExtra("clé", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                    finish();
+                                    startActivity(intent);
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Toast.makeText(AuthentificationMain.this, "Une erreur s'est produite ! Veuillez réessayer", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 }
                 @Override
