@@ -75,6 +75,7 @@ public class ScannerActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         requestForCamera();
+        codeScanner.startPreview();
     }
 
     private void requestForCamera() {
