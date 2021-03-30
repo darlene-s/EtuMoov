@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.etumoov.NavigationMap.MoovInTime.MoovInTimeMenu;
 import com.example.etumoov.Profil.ProfilActivity;
 import com.example.etumoov.R;
 import com.example.etumoov.Réveil.AlarmActivity;
@@ -80,7 +81,7 @@ public class MeteoActivity extends AppCompatActivity {
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.navigation:
-                        startActivity(new Intent(getApplicationContext(), MeteoActivity.class));
+                        startActivity(new Intent(getApplicationContext(), MoovInTimeMenu.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.meteo:

@@ -1,10 +1,12 @@
 package com.example.etumoov.NavigationMap.MoovInTime;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,7 +14,14 @@ import android.widget.ImageButton;
 
 import com.example.etumoov.NavigationMap.NaviMap.NaviMap;
 import com.example.etumoov.NavigationMap.NaviMap.TravelTime;
+import com.example.etumoov.Profil.ProfilActivity;
 import com.example.etumoov.R;
+import com.example.etumoov.Réveil.AlarmActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import AffichageCours.Classes.CalendarJour;
+import Meteo.MeteoActivity;
+
 /**
  * @author EtuMoov Team
  * Classe SquareInRealTime : Dashboard redirigeant vers les LinesActivity
@@ -41,6 +50,35 @@ public class MoovInTimeMenu extends AppCompatActivity {
          bus = findViewById(R.id.btn_bus);
          tram = findViewById(R.id.btn_tram);
          distance = findViewById(R.id.btn_distance);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setSelectedItemId(R.id.navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.reveil:
+                        startActivity(new Intent(getApplicationContext(),  AlarmActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.profil:
+                        startActivity(new Intent(getApplicationContext(), ProfilActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.emploiDuTps:
+                        startActivity(new Intent(getApplicationContext(), CalendarJour.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.navigation:
+                        return true;
+                    case R.id.meteo:
+                        startActivity(new Intent(getApplicationContext(), MeteoActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                }
+                return false;
+            }
+        });
 
 
 

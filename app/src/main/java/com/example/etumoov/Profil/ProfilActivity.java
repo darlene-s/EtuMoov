@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.etumoov.Accueil.AuthentificationMain;
+import com.example.etumoov.NavigationMap.MoovInTime.MoovInTimeMenu;
 import com.example.etumoov.R;
 import com.example.etumoov.Réveil.AlarmActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -62,7 +63,7 @@ public class ProfilActivity extends AppCompatActivity {
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.navigation:
-                        startActivity(new Intent(getApplicationContext(), AlarmActivity.class));
+                        startActivity(new Intent(getApplicationContext(), MoovInTimeMenu.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.meteo:

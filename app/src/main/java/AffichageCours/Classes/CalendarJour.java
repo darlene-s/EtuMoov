@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import AffichageCours.Scanner.IcsManager;
 
+import com.example.etumoov.NavigationMap.MoovInTime.MoovInTimeMenu;
 import com.example.etumoov.Profil.ProfilActivity;
 import com.example.etumoov.R;
 import com.example.etumoov.Réveil.AlarmActivity;
@@ -110,7 +111,7 @@ public class CalendarJour extends AppCompatActivity implements View.OnClickListe
                     case R.id.emploiDuTps:
                         return true;
                     case R.id.navigation:
-                        startActivity(new Intent(getApplicationContext(), CalendarJour.class));
+                        startActivity(new Intent(getApplicationContext(), MoovInTimeMenu.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.meteo:

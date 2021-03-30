@@ -43,6 +43,7 @@
         <activity android:name=".NavigationMap.MoovInTime.LinesActivity" />
         <activity android:name=".NavigationMap.MoovInTime.HorairesActivity" />
         <activity android:name=".NavigationMap.MoovInTime.MoovInTimeMenu"/>
+        <activity android:name=".NavigationMap.NaviMap.TravelTime"/>
         <!-- Activité Méteo -->
         <activity
             android:name="Meteo.cityFinder"
