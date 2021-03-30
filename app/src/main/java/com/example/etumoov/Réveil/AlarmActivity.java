@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -30,6 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
+import java.util.Random;
 
 import AffichageCours.Classes.CalendarJour;
 import Meteo.MeteoActivity;
@@ -39,11 +41,15 @@ public class AlarmActivity extends AppCompatActivity {
     Intent alarmReceiverIntent;
     AlarmManager alarmManager;
     Button btn_alarm_auto;
+    Button btn_alarm_manual;
+    Button btn_cancel_alarm;
     Button btn_snooze;
     Button btn_play;
     Calendar calendar;
+    TimePickerDialog timePicker;
     Context context;
     TextView textAlarm;
+    Class<?>[] listGames = {jeu.clicker.ClickerActivity.class, jeu.memory.Memory.class, jeu.calcul.CalculActivity.class};
 
     //binder
     AlarmService mService;
@@ -55,7 +61,13 @@ public class AlarmActivity extends AppCompatActivity {
         setContentView(R.layout.activity_alarm);
         this.context = this;
 
+        listGames[0] = jeu.clicker.ClickerActivity.class;
+        listGames[1] = jeu.memory.Memory.class;
+        listGames[2] = jeu.calcul.CalculActivity.class;
+
         btn_alarm_auto = findViewById(R.id.btn_ajout_alarme_auto);
+        btn_alarm_manual = findViewById(R.id.btn_ajout_alarme_manuelle);
+        btn_cancel_alarm = findViewById(R.id.btn_cancel_alarm);
         textAlarm = findViewById(R.id.textViewAlarm);
 
         alarmReceiverIntent = new Intent(this.context, AlarmBroadcastReceiver.class);
@@ -94,7 +106,7 @@ public class AlarmActivity extends AppCompatActivity {
         });
 
 
-        //thread pour changer la visibilité des boutons
+        //thread pour changer la visibilité des boutons snooze et play
         Thread thread = new Thread(){
             @Override
             public void run(){
@@ -108,6 +120,8 @@ public class AlarmActivity extends AppCompatActivity {
                                     try {
                                         textAlarm.setVisibility(View.INVISIBLE);
                                         btn_alarm_auto.setVisibility(View.INVISIBLE);
+                                        btn_alarm_manual.setVisibility(View.INVISIBLE);
+                                        btn_cancel_alarm.setVisibility(View.INVISIBLE);
 
                                         btn_snooze = findViewById(R.id.btn_snooze);
                                         btn_play = findViewById(R.id.btn_play);
@@ -123,6 +137,55 @@ public class AlarmActivity extends AppCompatActivity {
             }
         };
         thread.start();
+
+        //thread pour gérer la visibilité du bouton cancel alarme
+        Thread thread2 = new Thread(){
+            @Override
+            public void run(){
+                try{
+                    while(!isInterrupted()){
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                String extra = alarmReceiverIntent.getStringExtra("extra");
+                                if(extra == null){
+                                    try {
+                                    } catch(Exception e) {}
+                                } else if(extra.contentEquals("alarm on")){
+                                    btn_cancel_alarm.setVisibility(View.VISIBLE);
+                                    btn_alarm_manual.setVisibility(View.INVISIBLE);
+                                    btn_alarm_auto.setVisibility(View.INVISIBLE);
+                                }
+                            }
+                        });
+                    }
+                } catch(InterruptedException e){}
+            }
+        };
+        thread2.start();
+
+        //click bouton alarme manuelle -> timepicker apparait et alarme est programmée
+        btn_alarm_manual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timePicker = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                        calendar.set(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());
+                        calendar.set(Calendar.MINUTE, timePicker.getCurrentMinute());
+                        calendar.set(Calendar.SECOND, 0);
+                        textAlarm.setText("Alarme prévue pour : " + hourOfDay + ":" + minutes);
+                        alarmReceiverIntent.putExtra("extra","alarm on");
+                        pendingIntent = PendingIntent.getBroadcast(context, 0, alarmReceiverIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+                        Toast.makeText(context, "ALARME LANCÉE", Toast.LENGTH_SHORT).show();
+                    }
+                }, 0, 0, true);
+                timePicker.show();
+            }
+        });
     }
 
     public void setAutoAlarm(View view) {
@@ -139,6 +202,22 @@ public class AlarmActivity extends AppCompatActivity {
         Toast.makeText(this, "ALARME LANCÉE", Toast.LENGTH_SHORT).show();
     }
 
+    //annule une alarme, s'il n'y en a pas ça va crash, donc faut gérer la visibilité du bouton cancel alarme (cf thread2)
+    public void cancelAlarm(View view) {
+        alarmReceiverIntent.putExtra("extra","alarm off");
+
+        //cancel the alarm
+        alarmManager.cancel(pendingIntent);
+        textAlarm.setText("Aucune alarme programmée");
+
+        //stop the ringtone
+        //sends a message to stop directly to the ringtonePlayingService
+        sendBroadcast(alarmReceiverIntent);
+
+        Toast.makeText(this, "ALARME ANNULÉE", Toast.LENGTH_SHORT).show();
+    }
+
+    //stop l'alarme et la musique et set une alarme pour dans 5min après
     public void alarmSnooze(View view) {
         alarmReceiverIntent.putExtra("extra","alarm off");
 
@@ -152,8 +231,11 @@ public class AlarmActivity extends AppCompatActivity {
 
         btn_snooze.setVisibility(View.INVISIBLE);
         btn_play.setVisibility(View.INVISIBLE);
-        btn_alarm_auto.setVisibility(View.VISIBLE);
+
         textAlarm.setVisibility(View.VISIBLE);
+        btn_alarm_auto.setVisibility(View.VISIBLE);
+        btn_alarm_manual.setVisibility(View.VISIBLE);
+        btn_cancel_alarm.setVisibility(View.VISIBLE);
 
         alarmReceiverIntent.putExtra("extra","alarm on");
         pendingIntent = PendingIntent.getBroadcast(this, 0, alarmReceiverIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -163,6 +245,7 @@ public class AlarmActivity extends AppCompatActivity {
         textAlarm.setText("Alarme prévue dans 5 minutes");
     }
 
+    //stop la musique et lance un jeu au pif
     public void startActivity(View view) {
         alarmReceiverIntent.putExtra("extra","alarm off");
         alarmManager.cancel(pendingIntent);
@@ -171,11 +254,20 @@ public class AlarmActivity extends AppCompatActivity {
 
         btn_snooze.setVisibility(View.INVISIBLE);
         btn_play.setVisibility(View.INVISIBLE);
-        btn_alarm_auto.setVisibility(View.VISIBLE);
-        textAlarm.setVisibility(View.VISIBLE);
 
-        //Intent myIntent = new Intent(this, MeteoClickerActivity.class);
-        //startActivity(myIntent);
+        textAlarm.setVisibility(View.VISIBLE);
+        btn_alarm_auto.setVisibility(View.VISIBLE);
+        btn_alarm_manual.setVisibility(View.VISIBLE);
+        btn_cancel_alarm.setVisibility(View.VISIBLE);
+
+        Intent myIntent = new Intent(this, listGames[random()]);
+        startActivity(myIntent);
+    }
+
+    private int random() {
+        Random r = new Random();
+        int i = r.nextInt(3 - 0) + 0;
+        return i;
     }
 
     @Override

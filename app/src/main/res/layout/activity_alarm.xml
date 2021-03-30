@@ -5,49 +5,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".MainActivity" >
+    tools:context=".Réveil.AlarmActivity">
 
     <Button
         android:id="@+id/btn_ajout_alarme_auto"
         android:layout_width="152dp"
         android:layout_height="65dp"
-        android:layout_marginStart="140dp"
-        android:layout_marginLeft="140dp"
-        android:layout_marginTop="188dp"
         android:background="#1F1376"
         android:onClick="setAutoAlarm"
         android:text="@string/label_Alarme"
         android:textColor="@color/white"
         android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="140dp"
+        tools:layout_editor_absoluteY="188dp" />
 
     <TextView
         android:id="@+id/textViewAlarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
         android:text="@string/txt_aucune_alarm"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_ajout_alarme_auto"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="88dp"
+        tools:layout_editor_absoluteY="120dp" />
 
     <Button
         android:id="@+id/btn_snooze"
         android:layout_width="129dp"
         android:layout_height="65dp"
-
         android:onClick="alarmSnooze"
         android:text="@string/btn_snooze"
         android:textColor="@color/white"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/btn_play"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="152dp"
+        tools:layout_editor_absoluteY="288dp" />
 
     <Button
         android:id="@+id/btn_play"
@@ -57,30 +48,32 @@
         android:text="@string/btn_jouer"
         android:textColor="@color/white"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.551"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="152dp"
+        tools:layout_editor_absoluteY="353dp" />
 
-    <TextView
-        android:id="@+id/langue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="173dp"
-        android:layout_marginEnd="136dp"
-        android:layout_marginRight="136dp"
-        android:layout_marginBottom="672dp"
-        android:text="@string/txt_heure_du_réveil"
+    <Button
+        android:id="@+id/btn_cancel_alarm"
+        android:layout_width="152dp"
+        android:layout_height="66dp"
+        android:onClick="cancelAlarm"
+        android:visibility="invisible"
+        android:text="STOP"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/relativeLayout3"
-        app:layout_constraintStart_toEndOf="@+id/btn_ajout_alarme_auto"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_editor_absoluteX="200dp"
+        app:layout_editor_absoluteY="500dp"
+        tools:layout_editor_absoluteX="140dp"
+        tools:layout_editor_absoluteY="522dp" />
 
-   <RelativeLayout
+    <Button
+        android:id="@+id/btn_ajout_alarme_manuelle"
+        android:layout_width="152dp"
+        android:layout_height="66dp"
+        android:text="ALARME MANUELLE"
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteX="140dp"
+        tools:layout_editor_absoluteY="440dp" />
+
+    <RelativeLayout
         android:id="@+id/relativeLayout3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -89,7 +82,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.0">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
