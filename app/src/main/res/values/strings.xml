@@ -54,6 +54,7 @@
     <!-- ============== Bouton ============== -->
     <string name="btn_valider">Valider</string>
     <string name="btn_ajoutrappel">Ajouter</string>
+    <string name="btn_deco">Déconnexion</string>
 
 
     <!-- ============== Ajout Rappel ============== -->
@@ -73,6 +74,11 @@
     <string name="nouv_ville">Trouver une nouvelle ville !</string>
     <string name="entr_ville">Entrez le nom de la ville</string>
 
+    <!-- ============== Profil ============== -->
+
+    <string name="txt_tps_preparation">Combien de temps prenez-vous pour vous préparer ?</string>
+    <string name="txt_tps_supplémentaire">Avez-vous besoin d\'un temps supplémentaire ?</string>
+    <string name="txt_score_jeu">Vos meilleurs scores :)</string>
 
 
     <!-- ============== Navigation ============== -->
