@@ -149,8 +149,9 @@ public class AlarmActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 String extra = alarmReceiverIntent.getStringExtra("extra");
-                                if(extra == null){
+                                if(extra == null || extra.contentEquals("alarm off")){
                                     try {
+                                        btn_cancel_alarm.setVisibility(View.INVISIBLE);
                                     } catch(Exception e) {}
                                 } else if(extra.contentEquals("alarm on")){
                                     btn_cancel_alarm.setVisibility(View.VISIBLE);
