@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
 import BD_Utilisateur.Models_Utilisateur.Profil;
+import BD_Utilisateur.Models_Utilisateur.Utilisateur;
 
 public class ProfilActivity extends AppCompatActivity {
 
@@ -34,9 +35,26 @@ public class ProfilActivity extends AppCompatActivity {
         super.onStart();
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
             if (FirebaseDatabase.getInstance().getReference("Profil").child(FirebaseAuth.getInstance().getCurrentUser().getUid()) == null){
-                Intent intent = new Intent(getApplicationContext(), ProfilRegisterActivity.class);
-                finish();
-                startActivity(intent);
+                FirebaseDatabase.getInstance().getReference("Utilisateur").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Utilisateur utilisateur = snapshot.getValue(Utilisateur.class);
+                        if (utilisateur != null){
+                            db = new DataBaseHelper(getApplicationContext());
+                            Utilisateur user = db.getUtilisateurbyEmail(utilisateur.getEmail());
+                            Intent intent = new Intent(getApplicationContext(), ProfilRegisterActivity.class);
+                            intent.putExtra("ID_Utilisateur", String.valueOf(user.getId_user()));
+                            intent.putExtra("clé", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            finish();
+                            startActivity(intent);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(ProfilActivity.this, "Une erreur s'est produite ! Veuillez réessayer", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         }
     }
