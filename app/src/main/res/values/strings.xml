@@ -15,6 +15,7 @@
     <string name="label_MoovinTime">Moovintime</string>
     <string name="label_edt">EDT</string>
     <string name="label_reveil">Réveil</string>
+    <string name="label_meteo">Méteo</string>
 
 
     <!-- ============== Page d'accueil ============== -->
@@ -81,6 +82,12 @@
 
     <!-- ============== Navigation ============== -->
     <!-- ============== Réveil ============== -->
+    
+    <string name="label_Alarme">Alarme</string>
+    <string name="txt_aucune_alarm">Aucune alarme programmée !</string>
+    <string name="txt_heure_du_réveil">réveil</string>
+    <string name="btn_snooze">Snooze</string>
+    <string name="btn_jouer">Jouer</string>
     <!-- ============== Générale ============== -->
     <string name="txt_tps_preparation">Votre temps de préparation : </string>
     <string name="txt_tps_supplementaire">Votre temps supplémentaire :</string>

@@ -10,7 +10,7 @@
         android:icon="@drawable/ic_reveil"/>
     <item
         android:id="@+id/meteo"
-        android:title="@string/label_reveil"
+        android:title="@string/label_meteo"
         android:icon="@drawable/ic_meteo"/>
     <item
         android:id="@+id/navigation"

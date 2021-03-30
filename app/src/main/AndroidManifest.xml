@@ -17,13 +17,15 @@
         <receiver
             android:name=".Réveil.AlarmBroadcastReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
-
+            android:exported="true"/>
+        <!-- Activité Réveil -->
         <service
             android:name=".Réveil.AlarmService"
             android:enabled="true"
             android:exported="true" />
+        <activity android:name=".Réveil.AlarmActivity"/>
 
+        <!-- Activité Méteo -->
         <activity
             android:name="Meteo.cityFinder"
             android:parentActivityName="Meteo.MeteoActivity" />
@@ -34,7 +36,6 @@
         <activity
             android:name=".Profil.ProfilRegisterActivity"
             android:parentActivityName=".Accueil.AuthentificationMain" /> <!-- NavBar -->
-        <!-- <activity android:name=".MainActivity"/> -->
         <!-- Activité EDT -->
         <activity android:name="AffichageCours.Scanner.ScannerActivity" />
         <activity android:name=".MainActivity" />

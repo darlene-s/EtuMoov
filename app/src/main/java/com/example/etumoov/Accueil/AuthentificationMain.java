@@ -2,12 +2,12 @@ package com.example.etumoov.Accueil;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -17,6 +17,8 @@ import com.example.etumoov.Connect.Inscription_EtuMoov;
 import com.example.etumoov.Profil.ProfilActivity;
 import com.example.etumoov.Profil.ProfilRegisterActivity;
 import com.example.etumoov.R;
+import com.example.etumoov.Réveil.AlarmActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,9 +27,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Locale;
 
+import AffichageCours.Classes.CalendarJour;
 import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
 import BD_Utilisateur.Models_Utilisateur.Profil;
 import BD_Utilisateur.Models_Utilisateur.Utilisateur;
+import Meteo.MeteoActivity;
 import Paramètres.SettingsActivity;
 
 public class AuthentificationMain extends AppCompatActivity {
@@ -76,6 +80,8 @@ public class AuthentificationMain extends AppCompatActivity {
                 }
             });
         }
+
+
     }
 
     @Override

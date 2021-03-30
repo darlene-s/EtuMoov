@@ -1,5 +1,6 @@
 package com.example.etumoov.Réveil;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlarmManager;
@@ -13,6 +14,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,12 +22,17 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.etumoov.Profil.ProfilActivity;
 import com.example.etumoov.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
+
+import AffichageCours.Classes.CalendarJour;
+import Meteo.MeteoActivity;
 
 public class AlarmActivity extends AppCompatActivity {
     PendingIntent pendingIntent;
@@ -56,6 +63,36 @@ public class AlarmActivity extends AppCompatActivity {
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         calendar = calendar.getInstance();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setSelectedItemId(R.id.reveil);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.reveil:
+                        return true;
+                    case R.id.profil:
+                        startActivity(new Intent(getApplicationContext(),  ProfilActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.emploiDuTps:
+                        startActivity(new Intent(getApplicationContext(), CalendarJour.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.navigation:
+                        startActivity(new Intent(getApplicationContext(), MeteoActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.meteo:
+                        startActivity(new Intent(getApplicationContext(), MeteoActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                }
+                return false;
+            }
+        });
+
 
         //thread pour changer la visibilité des boutons
         Thread thread = new Thread(){

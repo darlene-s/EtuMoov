@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,6 +13,8 @@ import android.widget.Toast;
 
 import com.example.etumoov.Accueil.AuthentificationMain;
 import com.example.etumoov.R;
+import com.example.etumoov.Réveil.AlarmActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,9 +22,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import AffichageCours.Classes.CalendarJour;
 import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
 import BD_Utilisateur.Models_Utilisateur.Profil;
 import BD_Utilisateur.Models_Utilisateur.Utilisateur;
+import Meteo.MeteoActivity;
 
 public class ProfilActivity extends AppCompatActivity {
 
@@ -39,6 +44,35 @@ public class ProfilActivity extends AppCompatActivity {
         textScore = findViewById(R.id.textScore);
         btn_deconnexion = findViewById(R.id.btn_deconnexion);
         db = new DataBaseHelper(this);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setSelectedItemId(R.id.profil);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.reveil:
+                        startActivity(new Intent(getApplicationContext(),  AlarmActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.profil:
+                        return true;
+                    case R.id.emploiDuTps:
+                        startActivity(new Intent(getApplicationContext(), CalendarJour.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.navigation:
+                        startActivity(new Intent(getApplicationContext(), AlarmActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.meteo:
+                        startActivity(new Intent(getApplicationContext(), MeteoActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                }
+                return false;
+            }
+        });
 
         btn_deconnexion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +113,8 @@ public class ProfilActivity extends AppCompatActivity {
             }
         }
         db.close();
+
+
     }
 
     private void deconnexion (View view){

@@ -19,6 +19,7 @@ import AffichageCours.Scanner.IcsManager;
 
 import com.example.etumoov.Profil.ProfilActivity;
 import com.example.etumoov.R;
+import com.example.etumoov.Réveil.AlarmActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import AffichageCours.Scanner.ScannerActivity;
@@ -93,13 +94,13 @@ public class CalendarJour extends AppCompatActivity implements View.OnClickListe
         });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
-        bottomNavigationView.setSelectedItemId(R.id.meteo);
+        bottomNavigationView.setSelectedItemId(R.id.emploiDuTps);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.reveil:
-                        startActivity(new Intent(getApplicationContext(),  ProfilActivity.class));
+                        startActivity(new Intent(getApplicationContext(),  AlarmActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.profil:
