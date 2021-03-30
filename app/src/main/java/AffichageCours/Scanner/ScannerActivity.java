@@ -2,8 +2,12 @@ package AffichageCours.Scanner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 
@@ -27,6 +31,7 @@ public class ScannerActivity extends AppCompatActivity {
     private CodeScanner codeScanner;
     private CodeScannerView scannView;
     private DataBaseHelper db;
+    private boolean locationPermissionGranted;
 
     /**
      * Fonction de création de l'activity
@@ -40,20 +45,22 @@ public class ScannerActivity extends AppCompatActivity {
         scannView = findViewById(R.id.scannerView);
         codeScanner = new CodeScanner(this,scannView);
         db = new DataBaseHelper(this);
-
-        codeScanner.setDecodeCallback(new DecodeCallback() {
-            @Override
-            public void onDecoded(@NonNull Result result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        db.insertLien(result.getText());
-                        Intent intent = new Intent(getApplicationContext(),CalendarJour.class);
-                        startActivity(intent);
-                    }
-                });
-            }
-        });
+        getLocationPermission();
+        if(locationPermissionGranted) {
+            codeScanner.setDecodeCallback(new DecodeCallback() {
+                @Override
+                public void onDecoded(@NonNull Result result) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            db.insertLien(result.getText());
+                            Intent intent = new Intent(getApplicationContext(), CalendarJour.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            });
+        }
     }
 
 
@@ -62,5 +69,16 @@ public class ScannerActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         codeScanner.startPreview();
+    }
+
+    private void getLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED) {
+            locationPermissionGranted = true;
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA}, 1);
+        }
     }
 }
