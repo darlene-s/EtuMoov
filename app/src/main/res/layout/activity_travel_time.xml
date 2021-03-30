@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/txt_view_travel_time"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".NavigationMap.NaviMap.TravelTime">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="452dp"
+        android:layout_height="376dp"
+        android:layout_marginTop="5dp"
+        android:contentDescription="@string/label_img"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.74"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_edit_numero2"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_transport" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="391dp"
+        android:layout_height="168dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="40dp"
+        android:contentDescription="@string/label_img"
+        app:layout_constraintBottom_toTopOf="@+id/txt_view_destination"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_view_domicile"
+        app:layout_constraintVertical_bias="0.022"
+        app:srcCompat="@drawable/ic_rectangle" />
+
+    <ImageView
+        android:id="@+id/img_fond2"
+        android:layout_width="391dp"
+        android:layout_height="168dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginRight="21dp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_view_estimated"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_view_destination"
+        app:layout_constraintVertical_bias="0.138"
+        app:srcCompat="@drawable/ic_rectangle"
+        android:contentDescription="@string/label_img" />
+
+    <EditText
+        android:id="@+id/txt_edit_codePostal2"
+        android:layout_width="75dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="124dp"
+        android:layout_marginRight="124dp"
+        android:layout_marginBottom="57dp"
+        android:ems="10"
+        android:hint="@string/code_postal"
+        android:inputType="number"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/txt_view_estimated"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.273"
+        app:layout_constraintStart_toEndOf="@+id/txt_view_postal_code2"
+        app:layout_constraintTop_toBottomOf="@+id/txt_edit_rue2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/txt_edit_rue2"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="118dp"
+        android:layout_marginRight="118dp"
+        android:ems="10"
+        android:fontFamily="@font/montserrat_medium"
+        android:inputType="text"
+        android:textColor="@color/white"
+        android:hint="@string/rue"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.904"
+        app:layout_constraintStart_toEndOf="@+id/txt_view_adresse_domicile3"
+        app:layout_constraintTop_toBottomOf="@+id/txt_edit_numero2" />
+
+    <EditText
+        android:id="@+id/txt_edit_numero2"
+        android:layout_width="30dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:fontFamily="@font/montserrat_medium"
+        android:inputType="number"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:hint="@string/n"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintStart_toEndOf="@+id/txt_view_domicile2"
+        app:layout_constraintTop_toBottomOf="@+id/txt_view_destination" />
+
+    <TextView
+        android:id="@+id/txt_view_postal_code2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="@string/code_postal"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.146"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_view_adresse_domicile3" />
+
+    <TextView
+        android:id="@+id/txt_view_adresse_domicile3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="@string/rue"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_view_domicile4" />
+
+    <TextView
+        android:id="@+id/txt_view_domicile4"
+        android:layout_width="35dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="@string/n"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.163"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_view_destination" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/obtenez_votre_temps_de_trajet"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_view_destination"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:background="@color/light_purple"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="@string/mon_tablissement"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.176"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_view_postal_code" />
+
+    <EditText
+        android:id="@+id/txt_edit_rue"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginRight="120dp"
+        android:ems="10"
+        android:hint="@string/rue"
+        android:fontFamily="@font/montserrat_medium"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/txt_view_adresse_domicile"
+        app:layout_constraintTop_toTopOf="@+id/imageView5"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/txt_view_adresse_domicile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="@string/rue"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_view_domicile2" />
+
+    <TextView
+        android:id="@+id/txt_view_postal_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="@string/code_postal"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.146"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_view_adresse_domicile"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txt_view_domicile2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="@string/n"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.156"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_view_domicile" />
+
+    <EditText
+        android:id="@+id/txt_edit_numero"
+        android:layout_width="30dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="@string/n"
+        android:fontFamily="@font/montserrat_medium"
+        android:inputType="number"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintStart_toEndOf="@+id/txt_view_domicile2"
+        app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
+    <EditText
+        android:id="@+id/txt_edit_codePostal"
+        android:layout_width="75dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="124dp"
+        android:layout_marginRight="124dp"
+        android:ems="10"
+        android:hint="@string/code_postal"
+        android:fontFamily="@font/montserrat_medium"
+        android:inputType="number"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_view_destination"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.154"
+        app:layout_constraintStart_toEndOf="@+id/txt_view_postal_code"
+        app:layout_constraintTop_toBottomOf="@+id/txt_edit_rue"
+        app:layout_constraintVertical_bias="0.038" />
+
+    <TextView
+        android:id="@+id/txt_view_estimated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="@string/temps_de_trajet_estim"
+        android:background="@color/light_purple"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_view_postal_code2" />
+
+    <TextView
+        android:id="@+id/txt_view_domicile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@color/light_purple"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="@string/mon_domicile"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.155"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/txt_view_trajet_tps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:textColor="@color/white"
+        android:background="@color/light_purple"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_view_estimated" />
+
+    <Button
+        android:id="@+id/button_valider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/valider"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_view_trajet_tps" />
+
+    <Button
+        android:id="@+id/btn_localisation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Localisation"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        app:layout_constraintEnd_toEndOf="@+id/imageView5"
+        app:layout_constraintHorizontal_bias="0.956"
+        app:layout_constraintStart_toEndOf="@+id/txt_edit_numero"
+        app:layout_constraintTop_toTopOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="0.05" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

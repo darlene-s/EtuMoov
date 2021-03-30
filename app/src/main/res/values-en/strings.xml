@@ -80,6 +80,34 @@
     <string name="btn_deco">Déconnexion</string>
 
     <!-- ============== Navigation ============== -->
+
+    <string name="votre_nom">Votre nom</string>
+    <string name="votre_pr_nom">Votre prénom</string>
+    <string name="voici_les_horaires_de_passage">Voici les horaires de passage</string>
+    <string name="choisis_une_station">Choisis une station !</string>
+    <string name="choisis_une_ligne">Choisis une ligne !</string>
+    <string name="title_activity_navi_map">Map</string>
+    <string name="google_maps_key">AIzaSyC3bJz3E7hA0uVegqRsUqhfZJNakRl2_CE</string>
+    <string name="moovintime1">MoovInTime1</string>
+    <string name="btn_description">btn description</string>
+    <string name="btn_bus">btn bus</string>
+    <string name="btn_rer">btn rer</string>
+    <string name="afficher_l_itin_raire">Afficher l\'itinéraire</string>
+    <string name="indiquer_ma_position">Indiquer ma position</string>
+    <string name="afficher_l_itinéraire">Afficher l\'itinéraire</string>
+    <string name="afficher_temps">Afficher temps</string>
+    <string name="btn_carte">Carte</string>
+    <string name="btn_distance">Calcul du temps de trajet</string>
+    <string name="mon_tablissement">Mon établissement :</string>
+    <string name="obtenez_votre_temps_de_trajet">Obtenez votre temps de trajet !</string>
+    <string name="h_min">..h..min</string>
+    <string name="valider">Valider</string>
+    <string name="temps_de_trajet_estim">Temps de trajet estimé</string>
+    <string name="n">N°</string>
+    <string name="code_postal">Code Postal</string>
+    <string name="rue">Rue</string>
+    <string name="mon_domicile">Mon domicile :</string>
+
     <!-- ============== Réveil ============== -->
     <string name="label_Alarme">Alarm</string>
     <string name="txt_aucune_alarm">Aucune alarme programmée !</string>
