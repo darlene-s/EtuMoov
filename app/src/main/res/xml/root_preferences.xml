@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory app:title="Synchronisation" >
+        <EditTextPreference
+            app:key="URLSYNC"
+            app:defaultValue="Lien"
+            app:title="URL de synchronisation"
+            app:summary="Copier-collez le lien de votre emploi du temps"/>
+
+        <Preference
+            app:defaultValue="SCAN"
+            app:key="SCANQRCODE"
+            app:title="Scanner QR code de l'URL"
+            app:summary="Scannez le QR code de votre emploi du temps"/>
+
+        <SwitchPreferenceCompat
+            app:key="SYNC"
+            app:title="Synchro° au lancement"
+            app:summaryOn="La synchronisation au lancement est activée"
+            app:summaryOff="La synchronisation au lancement est désactivée"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="2ème Catégorie">
+        <ListPreference
+            app:key="@string/langue_app"
+            app:title="Choix de la langue"
+            app:summary="Choissisez la langue de l'application"
+            app:defaultValue="0"
+            app:entries="@array/langue_name"
+            app:entryValues="@array/langue_values"
+            />
+        <EditTextPreference
+            />
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -33,7 +33,7 @@
         android:layout_height="37dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="320dp"
-        android:text="@string/txt_tps_supplémentaire"
+        android:text="@string/txt_tps_supplementaire"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

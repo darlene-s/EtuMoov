@@ -1,6 +1,5 @@
-<resources>
-
-    <!-- ============== Jeux  ============== -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>    <!-- ============== Jeux  ============== -->
 
     <string name="label_img">Image</string>
     <string name="label_calcul">Calcul</string>
@@ -20,8 +19,8 @@
     <!-- ============== Page d'accueil ============== -->
 
     <string name="app_name">EtuMoov</string>
-    <string name="txt_authentification">S\'authentifier</string>
-    <string name="txt_inscrire">S\'inscrire</string>
+    <string name="txt_authentification">ENGLISHCEPTION</string>
+    <string name="txt_inscrire">ENGLISHCEPTION</string>
     <string name="txt_slogan">EtuMoov, le compagnon des étudiants</string>
 
     <!-- ============== Page connexion ============== -->
@@ -54,7 +53,6 @@
     <!-- ============== Bouton ============== -->
     <string name="btn_valider">Valider</string>
     <string name="btn_ajoutrappel">Ajouter</string>
-    <string name="btn_deco">Déconnexion</string>
 
 
     <!-- ============== Ajout Rappel ============== -->
@@ -75,20 +73,12 @@
     <string name="nouv_ville">Trouver une nouvelle ville !</string>
     <string name="entr_ville">Entrez le nom de la ville</string>
 
-    <!-- ============== Profil ============== -->
-
-    <string name="txt_tps_preparation">Combien de temps prenez-vous pour vous préparer ?</string>
-    <string name="txt_tps_supplémentaire">Avez-vous besoin d\'un temps supplémentaire ?</string>
-    <string name="txt_score_jeu">Vos meilleurs scores :)</string>
-
-
-    <!-- ============== Navigation ============== -->
-    <!-- ============== Réveil ============== -->
-    <!-- ============== Générale ============== -->
     <string name="txt_tps_preparation">Votre temps de préparation : </string>
     <string name="txt_tps_supplementaire">Votre temps supplémentaire :</string>
     <string name="txt_score_jeu">Votre meilleur score sur les jeux : </string>
     <string name="btn_deco">Déconnexion</string>
 
-
+    <!-- ============== Navigation ============== -->
+    <!-- ============== Réveil ============== -->
+    <!-- ============== Générale ============== -->
 </resources>
