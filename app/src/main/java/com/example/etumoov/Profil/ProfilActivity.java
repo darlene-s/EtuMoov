@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
 import BD_Utilisateur.Models_Utilisateur.Profil;
+import BD_Utilisateur.Models_Utilisateur.Utilisateur;
 
 public class ProfilActivity extends AppCompatActivity {
 

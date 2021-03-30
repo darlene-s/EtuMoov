@@ -67,15 +67,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "FOREIGN KEY(id_profil) REFERENCES profil(id_profil) ON DELETE CASCADE"
                 + ")";
 
-        String strSQL4 = "CREATE TABLE IF NOT EXISTS " + T_Planning
-                + "(id_planning INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "jour DATE,"
-                + "Horaire Date,"
-                + "id_profil INTEGER,"
-                + "FOREIGN KEY(id_profil) REFERENCES profil(id_profil) ON DELETE CASCADE"
-                + ")";
-
-        String strSQL5 = "CREATE TABLE T_Cours ("
+        String strSQL4 = "CREATE TABLE T_Cours ("
                 + "   idCours integer primary key autoincrement,"
                 + "   prof String,"
                 + "   nomCours String,"
@@ -84,11 +76,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "   heureFinCours String,"
                 + "   dateCours String"
                 + ")";
-        String strSQL6 = "CREATE TABLE T_Lien ("
+
+        String strSQL5 = "CREATE TABLE T_Lien ("
                 + "   idLien integer primary key autoincrement,"
                 + "   lien String"
                 + ")";
-        String strSQL7 = "CREATE TABLE T_Rappel ("
+        String strSQL6 = "CREATE TABLE T_Rappel ("
                 + "   idRappel integer primary key autoincrement,"
                 + "   Titre String,"
                 + "   Description String,"
@@ -101,7 +94,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(strSQL4);
         db.execSQL(strSQL5);
         db.execSQL(strSQL6);
-        db.execSQL(strSQL7);
     }
 
     @Override
@@ -109,7 +101,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE Utilisateur");
         db.execSQL("DROP TABLE Profil");
         db.execSQL("DROP TABLE Navigation");
-        db.execSQL("DROP TABLE Planning");
         db.execSQL("DROP TABLE T_Cours");
         db.execSQL("DROP TABLE T_Lien");
         db.execSQL("DROP TABLE T_Rappel");
@@ -120,7 +111,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         this.getWritableDatabase().execSQL("DELETE FROM Utilisateur");
         this.getWritableDatabase().execSQL("DELETE FROM Profil");
         this.getWritableDatabase().execSQL("DELETE FROM Navigation");
-        this.getWritableDatabase().execSQL("DELETE FROM Planning");
         this.getWritableDatabase().execSQL("DELETE FROM T_Cours");
         this.getWritableDatabase().execSQL("DELETE FROM T_Lien");
         this.getWritableDatabase().execSQL("DELETE FROM T_Rappel");
@@ -129,6 +119,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void deleteCours() {
         this.getWritableDatabase().execSQL("DELETE FROM T_Cours");
     }
+
     public void deleteDataUser(){
         this.getWritableDatabase().execSQL("DELETE FROM Utilisateur");
         this.getWritableDatabase().execSQL("DELETE FROM Profil");
@@ -216,19 +207,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void insertPlanning(Planning planning) {
-        try {
-            String strSQL = "insert into " + T_Planning
-                    + "(jour, Horaire, id_profil) VALUES ('"
-                    + planning.getDate_jour() + "',"
-                    + planning.getHoraire() + "',"
-                    + planning.getId_profil() + "')";
-            this.getWritableDatabase().execSQL(strSQL);
-        } catch (Exception e) {
-            Toast.makeText(mContext, "Erreur dans l'ajout des informations du planning dans la base de données", Toast.LENGTH_LONG);
-        }
-    }
-
     public void insertCours(String prof, String nom, String loc, String heureDeb, String heureFin, String date) {
         nom = nom.replace("'", "''");
         String strSql = "insert into T_Cours (prof, nomCours,location,heureDebutCours,heureFinCours,dateCours) VALUES ('"
@@ -313,21 +291,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public Planning getPlanning(int id) {
-        try {
-            String strSQL = "SELECT *FROM Planning WHERE id_planning=" + id;
-            Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
-            if (cursor.moveToFirst()) {
-                do {
-                    return new Planning(cursor.getInt(cursor.getColumnIndex("id_planning")), cursor.getString(cursor.getColumnIndex("jour")), cursor.getString(cursor.getColumnIndex("Horaire")), cursor.getInt(cursor.getColumnIndex("id_profil")));
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-        } catch (Exception e) {
-            Toast.makeText(mContext, "Erreur lors de la récupération des infos du navigation.", Toast.LENGTH_LONG);
-        }
-        return null;
-    }
 
     /*
     Récupération globale de données de l'utilisateur de l'appli
@@ -361,19 +324,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return ListeNavigations;
     }
 
-    public List<Planning> getListPlanningsProfil() {
-        List<Planning> ListePlannings = new ArrayList<>();
-        String strSQL = "SELECT *FROM PLANNING";
-        Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            Planning planning = new Planning(cursor.getInt(cursor.getColumnIndex("id_planning")), cursor.getString(cursor.getColumnIndex("jour")), cursor.getString(cursor.getColumnIndex("Horaire")), cursor.getInt(cursor.getColumnIndex("id_profil")));
-            ListePlannings.add(planning);
-            cursor.moveToNext();
-        }
-        cursor.close();
-        return ListePlannings;
-    }
 
     public ArrayList<Cours> getCours() {
         ArrayList<Cours> cours = new ArrayList<>();
@@ -429,10 +379,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         this.getWritableDatabase().execSQL(strSQL);
     }
 
-    public void SuppPlanning(int id) {
-        String strSQL = "DELETE FROM Planning WHERE id_planning =" + id;
-        this.getWritableDatabase().execSQL(strSQL);
-    }
 
     public void SuppRappel(String titre) {
         String strSQL = "DELETE FROM T_Rappel WHERE Titre ='" + titre + "'";
