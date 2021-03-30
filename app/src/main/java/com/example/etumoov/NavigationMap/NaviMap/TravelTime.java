@@ -23,6 +23,7 @@ import com.example.etumoov.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -110,11 +111,9 @@ public class TravelTime extends AppCompatActivity {
     }
 
     private void getLocation() {
-        Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
-        locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(TravelTime.this, new OnSuccessListener<Location>() {
             @Override
-            public void onComplete(@NonNull Task<Location> task) {
-                Location location = task.getResult();
+            public void onSuccess(Location location) {
                 if(location != null) {
                     try {
                         Geocoder geocoder = new Geocoder(TravelTime.this,Locale.getDefault());
