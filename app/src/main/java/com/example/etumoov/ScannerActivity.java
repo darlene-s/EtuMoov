@@ -2,13 +2,21 @@ package com.example.etumoov;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.View;
 
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
+import com.example.etumoov.R;
 import com.google.zxing.Result;
+
 
 /**
  * Classe ScannerActivity, pour le scan du QR CODE
@@ -20,6 +28,7 @@ public class ScannerActivity extends AppCompatActivity {
 
     private CodeScanner codeScanner;
     private CodeScannerView scannView;
+    private boolean locationPermissionGranted;
 
     /**
      * Fonction de création de l'activity
@@ -32,23 +41,38 @@ public class ScannerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scanner);
         scannView = findViewById(R.id.scannerView);
         codeScanner = new CodeScanner(this,scannView);
+        getLocationPermission();
+        if(locationPermissionGranted) {
+            codeScanner.setDecodeCallback(new DecodeCallback() {
+                @Override
+                public void onDecoded(@NonNull Result result) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
 
-        codeScanner.setDecodeCallback(new DecodeCallback() {
-            @Override
-            public void onDecoded(@NonNull Result result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //db.
-                    }
-                });
-            }
-        });
+                        }
+                    });
+                }
+            });
+        }
     }
+
+
 
     @Override
     protected void onResume() {
         super.onResume();
         codeScanner.startPreview();
+    }
+
+    private void getLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED) {
+            locationPermissionGranted = true;
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA}, 1);
+        }
     }
 }
