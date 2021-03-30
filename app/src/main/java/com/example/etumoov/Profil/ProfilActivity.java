@@ -45,6 +45,7 @@ public class ProfilActivity extends AppCompatActivity {
         textScore = findViewById(R.id.textScore);
         textScoreMemory = findViewById(R.id.textScoreMemory);
         textScoreClicker = findViewById(R.id.textScoreClicker);
+        textNomPrenom = findViewById(R.id.textNomPrenom);
 
         btn_deconnexion = findViewById(R.id.btn_deconnexion);
         db = new DataBaseHelper(this);
@@ -87,7 +88,7 @@ public class ProfilActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent.hasExtra("ID_Utilisateur")){
             String str = intent.getStringExtra("ID_Utilisateur");
-            String str2 = intent.getStringExtra("clé");
+            String str2 = intent.getStringExtra("cle");
             int id = Integer.parseInt(str);
             if(!db.UserExist(id)){
                 referenceUser = FirebaseDatabase.getInstance().getReference("Utilisateur");
@@ -109,7 +110,7 @@ public class ProfilActivity extends AppCompatActivity {
             }
             else {
                 Utilisateur user = db.getUtilisateurbyId(id);
-                textNomPrenom.setText(user.getNom() + " "+ user.getPrenom());
+                textNomPrenom.setText(user.getNom() + " " + user.getPrenom());
             }
 
             if(!db.ProfilExist(id)){

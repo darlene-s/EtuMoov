@@ -50,6 +50,7 @@ public class AuthentificationMain extends AppCompatActivity {
                     if (profil != null){
                         Intent intent = new Intent(getApplicationContext(), ProfilActivity.class);
                         intent.putExtra("ID_Utilisateur", String.valueOf(profil.getId_user()));
+                        intent.putExtra("cle", FirebaseAuth.getInstance().getCurrentUser().getUid());
                         startActivity(intent);
                         finish();
                     } else {
@@ -62,7 +63,6 @@ public class AuthentificationMain extends AppCompatActivity {
                                     Utilisateur user = db.getUtilisateurbyEmail(utilisateur.getEmail());
                                     Intent intent = new Intent(getApplicationContext(), ProfilRegisterActivity.class);
                                     intent.putExtra("ID_Utilisateur", String.valueOf(user.getId_user()));
-                                    intent.putExtra("clé", FirebaseAuth.getInstance().getCurrentUser().getUid());
                                     finish();
                                     startActivity(intent);
                                 }

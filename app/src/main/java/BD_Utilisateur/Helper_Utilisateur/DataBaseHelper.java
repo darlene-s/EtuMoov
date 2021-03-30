@@ -414,7 +414,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public boolean UserExist(int id){
         try {
-            String strSQL = "SELECT *FROM Utilisateur where id_user  = '" + id +"'";
+            String strSQL = "SELECT *FROM Utilisateur where id_user  =" +id;
             Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
             if (cursor.moveToFirst()) {
                 do {

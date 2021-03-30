@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -84,7 +85,8 @@ public class Connexion_EtuMoov extends AppCompatActivity {
                             Toast.makeText(Connexion_EtuMoov.this, "Connexion réussie ! Bienvenue " + prenom + " !" , Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(getApplicationContext(), ProfilActivity.class);
                             intent.putExtra("ID_Utilisateur", String.valueOf(utilisateur.getId_user()));
-                            intent.putExtra("clé", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            intent.putExtra("cle", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            Log.d("TAG", FirebaseAuth.getInstance().getCurrentUser().getUid());
                             startActivity(intent);
                             db.close();
                             finish();
