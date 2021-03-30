@@ -34,6 +34,7 @@ import java.util.Calendar;
 import java.util.Random;
 
 import AffichageCours.Classes.CalendarJour;
+import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
 import Meteo.MeteoActivity;
 
 public class AlarmActivity extends AppCompatActivity {
@@ -50,6 +51,7 @@ public class AlarmActivity extends AppCompatActivity {
     Context context;
     TextView textAlarm;
     Class<?>[] listGames = {jeu.clicker.ClickerActivity.class, jeu.memory.Memory.class, jeu.calcul.CalculActivity.class};
+    DataBaseHelper db;
 
     //binder
     AlarmService mService;
@@ -60,6 +62,8 @@ public class AlarmActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm);
         this.context = this;
+
+        db = new DataBaseHelper(context);
 
         listGames[0] = jeu.clicker.ClickerActivity.class;
         listGames[1] = jeu.memory.Memory.class;
@@ -85,7 +89,7 @@ public class AlarmActivity extends AppCompatActivity {
                     case R.id.reveil:
                         return true;
                     case R.id.profil:
-                        startActivity(new Intent(getApplicationContext(),  ProfilActivity.class));
+                        startActivity(new Intent(getApplicationContext(), ProfilActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.emploiDuTps:
@@ -152,6 +156,8 @@ public class AlarmActivity extends AppCompatActivity {
                                 if(extra == null || extra.contentEquals("alarm off")){
                                     try {
                                         btn_cancel_alarm.setVisibility(View.INVISIBLE);
+                                        btn_alarm_auto.setVisibility(View.VISIBLE);
+                                        btn_alarm_manual.setVisibility(View.VISIBLE);
                                     } catch(Exception e) {}
                                 } else if(extra.contentEquals("alarm on")){
                                     btn_cancel_alarm.setVisibility(View.VISIBLE);
