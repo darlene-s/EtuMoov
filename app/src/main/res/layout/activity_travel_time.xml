@@ -5,22 +5,22 @@
     android:id="@+id/txt_view_travel_time"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_blue"
+    android:background="@drawable/background"
     tools:context=".NavigationMap.NaviMap.TravelTime">
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="452dp"
+        android:layout_height="376dp"
         android:layout_marginTop="5dp"
+        android:contentDescription="@string/label_img"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.74"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_edit_numero2"
-        app:layout_constraintVertical_bias="0.31"
-        app:srcCompat="@drawable/ic_transport"
-        android:contentDescription="@string/label_img" />
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_transport" />
 
     <ImageView
         android:id="@+id/imageView5"
@@ -278,6 +278,7 @@
         android:layout_marginTop="80dp"
         android:fontFamily="@font/montserrat_regular"
         android:text="@string/temps_de_trajet_estim"
+        android:background="@color/light_purple"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -305,6 +306,7 @@
         android:layout_marginTop="32dp"
         android:fontFamily="@font/montserrat_regular"
         android:textColor="@color/white"
+        android:background="@color/light_purple"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
