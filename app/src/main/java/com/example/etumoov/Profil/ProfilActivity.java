@@ -30,6 +30,18 @@ public class ProfilActivity extends AppCompatActivity {
     private DatabaseReference reference;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            if (FirebaseDatabase.getInstance().getReference("Profil").child(FirebaseAuth.getInstance().getCurrentUser().getUid()) == null){
+                Intent intent = new Intent(getApplicationContext(), ProfilRegisterActivity.class);
+                finish();
+                startActivity(intent);
+            }
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);

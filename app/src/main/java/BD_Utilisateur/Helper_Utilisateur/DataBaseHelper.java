@@ -84,6 +84,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + "   heureFinCours String,"
                 + "   dateCours String"
                 + ")";
+
         String strSQL6 = "CREATE TABLE T_Lien ("
                 + "   idLien integer primary key autoincrement,"
                 + "   lien String"
