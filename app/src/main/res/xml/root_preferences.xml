@@ -21,7 +21,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="2ème Catégorie">
+    <PreferenceCategory app:title="Choix des préferences">
         <ListPreference
             app:key="@string/langue_app"
             app:title="Choix de la langue"
@@ -31,7 +31,32 @@
             app:entryValues="@array/langue_values"
             />
         <EditTextPreference
+            app:title="Modification de l'adresse domicile"
+            app:key="domicile"
+            app:summary="Modifiez l'adresse de votre domicile"
             />
+        <ListPreference
+            app:title="Thème"
+            app:summary="Sélectionnez le thème pour l'application"
+            app:defaultValue="0"
+            app:entries="@array/theme"
+            app:entryValues="@array/themeValues">
+        </ListPreference>
     </PreferenceCategory>
+
+    <PreferenceCategory app:title="Aide">
+        <Preference
+            app:title="À propos"
+            app:key="about"/>
+
+        <Preference
+            app:title="Tutoriel"
+            app:key="tutorial"/>
+    </PreferenceCategory>
+    <Preference
+        app:key="DECO"
+        app:title="Déconnexion"
+        app:summary="Apuuyez pour déconnecter votre compte">
+    </Preference>
 
 </PreferenceScreen>
