@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_logoetumoov"
@@ -15,39 +14,55 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EtuMoov"
         android:usesCleartextTraffic="true">
+        <receiver
+            android:name=".Réveil.AlarmBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
 
-        <activity android:name="Meteo.cityFinder"
-            android:parentActivityName="Meteo.MeteoActivity"/>
-        <activity android:name="Meteo.MeteoActivity"
-            android:parentActivityName=".Profil.ProfilActivity"/>
+        <service
+            android:name=".Réveil.AlarmService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name="Meteo.cityFinder"
+            android:parentActivityName="Meteo.MeteoActivity" />
+        <activity
+            android:name="Meteo.MeteoActivity"
+            android:parentActivityName=".Profil.ProfilActivity" />
         <activity android:name=".Profil.ProfilActivity" />
-        <activity android:name=".Profil.ProfilRegisterActivity"
-            android:parentActivityName=".Accueil.AuthentificationMain"/> <!-- NavBar -->
+        <activity
+            android:name=".Profil.ProfilRegisterActivity"
+            android:parentActivityName=".Accueil.AuthentificationMain" /> <!-- NavBar -->
         <!-- <activity android:name=".MainActivity"/> -->
         <!-- Activité EDT -->
         <activity android:name="AffichageCours.Scanner.ScannerActivity" />
-
         <activity android:name=".MainActivity" />
-
-        <activity android:name="AffichageCours.Rappels.Rappels_Affichage"
-            android:parentActivityName="AffichageCours.Classes.CalendarJour"/>
-        <activity android:name="AffichageCours.Rappels.AjoutRappel"
-            android:parentActivityName="AffichageCours.Rappels.Rappels_Affichage"/>
-        <activity android:name="AffichageCours.Classes.CalendarJour"
-            android:parentActivityName=".Profil.ProfilActivity"/> <!-- Activité Connexion -->
-        <activity android:name=".Connect.Connexion_EtuMoov"
-            android:parentActivityName=".Accueil.AuthentificationMain"/>
-        <activity android:name=".Connect.ForgotPassword_EtuMoov"
-            android:parentActivityName=".Connect.Connexion_EtuMoov"/>
-        <activity android:name="Paramètres.SettingsActivity"
-            android:parentActivityName=".Profil.ProfilActivity"/>
-        <activity android:name=".Connect.Inscription_EtuMoov"
-            android:parentActivityName=".Accueil.AuthentificationMain"/> <!-- Activité jeux -->
-        <activity android:name="jeu.clicker.ClickerActivity"/>
+        <activity
+            android:name="AffichageCours.Rappels.Rappels_Affichage"
+            android:parentActivityName="AffichageCours.Classes.CalendarJour" />
+        <activity
+            android:name="AffichageCours.Rappels.AjoutRappel"
+            android:parentActivityName="AffichageCours.Rappels.Rappels_Affichage" />
+        <activity
+            android:name="AffichageCours.Classes.CalendarJour"
+            android:parentActivityName=".Profil.ProfilActivity" /> <!-- Activité Connexion -->
+        <activity
+            android:name=".Connect.Connexion_EtuMoov"
+            android:parentActivityName=".Accueil.AuthentificationMain" />
+        <activity
+            android:name=".Connect.ForgotPassword_EtuMoov"
+            android:parentActivityName=".Connect.Connexion_EtuMoov" />
+        <activity
+            android:name="Paramètres.SettingsActivity"
+            android:parentActivityName=".Profil.ProfilActivity" />
+        <activity
+            android:name=".Connect.Inscription_EtuMoov"
+            android:parentActivityName=".Accueil.AuthentificationMain" /> <!-- Activité jeux -->
+        <activity android:name="jeu.clicker.ClickerActivity" />
         <activity android:name="jeu.calcul.CalculActivity" />
-        <activity android:name=".Accueil.AuthentificationMain"/>
-        <activity android:name="jeu.memory.Memory" />
-        <!-- Activité principale :) -->
+        <activity android:name=".Accueil.AuthentificationMain" />
+        <activity android:name="jeu.memory.Memory" /> <!-- Activité principale :) -->
         <activity android:name=".Accueil.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
