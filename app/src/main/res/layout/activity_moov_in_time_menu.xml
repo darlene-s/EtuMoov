@@ -12,13 +12,14 @@
         android:layout_width="136dp"
         android:layout_height="154dp"
         android:layout_marginBottom="76dp"
+        android:background="@color/dark_blue"
         android:contentDescription="@string/btn_description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.847"
+        app:layout_constraintHorizontal_bias="0.858"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/moov_in_time1"
-        app:layout_constraintVertical_bias="0.833"
+        app:layout_constraintVertical_bias="0.828"
         app:srcCompat="@drawable/btn_tram" />
 
     <ImageButton
@@ -28,13 +29,14 @@
         android:layout_marginStart="42dp"
         android:layout_marginLeft="42dp"
         android:layout_marginBottom="76dp"
+        android:background="@color/dark_blue"
         android:contentDescription="@string/btn_bus"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_tram"
-        app:layout_constraintHorizontal_bias="0.277"
+        app:layout_constraintHorizontal_bias="0.089"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/moov_in_time1"
-        app:layout_constraintVertical_bias="0.829"
+        app:layout_constraintVertical_bias="0.826"
         app:srcCompat="@drawable/btn_bus" />
 
     <Button
@@ -62,13 +64,14 @@
         android:layout_marginStart="42dp"
         android:layout_marginLeft="42dp"
         android:layout_marginBottom="28dp"
+        android:background="@color/dark_blue"
         android:contentDescription="@string/btn_rer"
         app:layout_constraintBottom_toTopOf="@+id/btn_bus"
         app:layout_constraintEnd_toStartOf="@+id/btn_metro"
-        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintHorizontal_bias="0.068"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/moov_in_time1"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.876"
         app:srcCompat="@drawable/btn_rer" />
 
     <Button
@@ -97,14 +100,15 @@
         android:layout_marginEnd="42dp"
         android:layout_marginRight="42dp"
         android:layout_marginBottom="28dp"
+        android:background="@color/dark_blue"
         android:contentDescription="@string/btn_rer"
         app:layout_constraintBottom_toTopOf="@+id/btn_tram"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/btn_metro" />
+        app:layout_constraintVertical_bias="0.871"
+        android:src="@drawable/btn_metro" />
 
     <ImageView
         android:id="@+id/moov_in_time1"
@@ -121,6 +125,7 @@
         android:layout_marginRight="3dp"
         android:contentDescription="@string/label_img"
         android:textSize="12sp"
+        android:background="@color/dark_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
