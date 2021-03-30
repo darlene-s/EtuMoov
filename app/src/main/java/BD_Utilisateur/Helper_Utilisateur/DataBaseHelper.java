@@ -412,6 +412,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
+    public boolean UserExist(int id){
+        try {
+            String strSQL = "SELECT *FROM Utilisateur where id_user  = '" + id +"'";
+            Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    if (cursor.getInt(cursor.getColumnIndex("id_user")) == id)
+                        return true;
+                    else
+                        return false;
+                } while(cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (Exception e) {}
+        return false;
+    }
+
     public boolean ProfilExist(int id){
         try {
             String strSQL = "SELECT *FROM Profil where id_user =" + id;

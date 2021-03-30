@@ -31,10 +31,10 @@ import Meteo.MeteoActivity;
 
 public class ProfilActivity extends AppCompatActivity {
 
-    private TextView textTps_p, textTps_s, textScore;
+    private TextView textTps_p, textTps_s, textScore, textScoreMemory, textScoreClicker, textNomPrenom;
     private Button btn_deconnexion;
     private DataBaseHelper db;
-    private DatabaseReference reference;
+    private DatabaseReference referenceUser, referenceProfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,9 @@ public class ProfilActivity extends AppCompatActivity {
         textTps_p = findViewById(R.id.text_tps_p);
         textTps_s = findViewById(R.id.text_tps_s);
         textScore = findViewById(R.id.textScore);
+        textScoreMemory = findViewById(R.id.textScoreMemory);
+        textScoreClicker = findViewById(R.id.textScoreClicker);
+
         btn_deconnexion = findViewById(R.id.btn_deconnexion);
         db = new DataBaseHelper(this);
 
@@ -84,10 +87,34 @@ public class ProfilActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent.hasExtra("ID_Utilisateur")){
             String str = intent.getStringExtra("ID_Utilisateur");
+            String str2 = intent.getStringExtra("clé");
             int id = Integer.parseInt(str);
+            if(!db.UserExist(id)){
+                referenceUser = FirebaseDatabase.getInstance().getReference("Utilisateur");
+                referenceUser.child(str2).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Utilisateur utilisateur = snapshot.getValue(Utilisateur.class);
+                        if (utilisateur != null){
+                            db.insertUser(utilisateur);
+                            Utilisateur user = db.getUtilisateurbyId(id);
+                            textNomPrenom.setText(user.getNom() + " "+ user.getPrenom());
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(ProfilActivity.this, "Une erreur s'est produite ! Veuillez réessayer", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+            else {
+                Utilisateur user = db.getUtilisateurbyId(id);
+                textNomPrenom.setText(user.getNom() + " "+ user.getPrenom());
+            }
+
             if(!db.ProfilExist(id)){
-                reference = FirebaseDatabase.getInstance().getReference("Profil");
-                reference.child(String.valueOf(id)).addListenerForSingleValueEvent(new ValueEventListener() {
+                referenceProfil = FirebaseDatabase.getInstance().getReference("Profil");
+                referenceProfil.child(str2).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Profil profil = snapshot.getValue(Profil.class);
@@ -97,6 +124,8 @@ public class ProfilActivity extends AppCompatActivity {
                             textTps_p.setText(String.valueOf(pp.getTps_preparation()));
                             textTps_s.setText(String.valueOf(pp.getTps_supplementaires()));
                             textScore.setText(String.valueOf(pp.getScore()));
+                            textScoreMemory.setText(String.valueOf(pp.getTimerMemory()));
+                            textScoreClicker.setText(String.valueOf(pp.getTimerCookie()));
                         }
                     }
 
@@ -111,6 +140,8 @@ public class ProfilActivity extends AppCompatActivity {
                 textTps_p.setText(String.valueOf(profil.getTps_preparation()));
                 textTps_s.setText(String.valueOf(profil.getTps_supplementaires()));
                 textScore.setText(String.valueOf(profil.getScore()));
+                textScoreMemory.setText(String.valueOf(profil.getTimerMemory()));
+                textScoreClicker.setText(String.valueOf(profil.getTimerCookie()));
             }
         }
         db.close();
