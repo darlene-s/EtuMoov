@@ -63,6 +63,8 @@ public class ScannerActivity extends AppCompatActivity {
                         }
                     });
                 }
+
+
             });
 
     }
