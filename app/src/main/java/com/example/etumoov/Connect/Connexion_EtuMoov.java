@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -85,7 +86,9 @@ public class Connexion_EtuMoov extends AppCompatActivity {
                             Toast.makeText(Connexion_EtuMoov.this, "Connexion réussie ! Bienvenue " + prenom + " !" , Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(getApplicationContext(), ProfilActivity.class);
                             intent.putExtra("ID_Utilisateur", String.valueOf(utilisateur.getId_user()));
-                            intent.putExtra("cle", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            SharedPreferences.Editor editor = getSharedPreferences("cle_id", MODE_PRIVATE).edit();
+                            editor.putString("cle_id_recup", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            editor.apply();
                             Log.d("TAG", FirebaseAuth.getInstance().getCurrentUser().getUid());
                             startActivity(intent);
                             db.close();

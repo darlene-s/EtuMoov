@@ -50,7 +50,9 @@ public class AuthentificationMain extends AppCompatActivity {
                     if (profil != null){
                         Intent intent = new Intent(getApplicationContext(), ProfilActivity.class);
                         intent.putExtra("ID_Utilisateur", String.valueOf(profil.getId_user()));
-                        intent.putExtra("cle", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                        SharedPreferences.Editor editor = getSharedPreferences("cle_id", MODE_PRIVATE).edit();
+                        editor.putString("cle_id_recup", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                        editor.apply();
                         startActivity(intent);
                         finish();
                     } else {
