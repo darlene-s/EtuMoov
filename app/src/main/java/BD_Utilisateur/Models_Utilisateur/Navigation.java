@@ -3,21 +3,21 @@ package BD_Utilisateur.Models_Utilisateur;
 public class Navigation {
 
     private int id_nav;
-    private double tps_trajet;
+    private int tps_trajet;
     private String domicile;
     private String destination;
     private int id_profil;
 
     public Navigation(){}
 
-    public Navigation(double tps, String dom, String dest, int id_p){
+    public Navigation(int tps, String dom, String dest, int id_p){
         this.tps_trajet = tps;
         this.domicile = dom;
         this.destination = dest;
         this.id_profil = id_p;
     }
 
-    public Navigation(int id, double tps, String dom, String dest, int id_p){
+    public Navigation(int id, int tps, String dom, String dest, int id_p){
         this.id_nav = id;
         this.tps_trajet = tps;
         this.domicile = dom;
@@ -33,11 +33,11 @@ public class Navigation {
         this.id_nav = id_nav;
     }
 
-    public double getTps_trajet() {
+    public int getTps_trajet() {
         return tps_trajet;
     }
 
-    public void setTps_trajet(double tps_trajet) {
+    public void setTps_trajet(int tps_trajet) {
         this.tps_trajet = tps_trajet;
     }
 

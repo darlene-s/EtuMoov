@@ -37,6 +37,7 @@ import java.util.Random;
 
 import AffichageCours.Classes.CalendarJour;
 import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
+import BD_Utilisateur.Models_Utilisateur.Navigation;
 import Meteo.MeteoActivity;
 
 public class AlarmActivity extends AppCompatActivity {
@@ -84,6 +85,9 @@ public class AlarmActivity extends AppCompatActivity {
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         calendar = calendar.getInstance();
+
+        Navigation nav = db.getNavigation();
+        btn_alarm_manual.setText(String.valueOf(nav.getTps_trajet()));
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.reveil);
@@ -210,7 +214,7 @@ public class AlarmActivity extends AppCompatActivity {
         pendingIntent = PendingIntent.getBroadcast(this, 0, alarmReceiverIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-        textAlarm.setText("Alarme prévue pour : " + calendar.getTime());
+        //textAlarm.setText("Alarme prévue pour : " + calendar.getTime());
         Toast.makeText(this, "ALARME LANCÉE", Toast.LENGTH_SHORT).show();
     }
 

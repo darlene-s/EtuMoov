@@ -284,7 +284,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                nav = new Navigation(cursor.getInt(cursor.getColumnIndex("id_nav")), cursor.getDouble(cursor.getColumnIndex("tps_preparation")), cursor.getString(cursor.getColumnIndex("domicile")), cursor.getString(cursor.getColumnIndex("destination")), cursor.getInt(cursor.getColumnIndex("id_profil")));
+                nav = new Navigation(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3), cursor.getInt(4));
+                cursor.moveToNext();
             }
             cursor.close();
             return nav;
@@ -330,7 +331,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            Navigation nav = new Navigation(cursor.getInt(cursor.getColumnIndex("id_nav")), cursor.getDouble(cursor.getColumnIndex("tps_preparation")), cursor.getString(cursor.getColumnIndex("domicile")), cursor.getString(cursor.getColumnIndex("destination")), cursor.getInt(cursor.getColumnIndex("id_profil")));
+            Navigation nav = new Navigation(cursor.getInt(cursor.getColumnIndex("id_nav")), cursor.getInt(cursor.getColumnIndex("tps_preparation")), cursor.getString(cursor.getColumnIndex("domicile")), cursor.getString(cursor.getColumnIndex("destination")), cursor.getInt(cursor.getColumnIndex("id_profil")));
             ListeNavigations.add(nav);
             cursor.moveToNext();
         }
