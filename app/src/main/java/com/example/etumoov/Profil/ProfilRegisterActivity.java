@@ -44,7 +44,7 @@ public class ProfilRegisterActivity extends AppCompatActivity {
                 tps_prepa.setError("Le champ est vide");
             else {
                 Utilisateur user = db.getUser();
-                Profil profil = new Profil(Integer.parseInt(vTps_P), Integer.parseInt(vTps_S), 0, "", "", user.getId_user());
+                Profil profil = new Profil(Integer.parseInt(vTps_P), Integer.parseInt(vTps_S), 0, "00:00", "00:00", user.getId_user());
                 if (profil != null){
                     FirebaseDatabase.getInstance().getReference("Profil").child(cle_id).setValue(profil);
                     db.insertProfil(profil);

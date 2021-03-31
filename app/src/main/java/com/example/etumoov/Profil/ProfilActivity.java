@@ -166,8 +166,8 @@ public class ProfilActivity extends AppCompatActivity {
             textTps_p.setText(String.valueOf(pro.getTps_preparation()));
             textTps_s.setText(String.valueOf(pro.getTps_supplementaires()));
             textScore.setText(String.valueOf(pro.getScore()));
-            textScoreMemory.setText(String.valueOf(pro.getTimerMemory()));
-            textScoreClicker.setText(String.valueOf(pro.getTimerCookie()));
+            textScoreMemory.setText(pro.getTimerMemory());
+            textScoreClicker.setText(pro.getTimerCookie());
             SharedPreferences.Editor she = getSharedPreferences("id_profil", MODE_PRIVATE).edit();
             she.putInt("id", pro.getId_profil());
             she.apply();

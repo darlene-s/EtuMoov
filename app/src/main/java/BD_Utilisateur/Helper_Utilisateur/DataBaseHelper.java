@@ -1,5 +1,6 @@
 package BD_Utilisateur.Helper_Utilisateur;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -479,17 +480,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public void updateCookie(int id, String string){
-        String str = "UPDATE Profil set timerCookie = '" + string + "' where id_profil =" + id;
-        this.getWritableDatabase().execSQL(str);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("timerCookie", string);
+        values.put("id_profil", id);
+        db.update("Profil", values, "id_profil=?", new String[]{String.valueOf(id)});
     }
     public void updateScore(int id, int score){
-        String str = "UPDATE Profil set score =" + score + " where id_profil =" + id;
-        this.getWritableDatabase().execSQL(str);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("score", score);
+        values.put("id_profil", id);
+        db.update("Profil", values, "id_profil=?", new String[]{String.valueOf(id)});
     }
     public void updateMemory(int id, String string){
-        String str = "UPDATE Profil set timerMemory = '" + string + "' where id_profil =" + id;
-        this.getWritableDatabase().execSQL(str);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("timerMemory", string);
+        values.put("id_profil", id);
+        db.update("Profil", values, "id_profil=?", new String[]{String.valueOf(id)});
     }
+
     public boolean ProfilExist(int id){
         try {
             String strSQL = "SELECT *FROM Profil where id_user =" + id;

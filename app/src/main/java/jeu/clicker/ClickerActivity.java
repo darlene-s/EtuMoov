@@ -100,8 +100,9 @@ public class ClickerActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {finish();}
                     });
             Profil profil = db.getProfils();
-            if (Integer.parseInt(timer.getText().toString()) < Integer.parseInt(profil.getTimerCookie()) || Integer.parseInt(profil.getTimerCookie()) == 0)
-                db.updateCookie(profil.getId_profil(), timer.getText().toString());
+            int j = profil.getTimerCookie().compareTo(String.valueOf(timer.getText()));
+            if (j >= 0)
+                db.updateCookie(profil.getId_profil(), String.valueOf(timer.getText()));
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
            // stopService(new Intent(this, AlarmService.class));
