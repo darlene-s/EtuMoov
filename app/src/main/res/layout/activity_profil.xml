@@ -200,7 +200,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="104dp"
-        android:text="Déconnexion"
+        android:text="@string/btn_deco"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -212,7 +212,6 @@
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="180dp"
-        android:onClick="Parametre"
         android:background="@drawable/ic_settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

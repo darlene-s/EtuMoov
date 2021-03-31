@@ -83,8 +83,6 @@ public class AuthentificationMain extends AppCompatActivity {
                 }
             });
         }
-
-
     }
 
     @Override

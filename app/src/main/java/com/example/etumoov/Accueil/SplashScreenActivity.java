@@ -28,10 +28,11 @@ public class SplashScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_screen);
         SharedPreferences spf = PreferenceManager.getDefaultSharedPreferences(this);
         String value = spf.getString(getString(R.string.langue_app), "0");
         setLangue(value);
+        loadLocale();
+        setContentView(R.layout.activity_splash_screen);
         etudiants = findViewById(R.id.ic_etudiants);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -63,11 +64,9 @@ public class SplashScreenActivity extends AppCompatActivity {
         int id = Integer.parseInt(value);
         if (id == 0){
             setLocale("fr");
-            loadLocale();
         }
         if (id == 1){
             setLocale("en");
-            loadLocale();
         }
     }
 

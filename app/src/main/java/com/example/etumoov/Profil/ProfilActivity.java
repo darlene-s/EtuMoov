@@ -2,9 +2,11 @@ package com.example.etumoov.Profil;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -25,6 +27,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Locale;
+
 import AffichageCours.Classes.CalendarJour;
 import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
 import BD_Utilisateur.Models_Utilisateur.Profil;
@@ -35,13 +39,16 @@ import Paramètres.SettingsActivity;
 public class ProfilActivity extends AppCompatActivity {
 
     private TextView textTps_p, textTps_s, textScore, textScoreMemory, textScoreClicker, textNomPrenom;
-    private Button btn_deconnexion;
+    private Button btn_deconnexion, btn_param;
     private DataBaseHelper db;
     private DatabaseReference referenceUser, referenceProfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences spf = PreferenceManager.getDefaultSharedPreferences(this);
+        String value = spf.getString(getString(R.string.langue_app), "0");
+        setLangue(value);
         setContentView(R.layout.activity_profil);
         textTps_p = findViewById(R.id.text_tps_p);
         textTps_s = findViewById(R.id.text_tps_s);
@@ -50,6 +57,7 @@ public class ProfilActivity extends AppCompatActivity {
         textScoreClicker = findViewById(R.id.textScoreClicker);
         textNomPrenom = findViewById(R.id.textNomPrenom);
 
+        btn_param = findViewById(R.id.btn_param);
         btn_deconnexion = findViewById(R.id.btn_deconnexion);
         db = new DataBaseHelper(this);
 
@@ -79,6 +87,13 @@ public class ProfilActivity extends AppCompatActivity {
                         return true;
                 }
                 return false;
+            }
+        });
+
+        btn_param.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Parametre(v);
             }
         });
 
@@ -192,5 +207,38 @@ public class ProfilActivity extends AppCompatActivity {
         FirebaseAuth.getInstance().signOut(); // Paramètres de l'utilisateur
         startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
         finish();
+    }
+
+    // Charge la langue enregistrée dans les préférences partagées
+    private void loadLocale(){
+        SharedPreferences prefs = getSharedPreferences("Settings", ProfilActivity.MODE_PRIVATE);
+        String language = prefs.getString("My_Lang", "");
+        setLocale(language);
+        //Toast.makeText(SplashScreenActivity.this, language, Toast.LENGTH_SHORT).show();
+    }
+
+    private void setLangue(String value){
+        int id = Integer.parseInt(value);
+        if (id == 0){
+            setLocale("fr");
+            loadLocale();
+        }
+        if (id == 1){
+            setLocale("en");
+            loadLocale();
+        }
+    }
+
+    private void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        // Enregistre les données dans les préférences partagées
+        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+        editor.putString("My_Lang", lang);
+        editor.apply();
+
     }
 }
