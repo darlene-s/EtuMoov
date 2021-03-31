@@ -15,6 +15,9 @@ import com.example.etumoov.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
+import BD_Utilisateur.Models_Utilisateur.Profil;
+
 
 public class CalculActivity extends AppCompatActivity {
 
@@ -22,6 +25,7 @@ public class CalculActivity extends AppCompatActivity {
     TextView tv_score, tv_questions, tv_timer, tv_bottommessage;
     ProgressBar prog_timer;
     DatabaseReference reference;
+    private DataBaseHelper db;
     //FirebaseUser user;
     int meilleurScore;
 
@@ -46,7 +50,7 @@ public class CalculActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calcul);
-
+        db = new DataBaseHelper(this);
         reference = FirebaseDatabase.getInstance().getReference("Utilisateur");
        /* user = FirebaseAuth.getInstance().getCurrentUser();
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
@@ -103,16 +107,20 @@ public class CalculActivity extends AppCompatActivity {
             // Pop up qui affiche le nombre de points et le nombre de bonne réponse
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CalculActivity.this);
             alertDialogBuilder
-                    .setMessage("Vous avez " +g.getScore() + " pts" + "\net " + g.getNumberCorrect() + " bonnes réponses sur : " + (g.getTotalQuestions()-1))
+                    .setMessage("Vous avez " + g.getScore() + " pts" + "\net " + g.getNumberCorrect() + " bonnes réponses sur : " + (g.getTotalQuestions()-1))
                     .setCancelable(false)
                     .setPositiveButton("QUITTER", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {finish();}
                     });
+            Profil profil = db.getProfils();
+            if (g.getScore() > profil.getScore() || profil.getScore() == 0)
+                db.updateScore(profil.getId_profil(), g.getScore());
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
           //  stopService(new Intent(this, AlarmService.class));
         }
+        db.close();
        // reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("scoreCalcul").setValue(g.getScore());
     }
 

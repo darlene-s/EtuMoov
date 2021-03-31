@@ -65,6 +65,7 @@ public class AlarmActivity extends AppCompatActivity {
     String heure_premier_cours;
     long sec, minutes, hours;
     ArrayList<Cours> cours;
+    Navigation nav;
 
     //binder
     AlarmService mService;
@@ -104,10 +105,10 @@ public class AlarmActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Navigation nav = db.getNavigation();
-        temp_de_trajet = nav.getTps_trajet();
-
-
+        if (db.NavigationExist()){
+            nav = db.getNavigation();
+            temp_de_trajet = nav.getTps_trajet();
+        }
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.reveil);

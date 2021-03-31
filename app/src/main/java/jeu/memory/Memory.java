@@ -18,12 +18,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Arrays;
 import java.util.Collections;
 
+import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
+import BD_Utilisateur.Models_Utilisateur.Profil;
+
 public class Memory extends AppCompatActivity {
     // déclaration des attributs
     private ImageView iv_11, iv_12, iv_13, iv_14, iv_21, iv_22, iv_23, iv_24;
     private Integer[] cardArray = {11, 12, 13, 14, 21, 22, 23, 24};
     private int image11, image12, image13, image14, image21, image22, image23, image24;
     private Chronometer chrono;
+    DataBaseHelper bd;
     DatabaseReference ref;
 
 
@@ -34,7 +38,7 @@ public class Memory extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memory);
-
+        bd = new DataBaseHelper(this);
         ref = FirebaseDatabase.getInstance().getReference("Utilisateur");
 
         //initialisation des images
@@ -266,6 +270,9 @@ public class Memory extends AppCompatActivity {
                             finish();
                         }
                     });
+            Profil profil = bd.getProfils();
+            if (Integer.parseInt(chrono.getText().toString()) < Integer.parseInt(profil.getTimerMemory()) || Integer.parseInt(profil.getTimerMemory()) == 0)
+                bd.updateMemory(profil.getId_profil(), chrono.getText().toString());
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
            // stopService(new Intent(this, AlarmService.class));

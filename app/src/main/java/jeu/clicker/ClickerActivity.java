@@ -17,6 +17,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Random;
 
+import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
+import BD_Utilisateur.Models_Utilisateur.Profil;
+
 public class ClickerActivity extends AppCompatActivity {
 
     TextView textscore;
@@ -24,6 +27,7 @@ public class ClickerActivity extends AppCompatActivity {
     ImageView[] IMGS = {tornado, hotsun, smilingsun, thunderstorm, smilingmoon, twoclouds};
     int score = 0;
     Chronometer timer;
+    DataBaseHelper db;
     DatabaseReference ref;
 
     @Override
@@ -31,7 +35,7 @@ public class ClickerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clicker);
         ref = FirebaseDatabase.getInstance().getReference("Utilisateur");
-
+        db = new DataBaseHelper(this);
         timer = (Chronometer) findViewById(R.id.chrono_clicker);
         timer.start();
 
@@ -95,10 +99,14 @@ public class ClickerActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {finish();}
                     });
+            Profil profil = db.getProfils();
+            if (Integer.parseInt(timer.getText().toString()) < Integer.parseInt(profil.getTimerCookie()) || Integer.parseInt(profil.getTimerCookie()) == 0)
+                db.updateCookie(profil.getId_profil(), timer.getText().toString());
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
            // stopService(new Intent(this, AlarmService.class));
         }
+        db.close();
       //  ref.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("timerClicker").setValue(timer.getText());
     }
 }

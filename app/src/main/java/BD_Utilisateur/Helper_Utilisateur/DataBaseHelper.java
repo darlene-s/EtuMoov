@@ -461,6 +461,35 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
+    public boolean NavigationExist(){
+        try {
+            String strSQL = "SELECT *FROM Navigation";
+            Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    if (cursor != null)
+                        return true;
+                    else
+                        return false;
+                } while(cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (Exception e) {}
+        return false;
+    }
+
+    public void updateCookie(int id, String string){
+        String str = "UPDATE Profil set timerCookie = '" + string + "' where id_profil =" + id;
+        this.getWritableDatabase().execSQL(str);
+    }
+    public void updateScore(int id, int score){
+        String str = "UPDATE Profil set score =" + score + " where id_profil =" + id;
+        this.getWritableDatabase().execSQL(str);
+    }
+    public void updateMemory(int id, String string){
+        String str = "UPDATE Profil set timerMemory = '" + string + "' where id_profil =" + id;
+        this.getWritableDatabase().execSQL(str);
+    }
     public boolean ProfilExist(int id){
         try {
             String strSQL = "SELECT *FROM Profil where id_user =" + id;
