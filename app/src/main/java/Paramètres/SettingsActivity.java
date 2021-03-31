@@ -11,6 +11,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.etumoov.Accueil.AuthentificationMain;
+import com.example.etumoov.Profil.ProfilActivity;
 import com.example.etumoov.R;
 import com.google.firebase.auth.FirebaseAuth;
 import AffichageCours.Classes.CalendarJour;
@@ -36,7 +37,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public static class SettingsFragment extends PreferenceFragmentCompat {
-        private androidx.preference.Preference scanQRCode, decoPreference;
+        private androidx.preference.Preference scanQRCode, decoPreference, retour;
         private androidx.preference.EditTextPreference URLSYNC;
         private DataBaseHelper db;
 
@@ -47,6 +48,15 @@ public class SettingsActivity extends AppCompatActivity {
             scanQRCode = findPreference("SCANQRCODE");
             URLSYNC = findPreference("URLSYNC");
             decoPreference = findPreference("DECO");
+            retour = findPreference("retour");
+            retour.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    startActivity(new Intent(preference.getContext(), ProfilActivity.class));
+                    return true;
+                }
+            });
+
             decoPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {

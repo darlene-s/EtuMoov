@@ -61,8 +61,8 @@
     <string name="ET_daterappel">Date of reminder (xx/xx/xxxx)</string>
     <string name="ET_descrrappel">Description of the reminder</string>
     <string name="ET_titrerappel">Title of your reminder</string>
-    <string name="txt_titreaddrappel">Add a reminder !</string>
-    <string name="txt_ajt_rappel">Ajouter un nouveau rappel</string>
+    <string name="txt_titreaddrappel">To Do List</string>
+    <string name="txt_ajt_rappel">Add a reminder !</string>
 
     <!-- ============== Liste des rappels ============== -->
 
@@ -75,11 +75,14 @@
     <string name="nouv_ville">Find a new city !</string>
     <string name="entr_ville">Enter the name of the city</string>
 
-    <!-- ====================           ============= -->
-
+    <!-- ====================   General       ============= -->
+    <string name="txt_bonjour">Welcome, </string>
+    <string name="txt_infos">You will find in this space all the useful information for your profile.</string>
     <string name="txt_tps_preparation">Your preparation time : </string>
     <string name="txt_tps_supplementaire">Your overtime:</string>
-    <string name="txt_score_jeu">Your best score on the games : </string>
+    <string name="txt_score_jeu">your best score in the calculation game :</string>
+    <string name="txt_jeu_clicker">your best score in the Clicker game : </string>
+    <string name="txt_jeu_memory">your best score in the Memory game : </string>
     <string name="btn_deco">Disconnect</string>
 
     <!-- ============== Navigation ============== -->

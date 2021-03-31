@@ -120,9 +120,13 @@
     <string name="btn_alarm_manuelle">Alarme manuelle</string>
 
     <!-- ============== Générale ============== -->
+    <string name="txt_bonjour">Bonjour, </string>
+    <string name="txt_infos">Vous retrouverez dans cette espace toutes les informations utiles pour votre profil.</string>
     <string name="txt_tps_preparation">Votre temps de préparation : </string>
     <string name="txt_tps_supplementaire">Votre temps supplémentaire :</string>
-    <string name="txt_score_jeu">Votre meilleur score sur les jeux : </string>
+    <string name="txt_score_jeu">Votre meilleur score au jeu de calcul : </string>
+    <string name="txt_jeu_clicker">Votre meilleur score au jeu du Clicker : </string>
+    <string name="txt_jeu_memory">Votre meilleur score au jeu de Memory : </string>
 
 
 

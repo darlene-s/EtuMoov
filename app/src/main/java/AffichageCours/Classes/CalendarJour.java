@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import AffichageCours.Rappels.AjoutRappel;
 import AffichageCours.Scanner.IcsManager;
 
 import com.example.etumoov.NavigationMap.MoovInTime.MoovInTimeMenu;
@@ -41,7 +42,7 @@ import Meteo.MeteoActivity;
 
 public class CalendarJour extends AppCompatActivity implements View.OnClickListener {
 
-    private ImageView LeftArrow, RightArrow, btn_qr, btn_refresh;
+    private ImageView LeftArrow, RightArrow, btn_qr, btn_refresh, btn_rappel;
     private int datecount = 0;
     private TextView DateView;
     private ListView listView;
@@ -77,6 +78,15 @@ public class CalendarJour extends AppCompatActivity implements View.OnClickListe
         RightArrow.setOnClickListener(this::onClick);
 
         db.close();
+
+        btn_rappel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AjoutRappel.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         btn_qr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,6 +155,7 @@ public class CalendarJour extends AppCompatActivity implements View.OnClickListe
         btn_qr = findViewById(R.id.button_qr);
         btn_refresh = findViewById(R.id.btn_refresh);
         listView = (ListView) findViewById(R.id.cours_list);
+        btn_rappel = findViewById(R.id.btn_rappelajout);
     }
 
     @Override

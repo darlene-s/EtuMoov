@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Preference
+        app:title="Retour au profil"
+        app:key="retour"
+        app:summary="Appuyez pour retourner sur votre profil">
+
+    </Preference>
     <PreferenceCategory app:title="Synchronisation" >
         <EditTextPreference
             app:key="URLSYNC"
@@ -56,7 +62,7 @@
     <Preference
         app:key="DECO"
         app:title="Déconnexion"
-        app:summary="Apuuyez pour déconnecter votre compte">
+        app:summary="Apuyez pour déconnecter votre compte">
     </Preference>
 
 </PreferenceScreen>

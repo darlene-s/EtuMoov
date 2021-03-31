@@ -28,7 +28,17 @@
             android:contentDescription="@string/label_img"
             android:gravity="start"
             android:padding="25dp" />
-
+        <ImageButton
+            android:id="@+id/btn_rappelajout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_baseline_warning_24"
+            android:padding="25dp"
+            android:backgroundTint="@color/white"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/label_img"
+            />
         <ImageButton
             android:id="@+id/btn_refresh"
             android:layout_width="wrap_content"
