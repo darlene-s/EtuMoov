@@ -195,13 +195,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public void insertNavigation(Navigation navigation) {
+        this.getWritableDatabase().execSQL("DELETE FROM Navigation");
         try {
             String strSQL = "insert into " + T_Navigation
-                    + "(tps_trajet, domicile, destination, id_profil) VALUES ('"
-                    + navigation.getTps_trajet() + "',"
-                    + navigation.getDomicile() + "',"
+                    + "(tps_trajet, domicile, destination, id_profil) VALUES ("
+                    + navigation.getTps_trajet() + ",'"
+                    + navigation.getDomicile() + "','"
                     + navigation.getDestination() + "',"
-                    + navigation.getId_profil() + "')";
+                    + navigation.getId_profil() + ")";
             this.getWritableDatabase().execSQL(strSQL);
         } catch (Exception e) {
             Toast.makeText(mContext, "Erreur dans l'ajout des informations de navigation dans la base de données", Toast.LENGTH_LONG);
@@ -276,16 +277,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public Navigation getNavigation(int id) {
+    public Navigation getNavigation() {
         try {
-            String strSQL = "SELECT *FROM Navigation where id_nav =" + id;
+            Navigation nav = null;
+            String strSQL = "SELECT *FROM Navigation";
             Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
-            if (cursor.moveToFirst()) {
-                do {
-                    return new Navigation(cursor.getInt(cursor.getColumnIndex("id_nav")), cursor.getDouble(cursor.getColumnIndex("tps_preparation")), cursor.getString(cursor.getColumnIndex("domicile")), cursor.getString(cursor.getColumnIndex("destination")), cursor.getInt(cursor.getColumnIndex("id_profil")));
-                } while (cursor.moveToNext());
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                nav = new Navigation(cursor.getInt(cursor.getColumnIndex("id_nav")), cursor.getDouble(cursor.getColumnIndex("tps_preparation")), cursor.getString(cursor.getColumnIndex("domicile")), cursor.getString(cursor.getColumnIndex("destination")), cursor.getInt(cursor.getColumnIndex("id_profil")));
             }
             cursor.close();
+            return nav;
         } catch (Exception e) {
             Toast.makeText(mContext, "Erreur dans la récupération des infos de la navigation", Toast.LENGTH_LONG);
         }
