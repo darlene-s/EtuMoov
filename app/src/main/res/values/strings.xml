@@ -116,6 +116,8 @@
     <string name="txt_heure_du_réveil">réveil</string>
     <string name="btn_snooze">Snooze</string>
     <string name="btn_jouer">Jouer</string>
+    <string name="btn_alarm_manuelle">Alarme manuelle</string>
+
     <!-- ============== Générale ============== -->
     <string name="txt_tps_preparation">Votre temps de préparation : </string>
     <string name="txt_tps_supplementaire">Votre temps supplémentaire :</string>

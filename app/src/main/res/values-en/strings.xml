@@ -116,6 +116,7 @@
     <string name="txt_heure_du_réveil">alarm clock</string>
     <string name="btn_snooze">Snooze</string>
     <string name="btn_jouer">Play</string>
+    <string name="btn_alarm_manuelle">Manuel Alarm</string>
 
     <!-- ============== Générale ============== -->
 </resources>
