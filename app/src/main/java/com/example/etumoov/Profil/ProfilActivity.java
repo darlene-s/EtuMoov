@@ -130,6 +130,9 @@ public class ProfilActivity extends AppCompatActivity {
                             textScore.setText(String.valueOf(pp.getScore()));
                             textScoreMemory.setText(String.valueOf(pp.getTimerMemory()));
                             textScoreClicker.setText(String.valueOf(pp.getTimerCookie()));
+                            SharedPreferences.Editor sh = getSharedPreferences("id_profil",MODE_PRIVATE).edit();
+                            sh.putInt("id",pp.getId_user());
+                            sh.apply();
                         }
                     }
 
@@ -146,6 +149,9 @@ public class ProfilActivity extends AppCompatActivity {
                 textScore.setText(String.valueOf(profil.getScore()));
                 textScoreMemory.setText(String.valueOf(profil.getTimerMemory()));
                 textScoreClicker.setText(String.valueOf(profil.getTimerCookie()));
+                SharedPreferences.Editor sh = getSharedPreferences("id_profil",MODE_PRIVATE).edit();
+                sh.putInt("id",profil.getId_profil());
+                sh.apply();
             }
         }
         db.close();

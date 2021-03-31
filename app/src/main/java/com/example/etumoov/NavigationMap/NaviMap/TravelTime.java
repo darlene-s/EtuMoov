@@ -67,8 +67,8 @@ public class TravelTime extends AppCompatActivity {
         btn_loc = findViewById(R.id.btn_localisation);
         api = new APIGoogleDistance();
         choix = false;
-        SharedPreferences prefs = getApplicationContext().getSharedPreferences("cle_id", ProfilActivity.MODE_PRIVATE);
-        String cle_id = prefs.getString("cle_id_recup", "");
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences("id_profil", TravelTime.MODE_PRIVATE);
+        int cle_id = prefs.getInt("id", 0);
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
