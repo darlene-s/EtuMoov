@@ -38,6 +38,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
+import BD_Utilisateur.Models_Utilisateur.Navigation;
+import BD_Utilisateur.Models_Utilisateur.Profil;
+
 public class TravelTime extends AppCompatActivity {
     private DatabaseReference reference;
     private ListView UniversiteList;
@@ -50,6 +54,7 @@ public class TravelTime extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationProviderClient;
     private double longitude, latitude;
     private boolean choix;
+    private DataBaseHelper db;
 
 
     @Override
@@ -69,6 +74,8 @@ public class TravelTime extends AppCompatActivity {
         choix = false;
         SharedPreferences prefs = getApplicationContext().getSharedPreferences("id_profil", TravelTime.MODE_PRIVATE);
         int cle_id = prefs.getInt("id", 0);
+        db = new DataBaseHelper(this);
+        Profil profil = db.getProfils();
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -107,9 +114,10 @@ public class TravelTime extends AppCompatActivity {
                 if(choix)
                     res = api.getTravelTime(numero.getText() + " " + rue.getText() + "," + codePostal.getText(), numero2.getText() + " " + rue2.getText() + "," + codePostal2.getText(),0,0);
                 else res = api.getTravelTime(numero.getText() + " " + rue.getText() + "," + codePostal.getText(), numero2.getText() + " " + rue2.getText() + "," + codePostal2.getText(),longitude,latitude);
-                if(!(res == ""))
+                if(!(res == "")) {
+                    db.insertNavigation(new Navigation(Double.parseDouble(res), numero + " " + rue + "," + codePostal, numero2 + " " + rue2 + "," + codePostal2, profil.getId_profil()));
                     calculateTime(Long.parseLong(res));
-                else Toast.makeText(TravelTime.this, "impossible de trouver un chemin correct", Toast.LENGTH_SHORT).show();
+                } else Toast.makeText(TravelTime.this, "impossible de trouver un chemin correct", Toast.LENGTH_SHORT).show();
                 duree.setText(hours + " heures " + minutes + " minutes");
             }
         });
