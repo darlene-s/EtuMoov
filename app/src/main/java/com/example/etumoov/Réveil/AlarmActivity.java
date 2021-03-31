@@ -10,6 +10,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -74,6 +75,9 @@ public class AlarmActivity extends AppCompatActivity {
         btn_alarm_manual = findViewById(R.id.btn_ajout_alarme_manuelle);
         btn_cancel_alarm = findViewById(R.id.btn_cancel_alarm);
         textAlarm = findViewById(R.id.textViewAlarm);
+
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences("cle_id", ProfilActivity.MODE_PRIVATE);
+        String cle_id = prefs.getString("cle_id_recup", "");
 
         alarmReceiverIntent = new Intent(this.context, AlarmBroadcastReceiver.class);
 

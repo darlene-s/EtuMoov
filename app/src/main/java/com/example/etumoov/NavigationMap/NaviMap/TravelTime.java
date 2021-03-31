@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.etumoov.NavigationMap.NaviBD.Universite;
+import com.example.etumoov.Profil.ProfilActivity;
 import com.example.etumoov.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -49,6 +51,7 @@ public class TravelTime extends AppCompatActivity {
     private double longitude, latitude;
     private boolean choix;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +67,8 @@ public class TravelTime extends AppCompatActivity {
         btn_loc = findViewById(R.id.btn_localisation);
         api = new APIGoogleDistance();
         choix = false;
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences("cle_id", ProfilActivity.MODE_PRIVATE);
+        String cle_id = prefs.getString("cle_id_recup", "");
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 

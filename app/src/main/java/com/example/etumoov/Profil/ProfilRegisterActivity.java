@@ -3,6 +3,7 @@ package com.example.etumoov.Profil;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,7 +34,8 @@ public class ProfilRegisterActivity extends AppCompatActivity {
         db = new DataBaseHelper(this);
         Intent intent = getIntent();
         String str = intent.getStringExtra("ID_Utilisateur");
-        String cle = intent.getStringExtra("clé");
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences("cle_id", ProfilActivity.MODE_PRIVATE);
+        String cle_id = prefs.getString("cle_id_recup", "");
         int id = Integer.parseInt(str);
         btn_creation.setOnClickListener(v -> {
             String vTps_P = tps_prepa.getText().toString();
@@ -44,7 +46,7 @@ public class ProfilRegisterActivity extends AppCompatActivity {
                 Utilisateur user = db.getUtilisateurbyId(id);
                 Profil profil = new Profil(Integer.parseInt(vTps_P), Integer.parseInt(vTps_S), 0, "", "", user.getId_user());
                 if (profil != null){
-                    FirebaseDatabase.getInstance().getReference("Profil").child(cle).setValue(profil);
+                    FirebaseDatabase.getInstance().getReference("Profil").child(cle_id).setValue(profil);
                     db.insertProfil(profil);
                     Toast.makeText(ProfilRegisterActivity.this, "Profil enregistré", Toast.LENGTH_LONG).show();
                     Intent nextIntent = new Intent(getApplicationContext(), ProfilActivity.class);

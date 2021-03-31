@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -89,11 +90,12 @@ public class ProfilActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent.hasExtra("ID_Utilisateur")){
             String str = intent.getStringExtra("ID_Utilisateur");
-            String str2 = intent.getStringExtra("cle");
+            SharedPreferences prefs = getApplicationContext().getSharedPreferences("cle_id", ProfilActivity.MODE_PRIVATE);
+            String cle_id = prefs.getString("cle_id_recup", "");
             int id = Integer.parseInt(str);
             if(!db.UserExist(id)){
                 referenceUser = FirebaseDatabase.getInstance().getReference("Utilisateur");
-                referenceUser.child(str2).addListenerForSingleValueEvent(new ValueEventListener() {
+                referenceUser.child(cle_id).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Utilisateur utilisateur = snapshot.getValue(Utilisateur.class);
@@ -116,7 +118,7 @@ public class ProfilActivity extends AppCompatActivity {
 
             if(!db.ProfilExist(id)){
                 referenceProfil = FirebaseDatabase.getInstance().getReference("Profil");
-                referenceProfil.child(str2).addListenerForSingleValueEvent(new ValueEventListener() {
+                referenceProfil.child(cle_id).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Profil profil = snapshot.getValue(Profil.class);
