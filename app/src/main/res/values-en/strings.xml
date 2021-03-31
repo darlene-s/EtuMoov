@@ -54,6 +54,7 @@
     <!-- ============== Bouton ============== -->
     <string name="btn_valider">Validate</string>
     <string name="btn_ajoutrappel">Add</string>
+    <string name="btn_parametre">Paramètres</string>
 
 
     <!-- ============== Ajout Rappel ============== (pas sur de la trad a verif svp)  -->
