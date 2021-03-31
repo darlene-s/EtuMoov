@@ -37,7 +37,6 @@ public class ProfilActivity extends AppCompatActivity {
     private Button btn_deconnexion;
     private DataBaseHelper db;
     private DatabaseReference referenceUser, referenceProfil;
-    private SQLiteDatabase sql;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +102,7 @@ public class ProfilActivity extends AppCompatActivity {
                         Utilisateur utilisateur = snapshot.getValue(Utilisateur.class);
                         if (utilisateur != null){
                             db.insertUser(utilisateur);
-                            Utilisateur user = db.getUtilisateurbyId(id);
+                            Utilisateur user = db.getUser();
                             textNomPrenom.setText(user.getNom() + " "+ user.getPrenom());
                         }
                     }
@@ -114,7 +113,7 @@ public class ProfilActivity extends AppCompatActivity {
                 });
             }
             else {
-                Utilisateur user = db.getUtilisateurbyId(id);
+                Utilisateur user = db.getUser();
                 textNomPrenom.setText(user.getNom() + " " + user.getPrenom());
             }
 
@@ -126,7 +125,7 @@ public class ProfilActivity extends AppCompatActivity {
                         Profil profil = snapshot.getValue(Profil.class);
                         if (profil != null){
                             db.insertProfil(profil);
-                            Profil pp = db.getProfil(id);
+                            Profil pp = db.getProfils();
                             textTps_p.setText(String.valueOf(pp.getTps_preparation()));
                             textTps_s.setText(String.valueOf(pp.getTps_supplementaires()));
                             textScore.setText(String.valueOf(pp.getScore()));
@@ -145,7 +144,7 @@ public class ProfilActivity extends AppCompatActivity {
                 });
             }
             else{
-                Profil profil = db.getProfil(id);
+                Profil profil = db.getProfils();
                 textTps_p.setText(String.valueOf(profil.getTps_preparation()));
                 textTps_s.setText(String.valueOf(profil.getTps_supplementaires()));
                 textScore.setText(String.valueOf(profil.getScore()));
@@ -164,7 +163,7 @@ public class ProfilActivity extends AppCompatActivity {
     private void deconnexion (View view){
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             FirebaseAuth.getInstance().signOut(); // Déconnexion de l'utilisateur
-            db.deleteDataUser(sql);
+            db.deleteDataUser();
             startActivity(new Intent(getApplicationContext(), AuthentificationMain.class));
             db.close();
             finish();

@@ -15,6 +15,7 @@ import BD_Utilisateur.Models_Utilisateur.Navigation;
 import BD_Utilisateur.Models_Utilisateur.Planning;
 import BD_Utilisateur.Models_Utilisateur.Profil;
 import BD_Utilisateur.Models_Utilisateur.Utilisateur;
+import okhttp3.internal.Util;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String log = "DataBaseHelper";
@@ -120,42 +121,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         this.getWritableDatabase().execSQL("DELETE FROM T_Cours");
     }
 
-    public void deleteDataUser(SQLiteDatabase db){
-        this.getWritableDatabase().execSQL("DROP TABLE Utilisateur");
-        this.getWritableDatabase().execSQL("DROP TABLE  Profil");
-        this.getWritableDatabase().execSQL("DROP TABLE Navigation");
-        String strSQL1 = "CREATE TABLE IF NOT EXISTS " + T_Utilisateur
-                + "("
-                + "id_user INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "nom Text,"
-                + "prenom TEXT,"
-                + "mail TEXT,"
-                + "mdp TEXT,"
-                + "UNIQUE(mail)"
-                + ")";
-
-        String strSQL2 = "CREATE TABLE IF NOT EXISTS " + T_Profil
-                + "(id_profil INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "tps_preparation INTEGER,"
-                + "tps_suppl INTEGER,"
-                + "score INTEGER,"
-                + "timerMemory  TEXT,"
-                + "timerCookie TEXT,"
-                + "id_user INTEGER,"
-                + "FOREIGN KEY(id_user) REFERENCES utilisateur(id_user) ON DELETE CASCADE"
-                + ")";
-
-        String strSQL3 = "CREATE TABLE IF NOT EXISTS " + T_Navigation
-                + "(id_nav INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "tps_trajet INTEGER,"
-                + "domicile TEXT,"
-                + "destination TEXT,"
-                + "id_profil INTEGER,"
-                + "FOREIGN KEY(id_profil) REFERENCES profil(id_profil) ON DELETE CASCADE"
-                + ")";
-        db.execSQL(strSQL1);
-        db.execSQL(strSQL2);
-        db.execSQL(strSQL3);
+    public void deleteDataUser(){
+        this.getWritableDatabase().execSQL("DELETE FROM  Utilisateur");
+        this.getWritableDatabase().execSQL("DELETE FROM  Profil");
+        this.getWritableDatabase().execSQL("DELETE FROM Navigation");
     }
 
     /*
@@ -327,7 +296,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     /*
     Récupération globale de données de l'utilisateur de l'appli
      */
-    public List<Utilisateur> getListUsers() {
+    public Utilisateur getUser() {
         Utilisateur user = null;
         List<Utilisateur> userlist = new ArrayList<>();
         String strSQL = "SELECT *FROM Utilisateur";
@@ -335,13 +304,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             user = new Utilisateur(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
-            userlist.add(user);
             cursor.moveToNext();
         }
         cursor.close();
-        return userlist;
+        return user;
     }
 
+    public Profil getProfils(){
+        Profil profil = null;
+        String strSQL = "SELECT *FROM Profil";
+        Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            profil = new Profil(cursor.getInt(cursor.getColumnIndex("id_profil")), cursor.getInt(cursor.getColumnIndex("tps_preparation")), cursor.getInt(cursor.getColumnIndex("tps_suppl")), cursor.getInt(cursor.getColumnIndex("score")), cursor.getString(cursor.getColumnIndex("timerMemory")), cursor.getString(cursor.getColumnIndex("timerCookie")),  cursor.getInt(cursor.getColumnIndex("id_user")));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return profil;
+    }
     public List<Navigation> getListNavigationsProfil() {
         List<Navigation> ListeNavigations = new ArrayList<>();
         String strSQL = "SELECT *FROM NAVIGATION";
