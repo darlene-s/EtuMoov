@@ -111,7 +111,7 @@ public class TravelTime extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String res = null;
-                if(choix)
+                if(!choix)
                     res = api.getTravelTime(numero.getText() + " " + rue.getText() + "," + codePostal.getText(), numero2.getText() + " " + rue2.getText() + "," + codePostal2.getText(),0,0);
                 else res = api.getTravelTime(numero.getText() + " " + rue.getText() + "," + codePostal.getText(), numero2.getText() + " " + rue2.getText() + "," + codePostal2.getText(),longitude,latitude);
                 if(!(res == "")) {
