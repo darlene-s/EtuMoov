@@ -204,7 +204,6 @@ public class ProfilActivity extends AppCompatActivity {
         }
     }
     public void Parametre(View view){
-        FirebaseAuth.getInstance().signOut(); // Paramètres de l'utilisateur
         startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
         finish();
     }
