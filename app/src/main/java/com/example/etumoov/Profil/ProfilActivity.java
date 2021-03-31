@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,6 +37,7 @@ public class ProfilActivity extends AppCompatActivity {
     private Button btn_deconnexion;
     private DataBaseHelper db;
     private DatabaseReference referenceUser, referenceProfil;
+    private SQLiteDatabase sql;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,7 +164,7 @@ public class ProfilActivity extends AppCompatActivity {
     private void deconnexion (View view){
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             FirebaseAuth.getInstance().signOut(); // Déconnexion de l'utilisateur
-            db.deleteDataUser();
+            db.deleteDataUser(sql);
             startActivity(new Intent(getApplicationContext(), AuthentificationMain.class));
             db.close();
             finish();

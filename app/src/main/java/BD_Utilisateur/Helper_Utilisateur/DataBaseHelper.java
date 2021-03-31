@@ -120,10 +120,42 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         this.getWritableDatabase().execSQL("DELETE FROM T_Cours");
     }
 
-    public void deleteDataUser(){
-        this.getWritableDatabase().execSQL("DELETE FROM Utilisateur");
-        this.getWritableDatabase().execSQL("DELETE FROM Profil");
-        this.getWritableDatabase().execSQL("DELETE FROM Navigation");
+    public void deleteDataUser(SQLiteDatabase db){
+        this.getWritableDatabase().execSQL("DROP TABLE Utilisateur");
+        this.getWritableDatabase().execSQL("DROP TABLE  Profil");
+        this.getWritableDatabase().execSQL("DROP TABLE Navigation");
+        String strSQL1 = "CREATE TABLE IF NOT EXISTS " + T_Utilisateur
+                + "("
+                + "id_user INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "nom Text,"
+                + "prenom TEXT,"
+                + "mail TEXT,"
+                + "mdp TEXT,"
+                + "UNIQUE(mail)"
+                + ")";
+
+        String strSQL2 = "CREATE TABLE IF NOT EXISTS " + T_Profil
+                + "(id_profil INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "tps_preparation INTEGER,"
+                + "tps_suppl INTEGER,"
+                + "score INTEGER,"
+                + "timerMemory  TEXT,"
+                + "timerCookie TEXT,"
+                + "id_user INTEGER,"
+                + "FOREIGN KEY(id_user) REFERENCES utilisateur(id_user) ON DELETE CASCADE"
+                + ")";
+
+        String strSQL3 = "CREATE TABLE IF NOT EXISTS " + T_Navigation
+                + "(id_nav INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "tps_trajet INTEGER,"
+                + "domicile TEXT,"
+                + "destination TEXT,"
+                + "id_profil INTEGER,"
+                + "FOREIGN KEY(id_profil) REFERENCES profil(id_profil) ON DELETE CASCADE"
+                + ")";
+        db.execSQL(strSQL1);
+        db.execSQL(strSQL2);
+        db.execSQL(strSQL3);
     }
 
     /*
