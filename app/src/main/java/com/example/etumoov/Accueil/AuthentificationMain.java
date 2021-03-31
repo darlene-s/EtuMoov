@@ -43,6 +43,7 @@ public class AuthentificationMain extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            Toast.makeText(AuthentificationMain.this, "Veuillez patienter !", Toast.LENGTH_SHORT).show();
             FirebaseDatabase.getInstance().getReference("Profil").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
