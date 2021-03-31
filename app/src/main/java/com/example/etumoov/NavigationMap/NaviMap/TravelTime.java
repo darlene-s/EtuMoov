@@ -124,23 +124,16 @@ public class TravelTime extends AppCompatActivity {
     }
 
     private void getLocation() {
-        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(TravelTime.this, new OnSuccessListener<Location>() {
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
                 if(location != null) {
-                    try {
-                        Geocoder geocoder = new Geocoder(TravelTime.this,Locale.getDefault());
-                        List<Address> addressList = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
-                        Toast.makeText(TravelTime.this,"Adresse trouver !", Toast.LENGTH_SHORT).show();
-                        numero.setFocusable(false);
-                        rue.setFocusable(false);
-                        codePostal.setFocusable(false);
-                        choix = true;
-                        longitude = addressList.get(0).getLongitude();
-                        latitude = addressList.get(0).getLatitude();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    longitude = location.getLongitude();
+                    latitude = location.getLatitude();
+                    numero.setFocusable(false);
+                    rue.setFocusable(false);
+                    codePostal.setFocusable(false);
+                    choix = true;
                 }
             }
         });
