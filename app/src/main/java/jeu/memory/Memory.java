@@ -271,8 +271,9 @@ public class Memory extends AppCompatActivity {
                         }
                     });
             Profil profil = bd.getProfils();
+            int i = String.valueOf(chrono.getText()).compareTo(profil.getTimerMemory());
             int j = profil.getTimerCookie().compareTo(String.valueOf(chrono.getText()));
-            if (j <= 0)
+            if (j <= 0 && j>=-1)
                 bd.updateMemory(profil.getId_profil(), String.valueOf(chrono.getText()));
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
