@@ -56,6 +56,7 @@
     <string name="btn_valider">Valider</string>
     <string name="btn_ajoutrappel">Ajouter</string>
     <string name="btn_deco">Déconnexion</string>
+    <string name="btn_parametre">Paramètres</string>
 
 
     <!-- ============== Ajout Rappel ============== -->

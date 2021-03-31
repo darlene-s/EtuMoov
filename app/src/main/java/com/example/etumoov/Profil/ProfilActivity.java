@@ -30,6 +30,7 @@ import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
 import BD_Utilisateur.Models_Utilisateur.Profil;
 import BD_Utilisateur.Models_Utilisateur.Utilisateur;
 import Meteo.MeteoActivity;
+import Paramètres.SettingsActivity;
 
 public class ProfilActivity extends AppCompatActivity {
 
@@ -87,7 +88,7 @@ public class ProfilActivity extends AppCompatActivity {
                 deconnexion(v);
             }
         });
-        
+
         Intent intent = getIntent();
         if (intent.hasExtra("ID_Utilisateur")){
             String str = intent.getStringExtra("ID_Utilisateur");
@@ -172,6 +173,7 @@ public class ProfilActivity extends AppCompatActivity {
             she.apply();
         }
         db.close();
+
     }
 
     private void deconnexion (View view){
@@ -185,5 +187,10 @@ public class ProfilActivity extends AppCompatActivity {
         else {
             Toast.makeText(ProfilActivity.this, "Une erreur s'est produite ! Veuillez réessayer", Toast.LENGTH_SHORT).show();
         }
+    }
+    public void Parametre(View view){
+        FirebaseAuth.getInstance().signOut(); // Déconnexion de l'utilisateur
+        startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+        finish();
     }
 }
