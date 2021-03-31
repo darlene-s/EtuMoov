@@ -102,7 +102,7 @@ public class ClickerActivity extends AppCompatActivity {
             Profil profil = db.getProfils();
             int i = String.valueOf(timer.getText()).compareTo(profil.getTimerCookie());
             int j = profil.getTimerCookie().compareTo(String.valueOf(timer.getText()));
-            if (j <= 0 & j >= -1)
+            if (j <= 0 && j >= -1)
                 db.updateCookie(profil.getId_profil(), String.valueOf(timer.getText()));
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();

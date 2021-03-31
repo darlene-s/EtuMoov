@@ -123,4 +123,12 @@
     <string name="btn_alarm_manuelle">Manuel Alarm</string>
 
     <!-- ============== Générale ============== -->
+    <string name="txt_tps_prepa"></string>
+    <string name="txt_sltjsuitonpote">In the interest of the application, please fill in the following fields so that the application works at its best!</string>
+    <string name="txt_bvnjpp">Welcome to EtuMoov</string>
+    <string name="txt_profiltusersarien">Additional preparation time (not mandatory)</string>
+    <string name="txt_mtnmtn">Le temps qu\'il vous faut pour vous préparer le matin avant de partir (en minute)</string>
+    <string name="btn_creationcompte">Create your account</string>
+
+
 </resources>

@@ -78,7 +78,7 @@
     <string name="entr_ville">Entrez le nom de la ville</string>
 
     <!-- ============== Profil ============== -->
-
+    <string name="txt_tps_prepa"></string>
 
 
     <!-- ============== Navigation ============== -->
@@ -128,6 +128,11 @@
     <string name="txt_jeu_clicker">Votre meilleur score au jeu du Clicker : </string>
     <string name="txt_jeu_memory">Votre meilleur score au jeu de Memory : </string>
 
-
+<!-- =================== PROFIL JEANNE OSCOUUUUUUUUUUR =========== -->
+    <string name="txt_sltjsuitonpote">Dans l\'interet de l\'application veuillez renseigner les champs suivants que l\'application fonctionne au mieux !</string>
+    <string name="txt_bvnjpp">Bienvenue sur EtuMoov</string>
+    <string name="txt_profiltusersarien">Temps de préparation supplémentaire (pas obligatoire)</string>
+    <string name="txt_mtnmtn">Le temps qu\'il vous faut pour vous préparer le matin avant de partir (en minute)</string>
+    <string name="btn_creationcompte">Création de votre compte</string>
 
 </resources>

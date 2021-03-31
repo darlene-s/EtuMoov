@@ -4,37 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Profil.ProfilActivity"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    tools:context=".Profil.ProfilActivity">
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="80dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="52dp"
-        android:text="@string/txt_bonjour"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.189"
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="400dp"
+        android:layout_height="821dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="492dp"
+        android:contentDescription="@string/label_img"
+        android:rotation="150"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_fondaccueilblanc"
+        tools:ignore="ContentDescription" />
 
+    <ImageView
+        android:id="@+id/imageView21"
+        android:layout_width="208dp"
+        android:layout_height="255dp"
+        android:layout_marginEnd="256dp"
+        android:layout_marginBottom="712dp"
+        android:contentDescription="@string/label_img"
+        android:rotation="50"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_param"
+        app:srcCompat="@drawable/img_mdpoubliefdond1" />
+
+    <ImageView
+        android:id="@+id/imageView20"
+        android:layout_width="381dp"
+        android:layout_height="302dp"
+        android:contentDescription="@string/label_img"
+        app:layout_constraintBottom_toTopOf="@+id/btn_deconnexion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.549"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        app:layout_constraintVertical_bias="0.602"
+        app:srcCompat="@drawable/ic_rectangle" />
 
     <TextView
         android:id="@+id/textNomPrenom"
         android:layout_width="200dp"
         android:layout_height="28dp"
-        android:layout_marginTop="52dp"
-        android:text="TextView"
+        android:layout_marginTop="68dp"
+        android:text="@string/label_score"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="80dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="68dp"
+        android:text="@string/txt_bonjour"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.184"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -55,8 +93,8 @@
         android:id="@+id/tableLayout2"
         android:layout_width="376dp"
         android:layout_height="89dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="156dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11"
         tools:ignore="MissingConstraints">
@@ -64,7 +102,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="279dp"
-            android:layout_marginLeft="5dp">
+            android:layout_marginLeft="5sp">
 
             <TextView
                 android:id="@+id/textView12"
@@ -72,7 +110,7 @@
                 android:layout_height="39dp"
                 android:layout_weight="0.75"
                 android:text="@string/txt_tps_preparation"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -80,14 +118,21 @@
                 android:id="@+id/text_tps_p"
                 android:layout_width="85dp"
                 android:layout_height="30dp"
-                android:text="TextView"
-                android:textColor="@color/white" />
+                android:text="@string/label_score"
+                android:textColor="@color/black" />
+
+            <ImageView
+                android:id="@+id/imageView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/label_img"
+                app:srcCompat="@drawable/ic_rectangle" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp">
+            android:layout_marginLeft="5sp">
 
             <TextView
                 android:id="@+id/textView14"
@@ -95,7 +140,7 @@
                 android:layout_height="37dp"
                 android:layout_weight="0.75"
                 android:text="@string/txt_tps_supplementaire"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -103,25 +148,26 @@
                 android:id="@+id/text_tps_s"
                 android:layout_width="85dp"
                 android:layout_height="30dp"
-                android:text="TextView"
-                android:textColor="@color/white"
+                android:text="@string/label_score"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@+id/textView14"
                 app:layout_constraintTop_toTopOf="parent" />
         </TableRow>
     </TableLayout>
 
     <TableLayout
+        android:id="@+id/tableLayout"
         android:layout_width="375dp"
         android:layout_height="99dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="56dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout2">
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp">
+            android:layout_marginLeft="5sp">
 
             <TextView
                 android:id="@+id/textView15"
@@ -129,7 +175,7 @@
                 android:layout_height="29dp"
                 android:layout_weight="0.75"
                 android:text="@string/txt_score_jeu"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -137,8 +183,8 @@
                 android:id="@+id/textScore"
                 android:layout_width="85dp"
                 android:layout_height="30dp"
-                android:text="TextView"
-                android:textColor="@color/white"
+                android:text="@string/label_score"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@+id/textView15"
                 app:layout_constraintTop_toTopOf="parent" />
         </TableRow>
@@ -146,7 +192,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp">
+            android:layout_marginLeft="5sp">
 
             <TextView
                 android:id="@+id/textView16"
@@ -154,7 +200,7 @@
                 android:layout_height="29dp"
                 android:layout_weight="0.75"
                 android:text="@string/txt_jeu_clicker"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -162,8 +208,8 @@
                 android:id="@+id/textScoreClicker"
                 android:layout_width="85dp"
                 android:layout_height="30dp"
-                android:text="TextView"
-                android:textColor="@color/white"
+                android:text="@string/label_score"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@+id/textView16"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -180,7 +226,7 @@
                 android:layout_height="29dp"
                 android:layout_weight="0.75"
                 android:text="@string/txt_jeu_memory"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -188,8 +234,8 @@
                 android:id="@+id/textScoreMemory"
                 android:layout_width="85dp"
                 android:layout_height="30dp"
-                android:text="TextView"
-                android:textColor="@color/white"
+                android:text="@string/label_score"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@+id/textView17"
                 app:layout_constraintTop_toTopOf="parent" />
         </TableRow>
@@ -210,25 +256,30 @@
         android:id="@+id/btn_param"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="180dp"
         android:background="@drawable/ic_settings"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/textNomPrenom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.944"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <RelativeLayout
-         android:layout_width="match_parent"
-         android:layout_height="match_parent">
-         <com.google.android.material.bottomnavigation.BottomNavigationView
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:id="@+id/bottom_nav"
-             app:itemBackground="@color/dark_blue"
-             app:itemTextColor="@drawable/selector"
-             app:itemIconTint="@drawable/selector"
-             app:menu="@menu/menu_nav"
-             android:layout_alignParentBottom="true"/>
-     </RelativeLayout>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_nav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:itemBackground="@color/dark_blue"
+            app:itemIconTint="@drawable/selector"
+            app:itemTextColor="@drawable/selector"
+            app:menu="@menu/menu_nav" />
+
+    </RelativeLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

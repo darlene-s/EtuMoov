@@ -181,7 +181,7 @@ public class MeteoActivity extends AppCompatActivity {
         client.get(WEATHER_URL,params,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Toast.makeText(MeteoActivity.this,"Données récupérés avec succès",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MeteoActivity.this,"Données récupérées avec succès",Toast.LENGTH_SHORT).show();
 
                 weatherData weatherD=weatherData.fromJson(response);
                 updateUI(weatherD);
