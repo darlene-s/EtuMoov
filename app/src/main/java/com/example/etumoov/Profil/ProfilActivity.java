@@ -85,6 +85,7 @@ public class ProfilActivity extends AppCompatActivity {
                 deconnexion(v);
             }
         });
+        
         Intent intent = getIntent();
         if (intent.hasExtra("ID_Utilisateur")){
             String str = intent.getStringExtra("ID_Utilisateur");
