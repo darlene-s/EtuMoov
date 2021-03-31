@@ -2,6 +2,7 @@ package com.example.etumoov.Réveil;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.collection.SimpleArrayMap;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -32,11 +33,16 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 import AffichageCours.Classes.CalendarJour;
 import BD_Utilisateur.Helper_Utilisateur.DataBaseHelper;
+import BD_Utilisateur.Models_Cours.Cours;
 import BD_Utilisateur.Models_Utilisateur.Navigation;
 import Meteo.MeteoActivity;
 
@@ -55,6 +61,10 @@ public class AlarmActivity extends AppCompatActivity {
     TextView textAlarm;
     Class<?>[] listGames = {jeu.clicker.ClickerActivity.class, jeu.memory.Memory.class, jeu.calcul.CalculActivity.class};
     DataBaseHelper db;
+    int temp_de_trajet;
+    String heure_premier_cours;
+    long sec, minutes, hours;
+    ArrayList<Cours> cours;
 
     //binder
     AlarmService mService;
@@ -86,8 +96,18 @@ public class AlarmActivity extends AppCompatActivity {
 
         calendar = calendar.getInstance();
 
+        cours = new ArrayList<>();
+        cours = db.getCours();
+        try {
+            getFirstCoursOfNextDay();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         Navigation nav = db.getNavigation();
-        btn_alarm_manual.setText(String.valueOf(nav.getTps_trajet()));
+        temp_de_trajet = nav.getTps_trajet();
+
+
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.reveil);
@@ -204,6 +224,23 @@ public class AlarmActivity extends AppCompatActivity {
         });
     }
 
+    private void getFirstCoursOfNextDay() throws ParseException {
+        Date CurDate = new Date();
+        ArrayList<Cours> courstemp = new ArrayList<>();
+        Calendar c = Calendar.getInstance();
+        for(int i = 0; i < cours.size() ; i++) {
+            Date date = new SimpleDateFormat("dd/MM/yyyy").parse(cours.get(i).getDateCours());
+            c.setTime(CurDate);
+            c.add(Calendar.DATE, 1);
+            CurDate = c.getTime();
+            if(date.compareTo(CurDate) == 0) {
+                ArrayList<Cours> coursOfTheDay = new ArrayList<>();
+                coursOfTheDay.add(cours.get(i));
+            }
+        }
+    }
+
+
     public void setAutoAlarm(View view) {
         //mettre le reveil en prenant en compte les données de l'utilisateur : heure du 1er cours, temps d'itineraire etc
         calendar.set(Calendar.HOUR_OF_DAY, 17);
@@ -284,6 +321,12 @@ public class AlarmActivity extends AppCompatActivity {
         Random r = new Random();
         int i = r.nextInt(3 - 0) + 0;
         return i;
+    }
+
+    public void calculateTime(long seconds) {
+        sec = seconds % 60;
+        minutes = seconds % 3600 / 60;
+        hours = seconds % 86400 / 3600;
     }
 
     @Override

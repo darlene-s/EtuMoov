@@ -115,7 +115,7 @@ public class TravelTime extends AppCompatActivity {
                     res = api.getTravelTime(numero.getText() + " " + rue.getText() + "," + codePostal.getText(), numero2.getText() + " " + rue2.getText() + "," + codePostal2.getText(),0,0);
                 else res = api.getTravelTime(numero.getText() + " " + rue.getText() + "," + codePostal.getText(), numero2.getText() + " " + rue2.getText() + "," + codePostal2.getText(),longitude,latitude);
                 if(!(res == "")) {
-                    db.insertNavigation(new Navigation(Integer.parseInt(res), numero + " " + rue + "," + codePostal, numero2 + " " + rue2 + "," + codePostal2, profil.getId_profil()));
+                    db.insertNavigation(new Navigation(Integer.parseInt(res), numero.getText() + " " + rue.getText() + "," + codePostal.getText(), numero2.getText() + " " + rue2.getText() + "," + codePostal2.getText(), profil.getId_profil()));
                     calculateTime(Long.parseLong(res));
                 } else Toast.makeText(TravelTime.this, "impossible de trouver un chemin correct", Toast.LENGTH_SHORT).show();
                 duree.setText(hours + " heures " + minutes + " minutes");
