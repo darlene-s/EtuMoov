@@ -189,7 +189,7 @@ public class AlarmActivity extends AppCompatActivity {
                                         btn_alarm_auto.setVisibility(View.VISIBLE);
                                         btn_alarm_manual.setVisibility(View.VISIBLE);
                                     } catch(Exception e) {}
-                                } else if(extra.contentEquals("alarm on")){
+                                } else if(extra.contentEquals("alarm on") && !mService.showButtons()){
                                     btn_cancel_alarm.setVisibility(View.VISIBLE);
                                     btn_alarm_manual.setVisibility(View.INVISIBLE);
                                     btn_alarm_auto.setVisibility(View.INVISIBLE);
@@ -252,7 +252,7 @@ public class AlarmActivity extends AppCompatActivity {
         pendingIntent = PendingIntent.getBroadcast(this, 0, alarmReceiverIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-        //textAlarm.setText("Alarme prévue pour : " + calendar.getTime());
+        textAlarm.setText("Alarme prévue pour : " + calendar.getTime());
         Toast.makeText(this, "ALARME LANCÉE", Toast.LENGTH_SHORT).show();
     }
 

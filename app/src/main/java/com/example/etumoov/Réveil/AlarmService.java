@@ -23,7 +23,7 @@ public class AlarmService extends Service {
     }
 
     public class LocalBinder extends Binder {
-        AlarmService getService() {
+        public AlarmService getService() {
             // Return this instance of ringtonePlayingService so clients can call public methods
             return AlarmService.this;
         }
@@ -43,6 +43,7 @@ public class AlarmService extends Service {
 
             player = MediaPlayer.create(this, Settings.System.DEFAULT_RINGTONE_URI);
             player.start();
+            player.setLooping(true);
             isRunning = true;
 
         } else if (this.isRunning && startId == 0){
