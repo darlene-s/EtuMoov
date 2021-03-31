@@ -189,7 +189,7 @@ public class ProfilActivity extends AppCompatActivity {
         }
     }
     public void Parametre(View view){
-        FirebaseAuth.getInstance().signOut(); // Déconnexion de l'utilisateur
+        FirebaseAuth.getInstance().signOut(); // Paramètres de l'utilisateur
         startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
         finish();
     }
