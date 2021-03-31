@@ -94,70 +94,84 @@ public class ProfilActivity extends AppCompatActivity {
             SharedPreferences prefs = getApplicationContext().getSharedPreferences("cle_id", ProfilActivity.MODE_PRIVATE);
             String cle_id = prefs.getString("cle_id_recup", "");
             int id = Integer.parseInt(str);
-            if(!db.UserExist(id)){
-                referenceUser = FirebaseDatabase.getInstance().getReference("Utilisateur");
-                referenceUser.child(cle_id).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Utilisateur utilisateur = snapshot.getValue(Utilisateur.class);
-                        if (utilisateur != null){
-                            db.insertUser(utilisateur);
-                            Utilisateur user = db.getUser();
-                            textNomPrenom.setText(user.getNom() + " "+ user.getPrenom());
+            if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                if (!db.UserExistID(id)) {
+                    referenceUser = FirebaseDatabase.getInstance().getReference("Utilisateur");
+                    referenceUser.child(cle_id).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            Utilisateur utilisateur = snapshot.getValue(Utilisateur.class);
+                            if (utilisateur != null) {
+                                db.insertUser(utilisateur);
+                                Utilisateur user = db.getUser();
+                                textNomPrenom.setText(user.getNom() + " " + user.getPrenom());
+                            }
                         }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(ProfilActivity.this, "Une erreur s'est produite ! Veuillez réessayer", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-            else {
-                Utilisateur user = db.getUser();
-                textNomPrenom.setText(user.getNom() + " " + user.getPrenom());
-            }
 
-            if(!db.ProfilExist(id)){
-                referenceProfil = FirebaseDatabase.getInstance().getReference("Profil");
-                referenceProfil.child(cle_id).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Profil profil = snapshot.getValue(Profil.class);
-                        if (profil != null){
-                            db.insertProfil(profil);
-                            Profil pp = db.getProfils();
-                            textTps_p.setText(String.valueOf(pp.getTps_preparation()));
-                            textTps_s.setText(String.valueOf(pp.getTps_supplementaires()));
-                            textScore.setText(String.valueOf(pp.getScore()));
-                            textScoreMemory.setText(String.valueOf(pp.getTimerMemory()));
-                            textScoreClicker.setText(String.valueOf(pp.getTimerCookie()));
-                            SharedPreferences.Editor sh = getSharedPreferences("id_profil",MODE_PRIVATE).edit();
-                            sh.putInt("id",pp.getId_user());
-                            sh.apply();
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Toast.makeText(ProfilActivity.this, "Une erreur s'est produite ! Veuillez réessayer", Toast.LENGTH_SHORT).show();
                         }
-                    }
+                    });
+                }
+                else {
+                    Utilisateur user = db.getUser();
+                    textNomPrenom.setText(user.getNom() + " "+ user.getPrenom());
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(ProfilActivity.this, "Une erreur s'est produite ! Veuillez réessayer", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-            else{
-                Profil profil = db.getProfils();
-                textTps_p.setText(String.valueOf(profil.getTps_preparation()));
-                textTps_s.setText(String.valueOf(profil.getTps_supplementaires()));
-                textScore.setText(String.valueOf(profil.getScore()));
-                textScoreMemory.setText(String.valueOf(profil.getTimerMemory()));
-                textScoreClicker.setText(String.valueOf(profil.getTimerCookie()));
-                SharedPreferences.Editor sh = getSharedPreferences("id_profil",MODE_PRIVATE).edit();
-                sh.putInt("id",profil.getId_profil());
-                sh.apply();
+                if (!db.ProfilExist(id)) {
+                    referenceProfil = FirebaseDatabase.getInstance().getReference("Profil");
+                    referenceProfil.child(cle_id).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            Profil profil = snapshot.getValue(Profil.class);
+                            if (profil != null) {
+                                db.insertProfil(profil);
+                                Profil pp = db.getProfils();
+                                textTps_p.setText(String.valueOf(pp.getTps_preparation()));
+                                textTps_s.setText(String.valueOf(pp.getTps_supplementaires()));
+                                textScore.setText(String.valueOf(pp.getScore()));
+                                textScoreMemory.setText(String.valueOf(pp.getTimerMemory()));
+                                textScoreClicker.setText(String.valueOf(pp.getTimerCookie()));
+                                SharedPreferences.Editor sh = getSharedPreferences("id_profil", MODE_PRIVATE).edit();
+                                sh.putInt("id", pp.getId_user());
+                                sh.apply();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Toast.makeText(ProfilActivity.this, "Une erreur s'est produite ! Veuillez réessayer", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                else {
+                    Profil pro = db.getProfils();
+                    textTps_p.setText(String.valueOf(pro.getTps_preparation()));
+                    textTps_s.setText(String.valueOf(pro.getTps_supplementaires()));
+                    textScore.setText(String.valueOf(pro.getScore()));
+                    textScoreMemory.setText(String.valueOf(pro.getTimerMemory()));
+                    textScoreClicker.setText(String.valueOf(pro.getTimerCookie()));
+                    SharedPreferences.Editor she = getSharedPreferences("id_profil", MODE_PRIVATE).edit();
+                    she.putInt("id", pro.getId_profil());
+                    she.apply();
+                }
             }
         }
+        else if (db.UserExist()){
+            Utilisateur user = db.getUser();
+            textNomPrenom.setText(user.getNom() + " " + user.getPrenom());
+            Profil pro = db.getProfils();
+            textTps_p.setText(String.valueOf(pro.getTps_preparation()));
+            textTps_s.setText(String.valueOf(pro.getTps_supplementaires()));
+            textScore.setText(String.valueOf(pro.getScore()));
+            textScoreMemory.setText(String.valueOf(pro.getTimerMemory()));
+            textScoreClicker.setText(String.valueOf(pro.getTimerCookie()));
+            SharedPreferences.Editor she = getSharedPreferences("id_profil", MODE_PRIVATE).edit();
+            she.putInt("id", pro.getId_profil());
+            she.apply();
+        }
         db.close();
-
-
     }
 
     private void deconnexion (View view){

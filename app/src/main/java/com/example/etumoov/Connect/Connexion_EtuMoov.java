@@ -89,7 +89,6 @@ public class Connexion_EtuMoov extends AppCompatActivity {
                             SharedPreferences.Editor editor = getSharedPreferences("cle_id", MODE_PRIVATE).edit();
                             editor.putString("cle_id_recup", FirebaseAuth.getInstance().getCurrentUser().getUid());
                             editor.apply();
-                            Log.d("TAG", FirebaseAuth.getInstance().getCurrentUser().getUid());
                             startActivity(intent);
                             db.close();
                             finish();

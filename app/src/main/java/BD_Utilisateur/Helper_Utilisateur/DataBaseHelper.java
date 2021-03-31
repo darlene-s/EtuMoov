@@ -427,13 +427,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
-    public boolean UserExist(int id){
+    public boolean UserExistID(int id){
         try {
             String strSQL = "SELECT *FROM Utilisateur where id_user  =" +id;
             Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
             if (cursor.moveToFirst()) {
                 do {
                     if (cursor.getInt(cursor.getColumnIndex("id_user")) == id)
+                        return true;
+                    else
+                        return false;
+                } while(cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (Exception e) {}
+        return false;
+    }
+
+    public boolean UserExist(){
+        try {
+            String strSQL = "SELECT *FROM Utilisateur";
+            Cursor cursor = this.getReadableDatabase().rawQuery(strSQL, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    if (cursor != null)
                         return true;
                     else
                         return false;
